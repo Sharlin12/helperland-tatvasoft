@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<head>
+    <title>Upcoming Services</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+    <link href="./styles/index.css" rel="stylesheet" type="text/css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+   
+
+    
+  
+    </head>
+    <body>
+  <!--nav bar-->
+      <div class="my-navbar d-flex align-items-center" >
+        <nav class="navbar navbar-expand-lg  fixed-top align-items-center" >
+            <a href="#" title="helperland" class="logo-img" ><img src="./assets/logo-large.png"  alt="logo"></a>
+            
+          
+          <button class="navbar-toggler" style="border: none;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="text-white fa fa-bars"></i>
+            
+            <!--in mobile layout made threelines icon white-->
+          </button>
+        
+          <div class="collapse navbar-collapse align-items-center" id="navbarSupportedContent">
+            <ul class="navbar-nav align-items-center  ml-auto ">
+                
+                <li class="nav-item">
+                    <a class="nav-link nav-text" href="#" title="Prices">Prices & Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-text" href="#" title="Our Guarantee">Warranty</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-text" href="#" title="Blog">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-text" href="#" title="Contact us">Contact</a>
+                </li>
+                <li class="nav-item " >
+                    <div class="row">
+                    <div class="nav-bar-line"></div>
+                    <a class="nav-link nav-img notification" href="#" title="Notification">
+                      <img src="./assets/icon-notification.png">
+                      <span class="badge">2</span>
+                    </a>
+                </div>
+                </li>
+               
+                <li class="nav-item " >
+                    <div class="row">
+                    <div class="nav-bar-line"></div>
+                    <a class="nav-link nav-img" href="#" title="Settings"><img src="./assets/user.png"></a>
+                    <div class=" dropdown ">
+                      <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img  src="./assets/sp-arrow-down.png">
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        
+                        <a class="dropdown-item" href="#">Welcome,<br/>Sandip</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">My Dashboard</a>
+                        <a class="dropdown-item" href="#">My Settings</a>
+                        <a class="dropdown-item" href="#">Logout</a>
+                      </div>
+                      
+                          
+                   
+                    </div>
+                </div>
+                </li>
+            </ul>
+             
+          </div>
+              
+      
+        </nav>
+    </div>
+   
+      
+          
+   
+    </div>
+    <div class="service-history">
+        <div class="container-fluid"><p class="text-center" >Welcome,<span>Sandip!</span></p></div>
+          
+          <div class="line"></div>
+          <div class=" dropdown ">
+            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-fw fa-arrow-circle-right"></i>
+            </a>
+            <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Dashboard</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">New Service Requests</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Upcoming Services</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Service Schedule</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Service History</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">My Ratings</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Block Customer</a>
+            </div>
+            </div>
+          <div class="history-container">
+            <div class="container">
+              <div class="row">
+                <div class="buttons" >
+                  
+                    <button type="button" class="btn ">Dashboard</button>
+                  
+                  <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                  
+                    <button type="button" class="btn ">New Service Requests</button>
+                  
+                    <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                  
+                    <button type="button" class="btn active">Upcoming Services</button>
+                  
+                    <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                  <button type="button" class="btn ">Service Schedule</button>
+                  <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                  <button type="button" class="btn ">Service History</button>
+                  <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                  <button type="button" class="btn ">My Ratings</button>
+                  <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                  <button type="button" class="btn ">Block Customer</button>
+                  <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                </div>
+                <div class="col-lg col-md" >
+                    <div class="row">
+                      <p class="text1" ></p>
+                    <a class="ml-auto  " id="data" href="#" title="Export"></a>
+                    </div>
+                    
+                    <div class="datatable-style" style="overflow-x:auto;">
+                    <table class="datatable1 border row-border" >
+                      <thead >
+                        <tr>
+                            <th>Service ID</th>
+                            <th>Service Date</th>
+                          <th>Customer Details</th>
+                          <th>Distance</th>
+                          
+                          <th >
+                            Actions
+                            </th>
+                          
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                            <td ><p class="service-id">323436</p></td>
+                             
+                          <td >
+                            <div class="row"><img class="calender" src="./assets/calendar2.png">
+                              <p id="date" >31/3/2018</p></div>
+                             <div class="row">
+                                <img class="clock" src="./assets/layer-14.png">
+                                <p id="time">12:00-18:00</p>
+                             </div> 
+                            
+                            </td>
+                          <td >
+                            <p class="sp-name">David Bough</p>
+                            <div class="row">
+                              <img class="house" src="./assets/layer-15.png">
+                              <p id="time">Musterstrabe 5,12345 Bonn</p>
+                           </div> 
+                            </td>
+                          
+                          </td>
+                          <td ><p class="service-id">10km</p></td>
+                          <td>
+                            <a class="align-items-center cancel" href="#" title="Cancel">Cancel</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td ><p class="service-id">322536</p></td>
+                          <td >
+                            <div class="row"><img class="calender" src="./assets/calendar2.png">
+                              <p id="date" >15/3/2018</p></div>
+                              
+                              <div class="row">
+                                <img class="clock" src="./assets/layer-14.png">
+                                <p id="time">12:00-18:00</p>
+                             </div> 
+                            </td>
+                            <td >
+                              <p class="sp-name">David Bough</p>
+                              <div class="row">
+                                <img class="house" src="./assets/layer-15.png">
+                                <p id="time">Musterstrabe 5,12345 Bonn</p>
+                             </div> 
+                            </td>
+                            <td ><p class="service-id">3km</p></td>
+                          <td>
+                            <a class="align-items-center cancel" href="#" title="Cancel">Cancel</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td ><p class="service-id">345436</p></td>
+                          <td >
+                            <div class="row"><img class="calender" src="./assets/calendar2.png">
+                              <p id="date" >10/3/2018</p></div>
+                              
+                              <div class="row">
+                                <img class="clock" src="./assets/layer-14.png">
+                                <p id="time">12:00-18:00</p>
+                             </div> 
+                            </td>
+                            <td >
+                              <p class="sp-name">David Bough</p>
+                              <div class="row">
+                                <img class="house" src="./assets/layer-15.png">
+                                <p id="time">Musterstrabe 5,12345 Bonn</p>
+                             </div> 
+                            </td>
+                            <td ><p class="service-id">7km</p></td>
+                            <td>
+                              <a class="align-items-center cancel" href="#" title="Cancel">Cancel</a>
+                              </td>
+                        </tr>
+                        <tr>
+                            <td ><p class="service-id">323456</p></td>
+                          <td >
+                            <div class="row"><img class="calender" src="./assets/calendar2.png">
+                              <p id="date" >28/2/2018</p></div>
+                              
+                              <div class="row">
+                                <img class="clock" src="./assets/layer-14.png">
+                                <p id="time">12:00-18:00</p>
+                             </div> 
+                            </td>
+                            <td >
+                              <p class="sp-name">David Bough</p>
+                              <div class="row">
+                                <img class="house" src="./assets/layer-15.png">
+                                <p id="time">Musterstrabe 5,12345 Bonn</p>
+                             </div> 
+                            </td>
+                            <td ><p class="service-id">8km</p></td>
+                            <td>
+                              <a class="align-items-center cancel" href="#" title="Cancel">Cancel</a>
+                              </td>
+                        </tr>
+                        <tr>
+                            <td ><p class="service-id">323456</p></td>
+                          <td >
+                            <div class="row"><img class="calender" src="./assets/calendar2.png">
+                              <p id="date" >15/2/2018</p></div>
+                              
+                              <div class="row">
+                                <img class="clock" src="./assets/layer-14.png">
+                                <p id="time">12:00-18:00</p>
+                             </div> 
+                            </td>
+                            <td >
+                              <p class="sp-name">David Bough</p>
+                              <div class="row">
+                                <img class="house" src="./assets/layer-15.png">
+                                <p id="time">Musterstrabe 5,12345 Bonn</p>
+                             </div> 
+                            </td>
+                            <td ><p class="service-id">5km</p></td>
+                            <td>
+                              <a class="align-items-center cancel" href="#" title="Cancel">Cancel</a>
+                              </td>
+                        </tr>
+                        <tr> 
+                            <td ><p class="service-id">253436</p></td>
+                          <td >
+                            <div class="row"><img class="calender" src="./assets/calendar2.png">
+                              <p id="date" >15/2/2018</p></div>
+                              <div class="row">
+                                <img class="clock" src="./assets/layer-14.png">
+                                <p id="time">12:00-18:00</p>
+                             </div> 
+                            </td>
+                            <td >
+                              <p class="sp-name">David Bough</p>
+                              <div class="row">
+                                <img class="house" src="./assets/layer-15.png">
+                                <p id="time">Musterstrabe 5,12345 Bonn</p>
+                             </div> 
+                            </td>
+                            <td ><p class="service-id">6km</p></td>
+                            <td>
+                              <a class="align-items-center cancel" href="#" title="Cancel">Cancel</a>
+                              </td>
+                        </tr>
+                        <tr>
+                            <td ><p class="service-id">323486</p></td>
+                          <td >
+                            <div class="row"><img class="calender" src="./assets/calendar2.png">
+                              <p id="date" >31/1/2018</p></div>
+                              
+                              <div class="row">
+                                <img class="clock" src="./assets/layer-14.png">
+                                <p id="time">12:00-18:00</p>
+                             </div> 
+                            </td>
+                            <td >
+                              <p class="sp-name">David Bough</p>
+                              <div class="row">
+                                <img class="house" src="./assets/layer-15.png">
+                                <p id="time">Musterstrabe 5,12345 Bonn</p>
+                             </div> 
+                            </td>
+                            <td ><p class="service-id">7km</p></td>
+                            <td>
+                              <a class="align-items-center cancel" href="#" title="Cancel">Cancel</a>
+                              </td>
+                        </tr>
+                        <tr>
+                            <td ><p class="service-id">327536</p></td>
+                          <td >
+                            <div class="row"><img class="calender" src="./assets/calendar2.png">
+                              <p id="date" >19/1/2018</p></div>
+                              
+                              <div class="row">
+                                <img class="clock" src="./assets/layer-14.png">
+                                <p id="time">12:00-18:00</p>
+                             </div> 
+                            </td>
+                            <td >
+                              <p class="sp-name">David Bough</p>
+                            <div class="row">
+                              <img class="house" src="./assets/layer-15.png">
+                              <p id="time">Musterstrabe 5,12345 Bonn</p>
+                           </div> 
+                            </td>
+                            <td ><p class="service-id">11km</p></td>
+                            <td>
+                              <a class="align-items-center cancel" href="#" title="Cancel">Cancel</a>
+                              </td>
+                        </tr>
+                        <tr>
+                            <td ><p class="service-id">583436</p></td>
+                          <td >
+                            <div class="row"><img class="calender" src="./assets/calendar2.png">
+                              <p id="date" >5/1/2018</p></div>
+                              
+                              <div class="row">
+                                <img class="clock" src="./assets/layer-14.png">
+                                <p id="time">12:00-18:00</p>
+                             </div> 
+                            </td>
+                            <td >
+                              <p class="sp-name">David Bough</p>
+                              <div class="row">
+                                <img class="house" src="./assets/layer-15.png">
+                                <p id="time">Musterstrabe 5,12345 Bonn</p>
+                             </div> 
+                            </td>
+                            <td ><p class="service-id">12km</p></td>
+                            <td>
+                              <a class="align-items-center cancel" href="#" title="Cancel">Cancel</a>
+                              </td>
+                        </tr>
+                        <tr>
+                            <td ><p class="service-id">323456</p></td>
+                          <td >
+                            <div class="row"><img class="calender" src="./assets/calendar2.png">
+                              <p id="date" >1/1/2018</p></div>
+                              
+                              <div class="row">
+                                <img class="clock" src="./assets/layer-14.png">
+                                <p id="time">12:00-18:00</p>
+                             </div> 
+                            </td>
+                            <td >
+                              <p class="sp-name">David Bough</p>
+                            <div class="row">
+                              <img class="house" src="./assets/layer-15.png">
+                              <p id="time">Musterstrabe 5,12345 Bonn</p>
+                           </div> 
+                            </td>
+                            <td ><p class="service-id">13km</p></td>
+                            <td>
+                              <a class="align-items-center cancel" href="#" title="Cancel">Cancel</a>
+                              </td>
+                        </tr>
+                        <tr>
+                            <td ><p class="service-id">375436</p></td>
+                          <td >
+                            <div class="row"><img class="calender" src="./assets/calendar2.png">
+                              <p id="date" >15/2/2018</p></div>
+                               <div class="row">
+                                <img class="clock" src="./assets/layer-14.png">
+                                <p id="time">12:00-18:00</p>
+                             </div> 
+                              
+                            
+                            </td>
+                            <td >
+                              <p class="sp-name">David Bough</p>
+                              <div class="row">
+                                <img class="house" src="./assets/layer-15.png">
+                                <p id="time">Musterstrabe 5,12345 Bonn</p>
+                             </div> 
+                            </td>
+                            <td ><p class="service-id">3km</p></td>
+                            <td>
+                              <a class="align-items-center cancel" href="#" title="Cancel">Cancel</a>
+                              </td>
+                        </tr>
+                        <tr>
+                            <td ><p class="service-id">323400</p></td>
+                          <td >
+                            <div class="row"><img class="calender" src="./assets/calendar2.png">
+                              <p id="date" >24/12/2017</p></div>
+                              
+                              <div class="row">
+                                <img class="clock" src="./assets/layer-14.png">
+                                <p id="time">12:00-18:00</p>
+                             </div> 
+                            </td>
+                            <td >
+                              <p class="sp-name">David Bough</p>
+                              <div class="row">
+                                <img class="house" src="./assets/layer-15.png">
+                                <p id="time">Musterstrabe 5,12345 Bonn</p>
+                             </div> 
+                            </td>
+                            <td ><p class="service-id">10km</p></td>
+                            <td>
+                              <a class="align-items-center cancel" href="#" title="Cancel">Cancel</a>
+                              </td>
+                        </tr>
+                        
+                      </tbody>
+                      
+                    </table>
+                    
+                  </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+        </div>
+        <footer class="footer" >
+          <div class="footer-top">
+              <div class="container">
+                  <div class="row align-items-center">
+                      <div class="col-lg-2 footer-widget">
+                          <a href="#" title="helperland">
+                              <img src="./assets/footer-logo.png" alt="helperland">
+                          </a>
+                      </div>
+                      <div class="col-lg-8 footer-widget">
+                          <ul class="footer-navigation d-flex justify-content-center">
+                              <li>
+                                  <a href="#" title="Home">Home</a>
+                              </li>
+                              <li>
+                                  <a href="#" title="About">About</a>
+                              </li>
+                              <li>
+                                  <a href="#" title="Testimonials">Testimonials</a>
+                              </li>
+                              <li>
+                                  <a href="#" title="FAQs">FAQs</a>
+                              </li>
+                              <li>
+                                  <a href="#" title="Insurance Policy">Insurance Policy</a>
+                              </li>
+                              <li>
+                                  <a href="#" title="Impressum">Impressum</a>
+                              </li>
+                          </ul>
+                      </div>
+                      <div class="col-lg-2 footer-widget">
+                          <ul class="social-media-list d-flex justify-content-end">
+                              <li>
+                                  <a href="#" target="_blank" title="Facebook">
+                                      <img src="./assets/ic-facebook.png" alt="Facebook">
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="#" target="_blank" title="Instagram">
+                                      <img src="./assets/ic-instagram.png" alt="Instagram">
+                                  </a>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="footer-bottom">
+              <div class="container text-center">
+                  <p>@2018 HalperLand. All right reserverd. Terms and Condition | <a href="#" title="Privacy Policy">Privacy Policy</a></p>
+              </div>
+          </div>
+      </footer>
+ 
+        <script type="text/javascript" >
+             jQuery(document).ready(function() {
+                
+            $('.service-history .history-container .datatable-style .datatable1').DataTable(
+            {
+                searching: false,
+                
+                "bInfo" : false,
+                
+                    paginate: false,
+                
+                'columnDefs': [ {
+
+                    'targets': [4], /* column index */
+                
+                    'orderable': false, /* true or false */
+                
+                }],
+                
+                
+            }
+            );
+             });
+             
+
+             
+        </script>
+        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    
+        
+        </body>
+        </html>

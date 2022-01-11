@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<head>
+    <title>Service History</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+    <link href="./styles/index.css" rel="stylesheet" type="text/css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+
+    
+  
+    </head>
+    <body>
+  <!--nav bar-->
+      <div class="my-navbar d-flex align-items-center" >
+        <nav class="navbar navbar-expand-lg  fixed-top align-items-center" >
+            <a href="#" title="helperland" class="logo-img" ><img src="./assets/logo-large.png"  alt="logo"></a>
+            
+          
+          <button class="navbar-toggler" style="border: none;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="text-white fa fa-bars"></i>
+            
+            <!--in mobile layout made threelines icon white-->
+          </button>
+        
+          <div class="collapse navbar-collapse align-items-center" id="navbarSupportedContent">
+            <ul class="navbar-nav align-items-center  ml-auto ">
+                <li class="nav-item">
+                    <a class="nav-link align-items-center  border-btn-blue" href="#" title="Book a Cleaner">Book Now</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-text" href="#" title="Prices">Prices & Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-text" href="#" title="Our Guarantee">Warranty</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-text" href="#" title="Blog">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-text" href="#" title="Contact us">Contact</a>
+                </li>
+                <li class="nav-item " >
+                    <div class="row">
+                    <div class="nav-bar-line"></div>
+                    <a class="nav-link nav-img notification" href="#" title="Notification">
+                      <img src="./assets/icon-notification.png">
+                      <span class="badge">2</span>
+                    </a>
+                </div>
+                </li>
+               
+                <li class="nav-item " >
+                    <div class="row">
+                    <div class="nav-bar-line"></div>
+                    <a class="nav-link nav-img" href="#" title="Settings"><img src="./assets/user.png"></a>
+                    <div class=" dropdown ">
+                      <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img  src="./assets/sp-arrow-down.png">
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        
+                        <a class="dropdown-item" href="#">Welcome,<br/>Gaurang Patel</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">My Dashboard</a>
+                        <a class="dropdown-item" href="#">My Settings</a>
+                        <a class="dropdown-item" href="#">Logout</a>
+                      </div>
+                      
+                          
+                   
+                    </div>
+                </div>
+                </li>
+            </ul>
+             
+          </div>
+              
+      
+        </nav>
+    </div>
+    <div class="service-history">
+      <div class="container-fluid"><p class="text-center" >Welcome,<span>Gaurang!</span></p></div>
+        
+        <div class="line"></div>
+        <div class=" dropdown ">
+          <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-fw fa-arrow-circle-right "></i>
+          </a>
+          <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Dashboard</a>
+            
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Service History</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Service Schedule</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Favorite Pros</a>
+            
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Invoice</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Notification</a>
+          </div>
+          </div>
+        <div class="history-container">
+          <div class="container">
+            <div class="row">
+              <div class="buttons" >
+                
+                  <button type="button" class="btn ">Dashboard</button>
+                
+                <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                
+                  <button type="button" class="btn active">Service History</button>
+                
+                  <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                
+                  <button type="button" class="btn ">Service Schedule</button>
+                
+                  <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                <button type="button" class="btn ">Favorite Pros</button>
+                <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                <button type="button" class="btn ">Invoice</button>
+                <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                <button type="button" class="btn ">Notifications</button>
+                <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+              </div>
+              <div class="col-lg col-md" >
+                <div class="row">
+                  <p class="text1" >Service History</p>
+                <a class="ml-auto export " id="data" href="#" title="Export">Export</a>
+                </div>
+                
+                <div class="datatable-style" style="overflow-x:auto;">
+                <table class="datatable border row-border">
+                  <thead >
+                    <tr>
+                      
+                        <th>Service Details</th>
+                      <th>Service Provider</th>
+                      <th>Payments</th>
+                      <th>Status</th>
+                      <th >
+                        Rate SP
+                        </th>
+                      
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td >
+                        <div class="row"><img class="calender" src="./assets/calendar.png">
+                          <p id="date" >31/3/2018</p></div>
+                          
+                        <p id="time">12:00-18:00</p>
+                        </td>
+                      <td >
+                        <div class="row ">
+                          <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                         
+                        <div>
+                        <p class="sp-name">Lyum Watson</p>
+                        <div class="row star">
+                          <img src="./assets/star1.png">
+                          <img src="./assets/star1.png">
+                          <img src="./assets/star1.png">
+                          <img src="./assets/star1.png">
+                          <img src="./assets/star2.png">
+                        </div>
+                      </div>
+                    </div>
+                      </td>
+                      <td><p class="bill">€<span>63</span></p></td>
+                      <td >
+                        <div class="status1"><p class="text-white">Completed</p>
+                        </div>
+                        
+                      </td>
+                      <td>
+                        <a class="align-items-center  rate" href="#" title="Rate">Rate SP</a>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td >
+                        <div class="row"><img class="calender" src="./assets/calendar.png">
+                          <p id="date" >15/3/2018</p></div>
+                          
+                        <p id="time">12:00-18:00</p>
+                        </td>
+                        <td >
+                          <div class="row ">
+                            <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                           
+                          <div>
+                          <p class="sp-name">Lyum Watson</p>
+                          <div class="row star">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star2.png">
+                          </div>
+                        </div>
+                      </div>
+                        </td>
+                        <td><p class="bill">€<span>63</span></p></td>
+                        <td >
+                          <div class="status1"><p class="text-white">Completed</p>
+                          </div>
+                          
+                        </td>
+                      <td>
+                        <a class="align-items-center  rate" href="#" title="Rate">Rate SP</a>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td >
+                        <div class="row"><img class="calender" src="./assets/calendar.png">
+                          <p id="date" >10/3/2018</p></div>
+                          
+                        <p id="time">12:00-18:00</p>
+                        </td>
+                        <td >
+                          <div class="row ">
+                            <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                           
+                          <div>
+                          <p class="sp-name">Lyum Watson</p>
+                          <div class="row star">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star2.png">
+                          </div>
+                        </div>
+                      </div>
+                        </td>
+                      <td><p class="bill">€<span>63</span></p></td>
+                      <td >
+                        <div class="status1"><p class="text-white">Completed</p>
+                        </div>
+                        
+                      </td>
+                      <td>
+                        <a class="align-items-center  rate" href="#" title="Rate">Rate SP</a>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td >
+                        <div class="row"><img class="calender" src="./assets/calendar.png">
+                          <p id="date" >28/2/2018</p></div>
+                          
+                        <p id="time">12:00-18:00</p>
+                        </td>
+                        <td >
+                          <div class="row ">
+                            <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                           
+                          <div>
+                          <p class="sp-name">Lyum Watson</p>
+                          <div class="row star">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star2.png">
+                          </div>
+                        </div>
+                      </div>
+                        </td>
+                        <td><p class="bill">€<span>63</span></p></td>
+                        <td >
+                          <div class="status2"><p class="text-white">Cancelled</p>
+                          </div>
+                          
+                        </td>
+                        <td>
+                          <a class="align-items-center  rate" href="#" title="Rate">Rate SP</a>
+                          </td>
+                    </tr>
+                    <tr>
+                      <td >
+                        <div class="row"><img class="calender" src="./assets/calendar.png">
+                          <p id="date" >15/2/2018</p></div>
+                          
+                        <p id="time">12:00-18:00</p>
+                        </td>
+                        <td >
+                          <div class="row ">
+                            <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                           
+                          <div>
+                          <p class="sp-name">Lyum Watson</p>
+                          <div class="row star">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star2.png">
+                          </div>
+                        </div>
+                      </div>
+                        </td>
+                        <td><p class="bill">€<span>63</span></p></td>
+                        <td >
+                          <div class="status1"><p class="text-white">Completed</p>
+                          </div>
+                          
+                        </td>
+                        <td>
+                          <a class="align-items-center  rate" href="#" title="Rate">Rate SP</a>
+                          </td>
+                    </tr>
+                    <tr> 
+                      <td >
+                        <div class="row"><img class="calender" src="./assets/calendar.png">
+                          <p id="date" >11/2/2018</p></div>
+                          
+                        <p id="time">12:00-18:00</p>
+                        </td>
+                        <td >
+                          <div class="row ">
+                            <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                           
+                          <div>
+                          <p class="sp-name">Lyum Watson</p>
+                          <div class="row star">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star2.png">
+                          </div>
+                        </div>
+                      </div>
+                        </td>
+                        <td><p class="bill">€<span>63</span></p></td>
+                        <td >
+                          <div class="status2"><p class="text-white">Cancelled</p>
+                          </div>
+                          
+                        </td>
+                        <td>
+                          <a class="align-items-center  rate" href="#" title="Rate">Rate SP</a>
+                          </td>
+                    </tr>
+                    <tr>
+                      <td >
+                        <div class="row"><img class="calender" src="./assets/calendar.png">
+                          <p id="date" >31/1/2018</p></div>
+                          
+                        <p id="time">12:00-18:00</p>
+                        </td>
+                        <td >
+                          <div class="row ">
+                            <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                           
+                          <div>
+                          <p class="sp-name">Lyum Watson</p>
+                          <div class="row star">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star2.png">
+                          </div>
+                        </div>
+                      </div>
+                        </td>
+                        <td><p class="bill">€<span>63</span></p></td>
+                        <td >
+                          <div class="status1"><p class="text-white">Completed</p>
+                          </div>
+                          
+                        </td>
+                        <td>
+                          <a class="align-items-center  rate" href="#" title="Rate">Rate SP</a>
+                          </td>
+                    </tr>
+                    <tr>
+                      <td >
+                        <div class="row"><img class="calender" src="./assets/calendar.png">
+                          <p id="date" >19/1/2018</p></div>
+                          
+                        <p id="time">12:00-18:00</p>
+                        </td>
+                        <td >
+                          <div class="row ">
+                            <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                           
+                          <div>
+                          <p class="sp-name">Lyum Watson</p>
+                          <div class="row star">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star2.png">
+                          </div>
+                        </div>
+                      </div>
+                        </td>
+                        <td><p class="bill">€<span>63</span></p></td>
+                        <td >
+                          <div class="status1"><p class="text-white">Completed</p>
+                          </div>
+                          
+                        </td>
+                        <td>
+                          <a class="align-items-center  rate" href="#" title="Rate">Rate SP</a>
+                          </td>
+                    </tr>
+                    <tr>
+                      <td >
+                        <div class="row"><img class="calender" src="./assets/calendar.png">
+                          <p id="date" >5/1/2018</p></div>
+                          
+                        <p id="time">12:00-18:00</p>
+                        </td>
+                        <td >
+                          <div class="row ">
+                            <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                           
+                          <div>
+                          <p class="sp-name">Lyum Watson</p>
+                          <div class="row star">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star2.png">
+                          </div>
+                        </div>
+                      </div>
+                        </td>
+                        <td><p class="bill">€<span>63</span></p></td>
+                        <td >
+                          <div class="status2"><p class="text-white">Cancelled</p>
+                          </div>
+                          
+                        </td>
+                        <td>
+                          <a class="align-items-center  rate" href="#" title="Rate">Rate SP</a>
+                          </td>
+                    </tr>
+                    <tr>
+                      <td >
+                        <div class="row"><img class="calender" src="./assets/calendar.png">
+                          <p id="date" >1/1/2018</p></div>
+                          
+                        <p id="time">12:00-18:00</p>
+                        </td>
+                        <td >
+                          <div class="row ">
+                            <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                           
+                          <div>
+                          <p class="sp-name">Lyum Watson</p>
+                          <div class="row star">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star2.png">
+                          </div>
+                        </div>
+                      </div>
+                        </td>
+                        <td><p class="bill">€<span>63</span></p></td>
+                        <td >
+                          <div class="status2"><p class="text-white">Cancelled</p>
+                          </div>
+                          
+                        </td>
+                        <td>
+                          <a class="align-items-center  rate" href="#" title="Rate">Rate SP</a>
+                          </td>
+                    </tr>
+                    <tr>
+                      <td >
+                        <div class="row"><img class="calender" src="./assets/calendar.png">
+                          <p id="date" >28/12/2017</p></div>
+                          
+                        <p id="time">12:00-18:00</p>
+                        </td>
+                        <td >
+                          <div class="row ">
+                            <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                           
+                          <div>
+                          <p class="sp-name">Lyum Watson</p>
+                          <div class="row star">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star2.png">
+                          </div>
+                        </div>
+                      </div>
+                        </td>
+                        <td><p class="bill">€<span>63</span></p></td>
+                        <td >
+                          <div class="status1"><p class="text-white">Completed</p>
+                          </div>
+                          
+                        </td>
+                        <td>
+                          <a class="align-items-center  rate" href="#" title="Rate">Rate SP</a>
+                          </td>
+                    </tr>
+                    <tr>
+                      <td >
+                        <div class="row"><img class="calender"  src="./assets/calendar.png">
+                          <p id="date" >24/12/2017</p></div>
+                          
+                        <p id="time">12:00-18:00</p>
+                        </td>
+                        <td >
+                          <div class="row ">
+                            <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                           
+                          <div>
+                          <p class="sp-name">Lyum Watson</p>
+                          <div class="row star">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star2.png">
+                          </div>
+                        </div>
+                      </div>
+                        </td>
+                        <td><p class="bill">€<span>63</span></p></td>
+                        <td >
+                          <div class="status1"><p class="text-white">Completed</p>
+                          </div>
+                          
+                        </td>
+                        <td>
+                          <a class="align-items-center  rate" href="#" title="Rate">Rate SP</a>
+                          </td>
+                    </tr>
+                    
+                  </tbody>
+                  
+                </table>
+              </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+    </div>
+    <footer class="footer" >
+      <div class="footer-top">
+          <div class="container">
+              <div class="row align-items-center">
+                  <div class="col-lg-2 footer-widget">
+                      <a href="#" title="helperland">
+                          <img src="./assets/footer-logo.png" alt="helperland">
+                      </a>
+                  </div>
+                  <div class="col-lg-8 footer-widget">
+                      <ul class="footer-navigation d-flex justify-content-center">
+                          <li>
+                              <a href="#" title="Home">Home</a>
+                          </li>
+                          <li>
+                              <a href="#" title="About">About</a>
+                          </li>
+                          <li>
+                              <a href="#" title="Testimonials">Testimonials</a>
+                          </li>
+                          <li>
+                              <a href="#" title="FAQs">FAQs</a>
+                          </li>
+                          <li>
+                              <a href="#" title="Insurance Policy">Insurance Policy</a>
+                          </li>
+                          <li>
+                              <a href="#" title="Impressum">Impressum</a>
+                          </li>
+                      </ul>
+                  </div>
+                  <div class="col-lg-2 footer-widget">
+                      <ul class="social-media-list d-flex justify-content-end">
+                          <li>
+                              <a href="#" target="_blank" title="Facebook">
+                                  <img src="./assets/ic-facebook.png" alt="Facebook">
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#" target="_blank" title="Instagram">
+                                  <img src="./assets/ic-instagram.png" alt="Instagram">
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="footer-bottom">
+          <div class="container text-center">
+              <p>@2018 HalperLand. All right reserverd. Terms and Condition | <a href="#" title="Privacy Policy">Privacy Policy</a></p>
+          </div>
+      </div>
+  </footer>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    
+    <script type="text/javascript" >
+         jQuery(document).ready(function() {
+           
+        $('.service-history .history-container .datatable-style .datatable').dataTable(
+        {
+          searching: false,
+          "dom": '<"top"i>rt<"bottom"flp><"clear">',
+          "bInfo" : false,
+          language: {
+              paginate: {
+                next: '<i class="fa fa-fw fa-angle-right">',
+                previous: '<i class="fa fa-fw fa-angle-left">' ,
+                first:'<i class="fa fa-fw fa-step-backward">',
+                last: '<i class="fa fa-fw fa-step-forward">'
+              }
+            },
+            'columnDefs': [ {
+
+              'targets': [4], /* column index */
+          
+              'orderable': false, /* true or false */
+          
+            }],
+          
+            "pagingType": "full_numbers"
+        }
+        );
+
+
+          var count=0;
+          $('.service-history .history-container .datatable-style .datatable tr').each(function(){
+            count++;
+          });
+          $("label").append(" Total Record:"+(count+1));
+         });
+        
+    </script>
+    </body>
+    </html>

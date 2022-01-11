@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<head>
+    <title>User Management</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+    <link href="./styles/index.css" rel="stylesheet" type="text/css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+
+    
+  
+    </head>
+    <body>
+  <!--nav bar-->
+      <div class="my-navbar d-flex align-items-center" >
+        <nav class="navbar navbar-expand-lg  fixed-top align-items-center" id="admin-navbar">
+            <a href="#" title="helperland"  id="helperland">helperland</a>
+          <button class="navbar-toggler" style="border: none;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="text-white fa fa-bars"></i>
+            
+            <!--in mobile layout made threelines icon white-->
+          </button>
+        
+          <div class="collapse navbar-collapse align-items-center" id="navbarSupportedContent">
+            <ul class="navbar-nav align-items-center  ml-auto ">
+               <li class="nav-item " >
+                   <a class="nav-link nav-img" href="#" title="Settings"><img src="./assets/admin-user.png"></a>
+                </li>
+                <li class="nav-item" id="admin-name">
+                    <a class="nav-link nav-text" href="#" title="Contact us">James Smith</a>
+                </li>
+                <li class="nav-item" id="logout">
+                    <a class="nav-link nav-img" href="#" title="Settings"><img src="./assets/logout.png"></a>
+                </li>
+            </ul>
+             
+          </div>
+        </nav>
+    </div>
+    <div class="admin-wrapper">
+      <div class="container-fluid">
+        <div class=" dropdown " id="drop-down">
+          <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-fw fa-arrow-circle-right "></i>
+          </a>
+          <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Service Management</a>
+            
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Role Management</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Coupen Code Management</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Service Requests</a>
+            
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Service Providers</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">User Management</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Finance Module</a>
+          </div>
+          </div>
+        <div class="row">
+          <div class="admin-buttons" >
+            <div class="border "></div>  
+            <button type="button" class="btn text-left">Service Management</button>
+          
+          <div class="border "></div>
+          
+            <button type="button" class="btn text-left">Role Management</button>
+          
+            <div class="border "></div>
+          
+            <button type="button" class="btn text-left" >Coupen Code Management
+
+              <button type="button" class="btn mybtn " onclick="toggleActive(this);" data-toggle="collapse" data-target="#two">
+                <img src="./assets/admin-arrow.png">
+                </button>
+                <div id="two" class="collapse">
+                  <a href="#">Coupen Codes</a><br/>
+                  <a href="#">Usage History</a>
+                </div>
+            </button>
+          
+            <div class="border "></div>
+          <button type="button" class="btn text-left">Service Requests</button>
+          <div class="border"></div>
+          <button type="button" class="btn text-left">Service Providers</button>
+          <div class="border "></div>
+          <button type="button" class="btn active text-left">User Management</button>
+          <div class="border "></div>
+          <button type="button" class="btn ">
+            Finance Module
+            <button type="button" class="btn mybtn " onclick="toggleActive(this);" data-toggle="collapse" data-target="#tw">
+              <img src="./assets/admin-arrow.png">
+              </button>
+              <div id="tw" class="collapse">
+                <a href="#">All Transaction</a><br/>
+                <a href="#">Generate Payment</a><br/>
+                <a href="#">Customer Invoices</a>
+                 
+                
+              </div>
+
+          </button>
+          <div class="border"></div>
+          <button type="button" class="btn text-left">Zip Code Management</button>
+          <div class="border "></div>
+          <button type="button" class="btn text-left">Rating Management</button>
+          <div class="border "></div>
+          <button type="button" class="btn text-left">Inquery Management</button>
+          <div class="border"></div>
+          <button type="button" class="btn text-left text-left">News Latter Management
+          </button>
+          <div class="border "></div>
+          <button type="button" class="btn text-left">Content Management
+            <button type="button" class="btn mybtn " onclick="toggleActive(this);" data-toggle="collapse" data-target="#t">
+              <img src="./assets/admin-arrow.png">
+              </button>
+              <div id="t" class="collapse">
+                <a href="#">Blog</a><br/>
+                <a href="#">FAQs</a>
+              </div>
+          </button>
+          <div class="border "></div>
+        </div>
+        <div class="main-wrapper">
+          
+            <div class="row">
+              <p class="my-header">User Management</p>
+            <a class="ml-auto add-new-user "  id="data" href="#" title="Export"><img class="add" src="./assets/add.png">Add New User</a>
+            </div>
+            <div class="">
+            <div class="white-box ">
+              <form>
+                <div class="form-row ">
+                   <div class="col">
+                    <select id="select-menu"class="form-control" >
+                      <option>UserName</option>
+                    </select>
+                   </div>
+                   <div class="col">
+                    <select id="select-menu1" class="form-control" >
+                      <option>User role</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mb-2">
+                      
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">+49</div>
+                        </div>
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone number">
+                      
+                      
+                    </div>
+                    
+                  </div>
+                  <div class="col">
+                    <input type="number" class="form-control" id="zip" placeholder="Zip code" name="zip" >
+                   </div>
+                    <button type="submit" class="btn" id="search-btn">Search</button>
+                  
+                    <button type="submit" class="btn " id="clear-btn">clear</button>
+                  
+                   </div>
+                   </form>
+            </div>
+          
+        </div>
+        <div class="user-management-dt " style="overflow-x:auto;">
+          <table class="datatable-um border row-border" >
+            <thead >
+              <tr>
+                
+                  <th>User Name</th>
+                <th>User Type</th>
+                <th>Role</th>
+                <th>Postal Code</th>
+                <th>City</th>
+                <th>Radius</th>
+                <th>UserStatus</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td ><p id="time">Lyum Watson</p></td>
+                  <td ><p id="time">Call Center</p></td>
+                  <td ><p id="time">Inquiry Manager</p></td>
+                  <td ><p id="time">123456</p></td>
+                  <td ><p id="time">Berlin</p></td>
+                  <td></td>
+               
+                <td >
+                  <div class="status1 ml-1"><p class="text-white">Active</p></div>
+                  
+                </td>
+                <td>
+                  <div class=" dropdown ">
+                    <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <div class="hello"><img  src="./assets/group-38.png"></div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Edit</a>
+                      <a class="dropdown-item" href="#">Deactivate</a>
+                      <a class="dropdown-item" href="#">Service History</a>
+                    </div>
+                  </div>
+                  </td>
+              </tr>
+              <tr>
+                <td ><p id="time">Jhon smith</p></td>
+                  <td ><p id="time">Service provider</p></td>
+                  <td ><p id="time"></p></td>
+                  <td ><p id="time">123456</p></td>
+                  <td ><p id="time">Berlin</p></td>
+                  <td><p id="time">10km</p></td>
+               
+                <td >
+                  <div class="status1 ml-1"><p class="text-white">Active</p></div>
+                  
+                </td>
+                <td>
+                  <div class=" dropdown ">
+                    <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <div class="hello"><img  src="./assets/group-38.png"></div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Edit</a>
+                      <a class="dropdown-item" href="#">Deactivate</a>
+                      <a class="dropdown-item" href="#">Service History</a>
+                    </div>
+                  </div>
+                  </td>
+              </tr>
+              <tr>
+                <td ><p id="time">Jhon smith</p></td>
+                  <td ><p id="time">Service provider</p></td>
+                  <td ><p id="time"></p></td>
+                  <td ><p id="time">123456</p></td>
+                  <td ><p id="time">Berlin</p></td>
+                  <td></td>
+               
+                <td >
+                  <div class="status1 ml-1"><p class="text-white">Active</p></div>
+                  
+                </td>
+                <td>
+                  <div class=" dropdown ">
+                    <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <div class="hello"><img  src="./assets/group-38.png"></div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Edit</a>
+                      <a class="dropdown-item" href="#">Deactivate</a>
+                      <a class="dropdown-item" href="#">Service History</a>
+                    </div>
+                  </div>
+                  </td>
+              </tr>
+              <tr>
+                <td ><p id="time">Jhon smith</p></td>
+                  <td ><p id="time">Service provider</p></td>
+                  <td ><p id="time"></p></td>
+                  <td ><p id="time">123456</p></td>
+                  <td ><p id="time">Berlin</p></td>
+                  <td></td>
+               
+                <td >
+                  <div class="status1 ml-1"><p class="text-white">Active</p></div>
+                  
+                </td>
+                <td>
+                  <div class=" dropdown ">
+                    <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <div class="hello"><img  src="./assets/group-38.png"></div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Edit</a>
+                      <a class="dropdown-item" href="#">Deactivate</a>
+                      <a class="dropdown-item" href="#">Service History</a>
+                    </div>
+                  </div>
+                  </td>
+              </tr>
+              <tr>
+                <td ><p id="time">Lyum Watson</p></td>
+                  <td ><p id="time">Call Center</p></td>
+                  <td ><p id="time">Inquiry Manager</p></td>
+                  <td ><p id="time">123456</p></td>
+                  <td ><p id="time">Berlin</p></td>
+                  <td></td>
+               
+                <td >
+                  <div class="status1 ml-1"><p class="text-white">Active</p></div>
+                  
+                </td>
+                <td>
+                  <div class=" dropdown ">
+                    <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <div class="hello"><img  src="./assets/group-38.png"></div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Edit</a>
+                      <a class="dropdown-item" href="#">Deactivate</a>
+                      <a class="dropdown-item" href="#">Service History</a>
+                    </div>
+                  </div>
+                  </td>
+              </tr>
+              <tr>
+                <td ><p id="time">joseph Watson</p></td>
+                  <td ><p id="time">Call Center</p></td>
+                  <td ><p id="time">Inquiry Manager</p></td>
+                  <td ><p id="time">123456</p></td>
+                  <td ><p id="time">Berlin</p></td>
+                  <td></td>
+               
+                <td >
+                  <div class="status1 ml-1"><p class="text-white">Active</p></div>
+                  
+                </td>
+                <td>
+                  <div class=" dropdown ">
+                    <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <div class="hello"><img  src="./assets/group-38.png"></div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Edit</a>
+                      <a class="dropdown-item" href="#">Deactivate</a>
+                      <a class="dropdown-item" href="#">Service History</a>
+                    </div>
+                  </div>
+                  </td>
+              </tr>
+              <tr>
+                <td ><p id="time">Jhon Watson</p></td>
+                  <td ><p id="time">Call Center</p></td>
+                  <td ><p id="time">Inquiry Manager</p></td>
+                  <td ><p id="time">123456</p></td>
+                  <td ><p id="time">Berlin</p></td>
+                  <td></td>
+               
+                <td >
+                  <div class="status1 ml-1"><p class="text-white">Active</p></div>
+                  
+                </td>
+                <td>
+                  <div class=" dropdown ">
+                    <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <div class="hello"><img  src="./assets/group-38.png"></div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Edit</a>
+                      <a class="dropdown-item" href="#">Deactivate</a>
+                      <a class="dropdown-item" href="#">Service History</a>
+                    </div>
+                  </div>
+                  </td>
+              </tr>
+              <tr>
+                <td ><p id="time">Jack Watson</p></td>
+                  <td ><p id="time">Call Center</p></td>
+                  <td ><p id="time">Inquiry Manager</p></td>
+                  <td ><p id="time">123456</p></td>
+                  <td ><p id="time">Berlin</p></td>
+                  <td></td>
+               
+                <td >
+                  <div class="status1 ml-1"><p class="text-white">Active</p></div>
+                  
+                </td>
+                <td>
+                  <div class=" dropdown ">
+                    <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <div class="hello"><img  src="./assets/group-38.png"></div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Edit</a>
+                      <a class="dropdown-item" href="#">Deactivate</a>
+                      <a class="dropdown-item" href="#">Service History</a>
+                    </div>
+                  </div>
+                  </td>
+              </tr>
+              <tr>
+                <td ><p id="time">Lyum Watson</p></td>
+                  <td ><p id="time">Call Center</p></td>
+                  <td ><p id="time">Inquiry Manager</p></td>
+                  <td ><p id="time">123456</p></td>
+                  <td ><p id="time">Berlin</p></td>
+                  <td></td>
+               
+                <td >
+                  <div class="status1 ml-1"><p class="text-white">Active</p></div>
+                  
+                </td>
+                <td>
+                  <div class=" dropdown ">
+                    <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <div class="hello"><img  src="./assets/group-38.png"></div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Edit</a>
+                      <a class="dropdown-item" href="#">Deactivate</a>
+                      <a class="dropdown-item" href="#">Service History</a>
+                    </div>
+                  </div>
+                  </td>
+              </tr>
+              <tr>
+                <td ><p id="time">jhon Watson</p></td>
+                  <td ><p id="time">Call Center</p></td>
+                  <td ><p id="time">Inquiry Manager</p></td>
+                  <td ><p id="time">123456</p></td>
+                  <td ><p id="time">Berlin</p></td>
+                  <td></td>
+               
+                <td >
+                  <div class="status1 ml-1"><p class="text-white">Active</p></div>
+                  
+                </td>
+                <td>
+                  <div class=" dropdown ">
+                    <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <div class="hello"><img  src="./assets/group-38.png"></div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Edit</a>
+                      <a class="dropdown-item" href="#">Deactivate</a>
+                      <a class="dropdown-item" href="#">Service History</a>
+                    </div>
+                  </div>
+                  </td>
+              </tr>
+              <tr>
+                <td ><p id="time">Peter Watson</p></td>
+                  <td ><p id="time">Call Center</p></td>
+                  <td ><p id="time">Inquiry Manager</p></td>
+                  <td ><p id="time">123456</p></td>
+                  <td ><p id="time">Berlin</p></td>
+                  <td></td>
+               
+                <td >
+                  <div class="status2 ml-1"><p class="text-white">Inactive</p></div>
+                  
+                </td>
+                <td>
+                  <div class=" dropdown ">
+                    <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <div class="hello"><img  src="./assets/group-38.png"></div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Edit</a>
+                      <a class="dropdown-item" href="#">Deactivate</a>
+                      <a class="dropdown-item" href="#">Service History</a>
+                    </div>
+                  </div>
+                  </td>
+              </tr>
+              <tr>
+                <td ><p id="time">Lyum Watson</p></td>
+                  <td ><p id="time">Call Center</p></td>
+                  <td ><p id="time">Inquiry Manager</p></td>
+                  <td ><p id="time">123456</p></td>
+                  <td ><p id="time">Berlin</p></td>
+                  <td></td>
+               
+                <td >
+                  <div class="status2 ml-1"><p class="text-white">Inactive</p></div>
+                  
+                </td>
+                <td>
+                  <div class=" dropdown ">
+                    <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <div class="hello"><img  src="./assets/group-38.png"></div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Edit</a>
+                      <a class="dropdown-item" href="#">Deactivate</a>
+                      <a class="dropdown-item" href="#">Service History</a>
+                    </div>
+                  </div>
+                  </td>
+              </tr>
+              </tbody>
+            </table>
+        </div>
+        <p id="admin-footer">©2018 Helperland. All rights reserved.</p>
+          </div>
+          
+        </div>
+        </div>
+        
+      </div>
+    
+    <script>
+      function toggleActive(el) {
+        el.classList.toggle('active');
+      }
+  
+      </script>
+       <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    
+       <script type="text/javascript" >
+            jQuery(document).ready(function() {
+              
+           $('.admin-wrapper .main-wrapper .datatable-um').dataTable(
+           {
+             searching: false,
+             "dom": '<"top"i>rt<"bottom"flp><"clear">',
+             "bInfo" : false,
+             language: {
+                 paginate: {
+                   next: '<i class="fa fa-fw fa-angle-right">',
+                   previous: '<i class="fa fa-fw fa-angle-left">' ,
+                   
+                 }
+               },
+               'columnDefs': [ {
+   
+                 'targets': [1,2,4,7], /* column index */
+             
+                 'orderable': false, /* true or false */
+             
+               }],
+             
+               
+           }
+           );
+   
+   
+           var count1=0;
+          $('.admin-wrapper .main-wrapper .user-management-dt  .datatable-um  tr').each(function(){
+            count1++;
+          });
+          $("label").append(" Total Record:"+(count1+1));
+         });
+           
+       </script>
+    </body>
+    </html>

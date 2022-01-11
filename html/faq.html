@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<head>
+    <title>FAQ</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+    <link href="./styles/index.css" rel="stylesheet" type="text/css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  
+    
+  
+  </head>
+  <body>
+  <!--nav bar-->
+      <div class="nav-faq d-flex align-items-center" >
+        <nav class="navbar navbar-expand-lg  fixed-top align-items-center" >
+            <a href="#" title="helperland" class="logo-img" ><img src="./assets/logo-large.png"  alt="logo"></a>
+            
+          
+          <button class="navbar-toggler" style="border: none;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="text-white fa fa-bars"></i><!--in mobile layout made threelines icon white-->
+          </button>
+        
+          <div class="collapse navbar-collapse align-items-center" id="navbarSupportedContent">
+            <ul class="navbar-nav align-items-center  ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link align-items-center  border-btn-blue" href="#" title="Book a Cleaner">Book Now</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link align-items-center border-btn" href="#" title="Prices">Prices & Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-text" href="#" title="Our Guarantee">Warranty</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-text" href="#" title="Blog">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-text" href="#" title="Contact us">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link  border-btn-blue" href="#" title="Login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link  border-btn-blue" href="#" title="Become a Helper">Become a
+                        Helper</a>
+                </li>
+            </ul>
+             
+          </div>
+              
+      
+        </nav>
+      </div>
+      <div class="faq-banner"><img src="./assets/faq-banner.png"  alt="faq banner"></div>
+      <div class="faq-section">
+          <h1 class="text-center" style="color: #4f4f4f;">FAQs</h1>
+          <div class="design ">
+            <div class="d-flex justify-content-center">
+            <div class="lhs-line"></div>
+            <img  src="./assets/forma-1-copy-5.png">
+            <div class="rhs-line"></div>
+          </div>
+            <p class="text-center">Whether you are Customer or Service provider,<br> We have tried our best to solve all your queries and questions.</p>
+          </div>
+        <div class="container-sm ">
+          <div class="faq-que">
+            <ul class="row nav nav-tabs nav-fill" id="myTab" role="tablist">
+              <li class="nav-item " role="presentation">
+                <a class="nav-link active"  id="customer" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">FOR CUSTOMER</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="service-provider" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">FOR SERVICE PROVIDER</a>
+              </li>
+            </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="customer">
+            <ul>
+              <li>
+              <button type="button" class="btn " onclick="toggleActive(this);" data-toggle="collapse" data-target="#one">
+                <img src="./assets/right-arrow.png">
+              </button>
+              <text class="txt">What's included in a cleaning? </text>
+              <div id="one" class="collapse">
+              Bedroom, Living Room & Common Areas, Bathrooms, Kitchen, Extras
+              </div> 
+            </li>
+            <li>
+            
+              <button type="button" class="btn " onclick="toggleActive(this);" data-toggle="collapse" data-target="#two">
+              <img src="./assets/right-arrow.png">
+              </button>
+              <text>Which Helperland professional will come to my place? </text>
+              <div id="two" class="collapse">
+              Helperland has a vast network of experienced, top-rated cleaners. Based on the time and date of your request, we work to assign the best professional available. Like working with a specific pro? Add them to your Pro Team from the mobile app and they'll be requested first for all future bookings.
+              You will receive an email with details about your professional prior to your appointment.
+              </div>
+            </li>
+
+              <li>
+            
+              <button type="button" class="btn " onclick="toggleActive(this);" data-toggle="collapse" data-target="#three">
+              <img src="./assets/right-arrow.png">
+              </button>
+              <text>Can I skip or reschedule bookings?</text>
+              <div id="three" class="collapse">
+                You can reschedule any booking for free at least 24 hours in advance of the scheduled start time. If you need to skip a booking within the minimum commitment, we’ll credit the value of the booking to your account.
+                You can use this credit on future cleanings and other Helperland services.
+              </div>
+              </li>
+              
+              <li>
+            
+              <button type="button" class="btn " onclick="toggleActive(this);" data-toggle="collapse" data-target="#four">
+              <img src="./assets/right-arrow.png">
+              </button>
+              <text>Do I need to be home for the booking?</text>
+              <div id="four" class="collapse">
+                We strongly recommend that you are home for the first clean of your booking to show your cleaner around. 
+                Some customers choose to give a spare key to their cleaner, but this decision is based on individual preferences.
+              </div>
+              </li>
+            </ul>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="service-provider">
+              <ul><li>
+              <button type="button" class="btn " onclick="toggleActive(this);" data-toggle="collapse" data-target="#five">
+                <img src="./assets/right-arrow.png">
+                </button>
+                <text>How much do service providers earn?</text>
+                <div id="five" class="collapse">
+                  The self-employed service providers working with Helperland set their own payouts, this means that they decide how much they earn per hour.
+                </div>
+                </li>
+                <li>
+                <button type="button" class="btn " onclick="toggleActive(this);" data-toggle="collapse" data-target="#six">
+                  <img src="./assets/right-arrow.png">
+                  </button>
+                  <text>What support do you provide to the service providers?</text>
+                  <div id="six" class="collapse">
+                    Our call-centre is available to assist the service providers with all queries or issues in regards to their bookings during office hours. Before a service provider starts receiving jobs, every individual partner receives an orientation session to familiarise with the online platform and their profile.
+                  </div>
+                </li></ul>
+            </div>
+          </div>
+      </div>
+        </div>
+      </div>
+      
+      <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-2 footer-widget">
+                        <a href="#" title="helperland">
+                            <img src="./assets/footer-logo.png" alt="helperland">
+                        </a>
+                    </div>
+                    <div class="col-lg-8 footer-widget">
+                        <ul class="footer-navigation d-flex justify-content-center">
+                            <li>
+                                <a href="#" title="Home">Home</a>
+                            </li>
+                            <li>
+                                <a href="#" title="About">About</a>
+                            </li>
+                            <li>
+                                <a href="#" title="Testimonials">Testimonials</a>
+                            </li>
+                            <li>
+                                <a href="#" title="FAQs">FAQs</a>
+                            </li>
+                            <li>
+                                <a href="#" title="Insurance Policy">Insurance Policy</a>
+                            </li>
+                            <li>
+                                <a href="#" title="Impressum">Impressum</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 footer-widget">
+                        <ul class="social-media-list d-flex justify-content-end">
+                            <li>
+                                <a href="#" target="_blank" title="Facebook">
+                                    <img src="./assets/ic-facebook.png" alt="Facebook">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank" title="Instagram">
+                                    <img src="./assets/ic-instagram.png" alt="Instagram">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container text-center">
+                <p>@2018 HalperLand. All right reserverd. Terms and Condition | <a href="#" title="Privacy Policy">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+    <script>
+    function toggleActive(el) {
+      el.classList.toggle('active');
+    }
+
+    </script>
+     
+  </body>
+  </html>

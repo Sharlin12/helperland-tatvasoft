@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<head>
+    <title>Service Requests</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+    <link href="./styles/index.css" rel="stylesheet" type="text/css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+
+    
+  
+    </head>
+    <body>
+  <!--nav bar-->
+      <div class="my-navbar d-flex align-items-center" >
+        <nav class="navbar navbar-expand-lg  fixed-top align-items-center" id="admin-navbar">
+            <a href="#" title="helperland"  id="helperland">helperland</a>
+          <button class="navbar-toggler" style="border: none;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="text-white fa fa-bars"></i>
+            
+            <!--in mobile layout made threelines icon white-->
+          </button>
+        
+          <div class="collapse navbar-collapse align-items-center" id="navbarSupportedContent">
+            <ul class="navbar-nav align-items-center  ml-auto ">
+               <li class="nav-item " >
+                   <a class="nav-link nav-img" href="#" title="Settings"><img src="./assets/admin-user.png"></a>
+                </li>
+                <li class="nav-item" id="admin-name">
+                    <a class="nav-link nav-text" href="#" title="Contact us">James Smith</a>
+                </li>
+                <li class="nav-item" id="logout">
+                    <a class="nav-link nav-img" href="#" title="Settings"><img src="./assets/logout.png"></a>
+                </li>
+            </ul>
+             
+          </div>
+        </nav>
+    </div>
+    <div class="admin-wrapper">
+      <div class="container-fluid">
+        <div class=" dropdown " id="drop-down">
+          <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-fw fa-arrow-circle-right "></i>
+          </a>
+          <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Service Management</a>
+            
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Role Management</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Coupen Code Management</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Service Requests</a>
+            
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Service Providers</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">User Management</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Finance Module</a>
+          </div>
+          </div>
+        <div class="row">
+          <div class="admin-buttons" >
+            <div class="border "></div>  
+            <button type="button" class="btn ">Service Management</button>
+          
+          <div class="border "></div>
+          
+            <button type="button" class="btn ">Role Management</button>
+          
+            <div class="border "></div>
+          
+            <button type="button" class="btn " >Coupen Code Management
+
+              <button type="button" class="btn mybtn " onclick="toggleActive(this);" data-toggle="collapse" data-target="#two">
+                <img src="./assets/admin-arrow.png">
+                </button>
+                <div id="two" class="collapse">
+                  <a href="#">Coupen Codes</a><br/>
+                  <a href="#">Usage History</a>
+                </div>
+            </button>
+          
+            <div class="border "></div>
+          <button type="button" class="btn active">Service Requests</button>
+          <div class="border"></div>
+          <button type="button" class="btn ">Service Providers</button>
+          <div class="border "></div>
+          <button type="button" class="btn ">User Management</button>
+          <div class="border "></div>
+          <button type="button" class="btn ">
+            Finance Module
+            <button type="button" class="btn mybtn " onclick="toggleActive(this);" data-toggle="collapse" data-target="#tw">
+              <img src="./assets/admin-arrow.png">
+              </button>
+              <div id="tw" class="collapse">
+                <a href="#">All Transaction</a><br/>
+                <a href="#">Generate Payment</a><br/>
+                <a href="#">Customer Invoices</a>
+                 
+                
+              </div>
+
+          </button>
+          <div class="border"></div>
+          <button type="button" class="btn ">Zip Code Management</button>
+          <div class="border "></div>
+          <button type="button" class="btn ">Rating Management</button>
+          <div class="border "></div>
+          <button type="button" class="btn ">Inquery Management</button>
+          <div class="border"></div>
+          <button type="button" class="btn ">News Latter Management
+          </button>
+          <div class="border "></div>
+          <button type="button" class="btn ">Content Management
+            <button type="button" class="btn mybtn " onclick="toggleActive(this);" data-toggle="collapse" data-target="#t">
+              <img src="./assets/admin-arrow.png">
+              </button>
+              <div id="t" class="collapse">
+                <a href="#">Blog</a><br/>
+                <a href="#">FAQs</a>
+              </div>
+          </button>
+          <div class="border "></div>
+        </div>
+        <div class="main-wrapper">
+          <div class=""><p class="my-header">Service Requests</p>
+            <div class="white-box "  style="overflow-x:auto;">
+              <form>
+                <div class="form-row ">
+                  <div class="col">
+                    <input type="number" class="form-control" id="s-id" placeholder="Service ID" name="s-id" >
+                   </div>
+                   <div class="col">
+                    <select class="form-control" >
+                      <option>Customer</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <select class="form-control" >
+                      <option>Service Provider</option>
+                    </select>
+                  </div>
+                   <div class="col">
+                    <select id="select-menu"class="form-control" >
+                      <option>Status</option>
+                    </select>
+                   </div>
+                   <div class="col">
+                    <span class="date-picker-calender">
+                    <img src="./assets/admin-calendar-blue.png">
+                    </span>
+                    <input style="padding-left: 40px;" type="text" class="form-control" id="date-picker" placeholder="From Date" name="date" >
+                   </div>
+                   <div class="col">
+                    <span class="date-picker-calender">
+                    <img src="./assets/admin-calendar-blue.png">
+                    </span>
+                    <input style="padding-left: 40px;" type="text" class="form-control" id="date-picker" placeholder="To Date" name="date" >
+                   </div>
+                    <button type="submit" class="btn" id="search-btn">Search</button>
+                  
+                    <button type="submit" class="btn " id="clear-btn">clear</button>
+                  
+                   </div>
+                   </form>
+            </div>
+                
+            
+              
+            </div>
+            <div class="user-management-dt " style="overflow-x:auto;">
+              
+              <table class="datatable-um border row-border" >
+                <thead >
+                  <tr>
+                    
+                    <th>Service ID</th>
+                  <th>Service Date</th>
+                  <th>Customer Details</th>
+                  <th>Service Provider</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td ><p class="service-id">323436</p></td>
+                     
+                  <td >
+                    <div class="row"><img class="calender" src="./assets/calendar2.png">
+                      <p id="date" >31/3/2018</p></div>
+                     <div class="row">
+                        <img class="clock" src="./assets/layer-14.png">
+                        <p id="time">12:00-18:00</p>
+                     </div> 
+                    
+                    </td>
+                  <td >
+                    <p id="customer-name">David Bough</p>
+                    <div class="row">
+                      <img class="house" src="./assets/layer-15.png">
+                      <p id="time">Musterstrabe 5,12345 Bonn</p>
+                   </div> 
+                    </td>
+                    <td >
+                      <div class="row ">
+                        <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                       
+                      <div>
+                      <p id="spname">Lyum Watson</p>
+                      <div class="row star">
+                        <img src="./assets/star1.png">
+                        <img src="./assets/star1.png">
+                        <img src="./assets/star1.png">
+                        <img src="./assets/star1.png">
+                        <img src="./assets/star2.png">
+                       
+                      </div>
+                    </div>
+                  </div>
+                    </td>
+                  
+                  <td>
+                    <a class="align-items-center status2" href="#" title="Cancel"><p class="text-white">Cancelled</p></a>
+                    </td>
+                    <td>
+                      <div class=" dropdown ">
+                        <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <div class="hello"><img  src="./assets/group-38.png"></div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="#">Edit</a>
+                          <a class="dropdown-item" href="#">Reschedule</a>
+                          <a class="dropdown-item" href="#">Refund</a>
+                          <a class="dropdown-item" href="#">Cancel</a>
+                          <a class="dropdown-item" href="#">Change SP</a>
+                          <a class="dropdown-item" href="#">Escalete</a>
+                          <a class="dropdown-item" href="#">History Log</a>
+                          <a class="dropdown-item" href="#">Download Invoice</a>
+                          
+                        </div>
+                      </div>
+                      </td>
+                </tr>
+                <tr>
+                  <td ><p class="service-id">323436</p></td>
+                   
+                <td >
+                  <div class="row"><img class="calender" src="./assets/calendar2.png">
+                    <p id="date" >31/3/2018</p></div>
+                   <div class="row">
+                      <img class="clock" src="./assets/layer-14.png">
+                      <p id="time">12:00-18:00</p>
+                   </div> 
+                  
+                  </td>
+                <td >
+                  <p id="customer-name">David Bough</p>
+                  <div class="row">
+                    <img class="house" src="./assets/layer-15.png">
+                    <p id="time">Musterstrabe 5,12345 Bonn</p>
+                 </div> 
+                  </td>
+                  <td >
+                    
+                  </td>
+                
+                <td>
+                  <a class="align-items-center new-req" href="#" title="Cancel"><p class="text-white">New</p></a>
+                  </td>
+                  <td>
+                    <div class=" dropdown ">
+                      <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="hello"><img  src="./assets/group-38.png"></div>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Edit</a>
+                        <a class="dropdown-item" href="#">Reschedule</a>
+                        <a class="dropdown-item" href="#">Refund</a>
+                        <a class="dropdown-item" href="#">Cancel</a>
+                        <a class="dropdown-item" href="#">Change SP</a>
+                        <a class="dropdown-item" href="#">Escalete</a>
+                        <a class="dropdown-item" href="#">History Log</a>
+                        <a class="dropdown-item" href="#">Download Invoice</a>
+                        
+                      </div>
+                    </div>
+                    </td>
+              </tr>
+              <td ><p class="service-id">323436</p></td>
+                   
+                <td >
+                  <div class="row"><img class="calender" src="./assets/calendar2.png">
+                    <p id="date" >31/3/2018</p></div>
+                   <div class="row">
+                      <img class="clock" src="./assets/layer-14.png">
+                      <p id="time">12:00-18:00</p>
+                   </div> 
+                  
+                  </td>
+                <td >
+                  <p id="customer-name">David Bough</p>
+                  <div class="row">
+                    <img class="house" src="./assets/layer-15.png">
+                    <p id="time">Musterstrabe 5,12345 Bonn</p>
+                 </div> 
+                  </td>
+                  <td >
+                    
+                  </td>
+                
+                <td>
+                  <a class="align-items-center new-req" href="#" title="Cancel"><p class="text-white">New</p></a>
+                  </td>
+                  <td>
+                    <div class=" dropdown ">
+                      <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="hello"><img  src="./assets/group-38.png"></div>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Edit</a>
+                        <a class="dropdown-item" href="#">Reschedule</a>
+                        <a class="dropdown-item" href="#">Refund</a>
+                        <a class="dropdown-item" href="#">Cancel</a>
+                        <a class="dropdown-item" href="#">Change SP</a>
+                        <a class="dropdown-item" href="#">Escalete</a>
+                        <a class="dropdown-item" href="#">History Log</a>
+                        <a class="dropdown-item" href="#">Download Invoice</a>
+                        
+                      </div>
+                    </div>
+                    </td>
+              </tr>
+              <tr>
+              <td ><p class="service-id">323436</p></td>
+                   
+                <td >
+                  <div class="row"><img class="calender" src="./assets/calendar2.png">
+                    <p id="date" >31/3/2018</p></div>
+                   <div class="row">
+                      <img class="clock" src="./assets/layer-14.png">
+                      <p id="time">12:00-18:00</p>
+                   </div> 
+                  
+                  </td>
+                <td >
+                  <p id="customer-name">David Bough</p>
+                  <div class="row">
+                    <img class="house" src="./assets/layer-15.png">
+                    <p id="time">Musterstrabe 5,12345 Bonn</p>
+                 </div> 
+                  </td>
+                  <td >
+                    <div class="row ">
+                      <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                     
+                    <div>
+                    <p id="spname">Lyum Watson</p>
+                    <div class="row star">
+                      <img src="./assets/star1.png">
+                      <img src="./assets/star1.png">
+                      <img src="./assets/star1.png">
+                      <img src="./assets/star1.png">
+                      <img src="./assets/star2.png">
+                     
+                    </div>
+                  </div>
+                </div>
+                  </td>
+                
+                <td>
+                  <a class="align-items-center pending-req" href="#" title="Cancel"><p class="text-white">Pending</p></a>
+                  </td>
+                  <td>
+                    <div class=" dropdown ">
+                      <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="hello"><img  src="./assets/group-38.png"></div>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Edit</a>
+                        <a class="dropdown-item" href="#">Reschedule</a>
+                        <a class="dropdown-item" href="#">Refund</a>
+                        <a class="dropdown-item" href="#">Cancel</a>
+                        <a class="dropdown-item" href="#">Change SP</a>
+                        <a class="dropdown-item" href="#">Escalete</a>
+                        <a class="dropdown-item" href="#">History Log</a>
+                        <a class="dropdown-item" href="#">Download Invoice</a>
+                        
+                      </div>
+                    </div>
+                    </td>
+              </tr>
+              <tr>
+                <td ><p class="service-id">323436</p></td>
+                     
+                  <td >
+                    <div class="row"><img class="calender" src="./assets/calendar2.png">
+                      <p id="date" >31/3/2018</p></div>
+                     <div class="row">
+                        <img class="clock" src="./assets/layer-14.png">
+                        <p id="time">12:00-18:00</p>
+                     </div> 
+                    
+                    </td>
+                  <td >
+                    <p id="customer-name">David Bough</p>
+                    <div class="row">
+                      <img class="house" src="./assets/layer-15.png">
+                      <p id="time">Musterstrabe 5,12345 Bonn</p>
+                   </div> 
+                    </td>
+                    <td >
+                      <div class="row ">
+                        <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                       
+                      <div>
+                      <p id="spname">Lyum Watson</p>
+                      <div class="row star">
+                        <img src="./assets/star1.png">
+                        <img src="./assets/star1.png">
+                        <img src="./assets/star1.png">
+                        <img src="./assets/star1.png">
+                        <img src="./assets/star2.png">
+                       
+                      </div>
+                    </div>
+                  </div>
+                    </td>
+                  
+                  <td>
+                    <a class="align-items-center pending-req" href="#" title="Cancel"><p class="text-white">Pending</p></a>
+                    </td>
+                    <td>
+                      <div class=" dropdown ">
+                        <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <div class="hello"><img  src="./assets/group-38.png"></div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="#">Edit</a>
+                          <a class="dropdown-item" href="#">Reschedule</a>
+                          <a class="dropdown-item" href="#">Refund</a>
+                          <a class="dropdown-item" href="#">Cancel</a>
+                          <a class="dropdown-item" href="#">Change SP</a>
+                          <a class="dropdown-item" href="#">Escalete</a>
+                          <a class="dropdown-item" href="#">History Log</a>
+                          <a class="dropdown-item" href="#">Download Invoice</a>
+                          
+                        </div>
+                      </div>
+                      </td>
+                </tr>
+                <tr>
+                  <td ><p class="service-id">323436</p></td>
+                       
+                    <td >
+                      <div class="row"><img class="calender" src="./assets/calendar2.png">
+                        <p id="date" >31/3/2018</p></div>
+                       <div class="row">
+                          <img class="clock" src="./assets/layer-14.png">
+                          <p id="time">12:00-18:00</p>
+                       </div> 
+                      
+                      </td>
+                    <td >
+                      <p id="customer-name">David Bough</p>
+                      <div class="row">
+                        <img class="house" src="./assets/layer-15.png">
+                        <p id="time">Musterstrabe 5,12345 Bonn</p>
+                     </div> 
+                      </td>
+                      <td >
+                        <div class="row ">
+                          <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                         
+                        <div>
+                        <p id="spname">Lyum Watson</p>
+                        <div class="row star">
+                          <img src="./assets/star1.png">
+                          <img src="./assets/star1.png">
+                          <img src="./assets/star1.png">
+                          <img src="./assets/star1.png">
+                          <img src="./assets/star2.png">
+                         
+                        </div>
+                      </div>
+                    </div>
+                      </td>
+                    
+                    <td>
+                      <a class="align-items-center status1" href="#" title="Cancel"><p class="text-white">Completed</p></a>
+                      </td>
+                      <td>
+                        <div class=" dropdown ">
+                          <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="hello"><img  src="./assets/group-38.png"></div>
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Refund</a>
+                            
+                            <a class="dropdown-item" href="#">Escalete</a>
+                            <a class="dropdown-item" href="#">History Log</a>
+                            <a class="dropdown-item" href="#">Download Invoice</a>
+                            
+                          </div>
+                        </div>
+                        </td>
+                  </tr>
+                  <tr>
+                    <td ><p class="service-id">323436</p></td>
+                         
+                      <td >
+                        <div class="row"><img class="calender" src="./assets/calendar2.png">
+                          <p id="date" >31/3/2018</p></div>
+                         <div class="row">
+                            <img class="clock" src="./assets/layer-14.png">
+                            <p id="time">12:00-18:00</p>
+                         </div> 
+                        
+                        </td>
+                      <td >
+                        <p id="customer-name">David Bough</p>
+                        <div class="row">
+                          <img class="house" src="./assets/layer-15.png">
+                          <p id="time">Musterstrabe 5,12345 Bonn</p>
+                       </div> 
+                        </td>
+                        <td >
+                          <div class="row ">
+                            <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                           
+                          <div>
+                          <p id="spname">Lyum Watson</p>
+                          <div class="row star">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star1.png">
+                            <img src="./assets/star2.png">
+                           
+                          </div>
+                        </div>
+                      </div>
+                        </td>
+                      
+                      <td>
+                        <a class="align-items-center status1" href="#" title="Cancel"><p class="text-white">Completed</p></a>
+                        </td>
+                        <td>
+                          <div class=" dropdown ">
+                            <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <div class="hello"><img  src="./assets/group-38.png"></div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="#">Refund</a>
+                              
+                              <a class="dropdown-item" href="#">Escalete</a>
+                              <a class="dropdown-item" href="#">History Log</a>
+                              <a class="dropdown-item" href="#">Download Invoice</a>
+                              
+                            </div>
+                          </div>
+                          </td>
+                    </tr>
+                    <tr>
+                      <td ><p class="service-id">323436</p></td>
+                           
+                        <td >
+                          <div class="row"><img class="calender" src="./assets/calendar2.png">
+                            <p id="date" >31/3/2018</p></div>
+                           <div class="row">
+                              <img class="clock" src="./assets/layer-14.png">
+                              <p id="time">12:00-18:00</p>
+                           </div> 
+                          
+                          </td>
+                        <td >
+                          <p id="customer-name">David Bough</p>
+                          <div class="row">
+                            <img class="house" src="./assets/layer-15.png">
+                            <p id="time">Musterstrabe 5,12345 Bonn</p>
+                         </div> 
+                          </td>
+                          <td >
+                            <div class="row ">
+                              <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                             
+                            <div>
+                            <p id="spname">Lyum Watson</p>
+                            <div class="row star">
+                              <img src="./assets/star1.png">
+                              <img src="./assets/star1.png">
+                              <img src="./assets/star1.png">
+                              <img src="./assets/star1.png">
+                              <img src="./assets/star2.png">
+                             
+                            </div>
+                          </div>
+                        </div>
+                          </td>
+                        
+                        <td>
+                          <a class="align-items-center status1" href="#" title="Cancel"><p class="text-white">Completed</p></a>
+                          </td>
+                          <td>
+                            <div class=" dropdown ">
+                              <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="hello"><img  src="./assets/group-38.png"></div>
+                              </a>
+                              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Refund</a>
+                                
+                                <a class="dropdown-item" href="#">Escalete</a>
+                                <a class="dropdown-item" href="#">History Log</a>
+                                <a class="dropdown-item" href="#">Download Invoice</a>
+                                
+                              </div>
+                            </div>
+                            </td>
+                      </tr>
+                      <tr>
+                        <td ><p class="service-id">323436</p></td>
+                             
+                          <td >
+                            <div class="row"><img class="calender" src="./assets/calendar2.png">
+                              <p id="date" >31/3/2018</p></div>
+                             <div class="row">
+                                <img class="clock" src="./assets/layer-14.png">
+                                <p id="time">12:00-18:00</p>
+                             </div> 
+                            
+                            </td>
+                          <td >
+                            <p id="customer-name">David Bough</p>
+                            <div class="row">
+                              <img class="house" src="./assets/layer-15.png">
+                              <p id="time">Musterstrabe 5,12345 Bonn</p>
+                           </div> 
+                            </td>
+                            <td >
+                              <div class="row ">
+                                <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                               
+                              <div>
+                              <p id="spname">Lyum Watson</p>
+                              <div class="row star">
+                                <img src="./assets/star1.png">
+                                <img src="./assets/star1.png">
+                                <img src="./assets/star1.png">
+                                <img src="./assets/star1.png">
+                                <img src="./assets/star2.png">
+                               
+                              </div>
+                            </div>
+                          </div>
+                            </td>
+                          
+                          <td>
+                            <a class="align-items-center status1" href="#" title="Cancel"><p class="text-white">Completed</p></a>
+                            </td>
+                            <td>
+                              <div class=" dropdown ">
+                                <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <div class="hello"><img  src="./assets/group-38.png"></div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                  <a class="dropdown-item" href="#">Refund</a>
+                                  
+                                  <a class="dropdown-item" href="#">Escalete</a>
+                                  <a class="dropdown-item" href="#">History Log</a>
+                                  <a class="dropdown-item" href="#">Download Invoice</a>
+                                  
+                                </div>
+                              </div>
+                              </td>
+                        </tr>
+                        <tr>
+                          <td ><p class="service-id">323436</p></td>
+                               
+                            <td >
+                              <div class="row"><img class="calender" src="./assets/calendar2.png">
+                                <p id="date" >31/3/2018</p></div>
+                               <div class="row">
+                                  <img class="clock" src="./assets/layer-14.png">
+                                  <p id="time">12:00-18:00</p>
+                               </div> 
+                              
+                              </td>
+                            <td >
+                              <p id="customer-name">David Bough</p>
+                              <div class="row">
+                                <img class="house" src="./assets/layer-15.png">
+                                <p id="time">Musterstrabe 5,12345 Bonn</p>
+                             </div> 
+                              </td>
+                              <td >
+                                <div class="row ">
+                                  <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                                 
+                                <div>
+                                <p id="spname">Lyum Watson</p>
+                                <div class="row star">
+                                  <img src="./assets/star1.png">
+                                  <img src="./assets/star1.png">
+                                  <img src="./assets/star1.png">
+                                  <img src="./assets/star1.png">
+                                  <img src="./assets/star2.png">
+                                 
+                                </div>
+                              </div>
+                            </div>
+                              </td>
+                            
+                            <td>
+                              <a class="align-items-center status1" href="#" title="Cancel"><p class="text-white">Completed</p></a>
+                              </td>
+                              <td>
+                                <div class=" dropdown ">
+                                  <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="hello"><img  src="./assets/group-38.png"></div>
+                                  </a>
+                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Refund</a>
+                                    
+                                    <a class="dropdown-item" href="#">Escalete</a>
+                                    <a class="dropdown-item" href="#">History Log</a>
+                                    <a class="dropdown-item" href="#">Download Invoice</a>
+                                    
+                                  </div>
+                                </div>
+                                </td>
+                          </tr>
+                          <tr>
+                            <td ><p class="service-id">323436</p></td>
+                                 
+                              <td >
+                                <div class="row"><img class="calender" src="./assets/calendar2.png">
+                                  <p id="date" >31/3/2018</p></div>
+                                 <div class="row">
+                                    <img class="clock" src="./assets/layer-14.png">
+                                    <p id="time">12:00-18:00</p>
+                                 </div> 
+                                
+                                </td>
+                              <td >
+                                <p id="customer-name">David Bough</p>
+                                <div class="row">
+                                  <img class="house" src="./assets/layer-15.png">
+                                  <p id="time">Musterstrabe 5,12345 Bonn</p>
+                               </div> 
+                                </td>
+                                <td >
+                                  <div class="row ">
+                                    <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                                   
+                                  <div>
+                                  <p id="spname">Lyum Watson</p>
+                                  <div class="row star">
+                                    <img src="./assets/star1.png">
+                                    <img src="./assets/star1.png">
+                                    <img src="./assets/star1.png">
+                                    <img src="./assets/star1.png">
+                                    <img src="./assets/star2.png">
+                                   
+                                  </div>
+                                </div>
+                              </div>
+                                </td>
+                              
+                              <td>
+                                <a class="align-items-center status1" href="#" title="Cancel"><p class="text-white">Completed</p></a>
+                                </td>
+                                <td>
+                                  <div class=" dropdown ">
+                                    <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <div class="hello"><img  src="./assets/group-38.png"></div>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                      <a class="dropdown-item" href="#">Refund</a>
+                                      
+                                      <a class="dropdown-item" href="#">Escalete</a>
+                                      <a class="dropdown-item" href="#">History Log</a>
+                                      <a class="dropdown-item" href="#">Download Invoice</a>
+                                      
+                                    </div>
+                                  </div>
+                                  </td>
+                            </tr>
+                            <tr>
+                              <td ><p class="service-id">323436</p></td>
+                                   
+                                <td >
+                                  <div class="row"><img class="calender" src="./assets/calendar2.png">
+                                    <p id="date" >31/3/2018</p></div>
+                                   <div class="row">
+                                      <img class="clock" src="./assets/layer-14.png">
+                                      <p id="time">12:00-18:00</p>
+                                   </div> 
+                                  
+                                  </td>
+                                <td >
+                                  <p id="customer-name">David Bough</p>
+                                  <div class="row">
+                                    <img class="house" src="./assets/layer-15.png">
+                                    <p id="time">Musterstrabe 5,12345 Bonn</p>
+                                 </div> 
+                                  </td>
+                                  <td >
+                                    <div class="row ">
+                                      <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                                     
+                                    <div>
+                                    <p id="spname">Lyum Watson</p>
+                                    <div class="row star">
+                                      <img src="./assets/star1.png">
+                                      <img src="./assets/star1.png">
+                                      <img src="./assets/star1.png">
+                                      <img src="./assets/star1.png">
+                                      <img src="./assets/star2.png">
+                                     
+                                    </div>
+                                  </div>
+                                </div>
+                                  </td>
+                                
+                                <td>
+                                  <a class="align-items-center status2" href="#" title="Cancel"><p class="text-white">Cancelled</p></a>
+                                  </td>
+                                  <td>
+                                    <div class=" dropdown ">
+                                      <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <div class="hello"><img  src="./assets/group-38.png"></div>
+                                      </a>
+                                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">Refund</a>
+                                        
+                                        <a class="dropdown-item" href="#">Escalete</a>
+                                        <a class="dropdown-item" href="#">History Log</a>
+                                        <a class="dropdown-item" href="#">Download Invoice</a>
+                                        
+                                      </div>
+                                    </div>
+                                    </td>
+                              </tr>
+                              <tr>
+                                <td ><p class="service-id">323436</p></td>
+                                     
+                                  <td >
+                                    <div class="row"><img class="calender" src="./assets/calendar2.png">
+                                      <p id="date" >31/3/2018</p></div>
+                                     <div class="row">
+                                        <img class="clock" src="./assets/layer-14.png">
+                                        <p id="time">12:00-18:00</p>
+                                     </div> 
+                                    
+                                    </td>
+                                  <td >
+                                    <p id="customer-name">David Bough</p>
+                                    <div class="row">
+                                      <img class="house" src="./assets/layer-15.png">
+                                      <p id="time">Musterstrabe 5,12345 Bonn</p>
+                                   </div> 
+                                    </td>
+                                    <td >
+                                      <div class="row ">
+                                        <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                                       
+                                      <div>
+                                      <p id="spname">Lyum Watson</p>
+                                      <div class="row star">
+                                        <img src="./assets/star1.png">
+                                        <img src="./assets/star1.png">
+                                        <img src="./assets/star1.png">
+                                        <img src="./assets/star1.png">
+                                        <img src="./assets/star2.png">
+                                       
+                                      </div>
+                                    </div>
+                                  </div>
+                                    </td>
+                                  
+                                  <td>
+                                    <a class="align-items-center status2" href="#" title="Cancel"><p class="text-white">Cancelled</p></a>
+                                    </td>
+                                    <td>
+                                      <div class=" dropdown ">
+                                        <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          <div class="hello"><img  src="./assets/group-38.png"></div>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                          <a class="dropdown-item" href="#">Refund</a>
+                                          
+                                          <a class="dropdown-item" href="#">Escalete</a>
+                                          <a class="dropdown-item" href="#">History Log</a>
+                                          <a class="dropdown-item" href="#">Download Invoice</a>
+                                          
+                                        </div>
+                                      </div>
+                                      </td>
+                                </tr>
+                                <tr>
+                                  <td ><p class="service-id">323436</p></td>
+                                       
+                                    <td >
+                                      <div class="row"><img class="calender" src="./assets/calendar2.png">
+                                        <p id="date" >31/3/2018</p></div>
+                                       <div class="row">
+                                          <img class="clock" src="./assets/layer-14.png">
+                                          <p id="time">12:00-18:00</p>
+                                       </div> 
+                                      
+                                      </td>
+                                    <td >
+                                      <p id="customer-name">David Bough</p>
+                                      <div class="row">
+                                        <img class="house" src="./assets/layer-15.png">
+                                        <p id="time">Musterstrabe 5,12345 Bonn</p>
+                                     </div> 
+                                      </td>
+                                      <td >
+                                        <div class="row ">
+                                          <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                                         
+                                        <div>
+                                        <p id="spname">Lyum Watson</p>
+                                        <div class="row star">
+                                          <img src="./assets/star1.png">
+                                          <img src="./assets/star1.png">
+                                          <img src="./assets/star1.png">
+                                          <img src="./assets/star1.png">
+                                          <img src="./assets/star2.png">
+                                         
+                                        </div>
+                                      </div>
+                                    </div>
+                                      </td>
+                                    
+                                    <td>
+                                      <a class="align-items-center status2" href="#" title="Cancel"><p class="text-white">Cancelled</p></a>
+                                      </td>
+                                      <td>
+                                        <div class=" dropdown ">
+                                          <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="hello"><img  src="./assets/group-38.png"></div>
+                                          </a>
+                                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="#">Refund</a>
+                                            
+                                            <a class="dropdown-item" href="#">Escalete</a>
+                                            <a class="dropdown-item" href="#">History Log</a>
+                                            <a class="dropdown-item" href="#">Download Invoice</a>
+                                            
+                                          </div>
+                                        </div>
+                                        </td>
+                                  </tr>
+                                  <tr>
+                                    <td ><p class="service-id">323436</p></td>
+                                         
+                                      <td >
+                                        <div class="row"><img class="calender" src="./assets/calendar2.png">
+                                          <p id="date" >31/3/2018</p></div>
+                                         <div class="row">
+                                            <img class="clock" src="./assets/layer-14.png">
+                                            <p id="time">12:00-18:00</p>
+                                         </div> 
+                                        
+                                        </td>
+                                      <td >
+                                        <p id="customer-name">David Bough</p>
+                                        <div class="row">
+                                          <img class="house" src="./assets/layer-15.png">
+                                          <p id="time">Musterstrabe 5,12345 Bonn</p>
+                                       </div> 
+                                        </td>
+                                        <td >
+                                          <div class="row ">
+                                            <div class="avtar "> <img  src="./assets/forma-1-copy-19.png"></div>
+                                           
+                                          <div>
+                                          <p id="spname">Lyum Watson</p>
+                                          <div class="row star">
+                                            <img src="./assets/star1.png">
+                                            <img src="./assets/star1.png">
+                                            <img src="./assets/star1.png">
+                                            <img src="./assets/star1.png">
+                                            <img src="./assets/star2.png">
+                                           
+                                          </div>
+                                        </div>
+                                      </div>
+                                        </td>
+                                      
+                                      <td>
+                                        <a class="align-items-center status2" href="#" title="Cancel"><p class="text-white">Cancelled</p></a>
+                                        </td>
+                                        <td>
+                                          <div class=" dropdown ">
+                                            <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              <div class="hello"><img  src="./assets/group-38.png"></div>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                              <a class="dropdown-item" href="#">Refund</a>
+                                              
+                                              <a class="dropdown-item" href="#">Escalete</a>
+                                              <a class="dropdown-item" href="#">History Log</a>
+                                              <a class="dropdown-item" href="#">Download Invoice</a>
+                                              
+                                            </div>
+                                          </div>
+                                          </td>
+                                    </tr>
+                              
+
+                </tbody>
+                </table>
+            </div>
+            <p id="admin-footer">©2018 Helperland. All rights reserved.</p>
+              </div>
+              
+            </div>
+            </div>
+            
+          </div>
+        
+        <script>
+          function toggleActive(el) {
+            el.classList.toggle('active');
+          }
+      
+          </script>
+           <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        
+           <script type="text/javascript" >
+                jQuery(document).ready(function() {
+                  
+               $('.admin-wrapper .main-wrapper .datatable-um').dataTable(
+               {
+                 searching: false,
+                 "dom": '<"top"i>rt<"bottom"flp><"clear">',
+                 "bInfo" : false,
+                 language: {
+                     paginate: {
+                       next: '<i class="fa fa-fw fa-angle-right">',
+                       previous: '<i class="fa fa-fw fa-angle-left">' ,
+                       
+                     }
+                   },
+                   'columnDefs': [ {
+       
+                     'targets': [5], /* column index */
+                 
+                     'orderable': false, /* true or false */
+                 
+                   }],
+                 
+                   
+               }
+               );
+       
+       
+               var count2=0;
+              $('.admin-wrapper .main-wrapper .user-management-dt  .datatable-um  tr').each(function(){
+                count2++;
+              });
+              $("label").append(" Total Record:"+(count2+1));
+             });
+               
+           </script>
+        </body>
+        </html>
