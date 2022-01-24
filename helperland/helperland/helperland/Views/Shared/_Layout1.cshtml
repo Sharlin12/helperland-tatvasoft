@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+    <link href="~/css/site.css" rel="stylesheet" type="text/css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/assets/favicon-16x16.png">
+  
+    
+  
+  </head>
+  <body>
+     <!--nav bar-->
+
+    <div class="nav-faq d-flex align-items-center" >
+        <nav class="navbar navbar-expand-lg  fixed-top align-items-center" >
+            <a href="#" title="helperland" class="logo-img" ><img src="~/assets/logo-large.png"  alt="logo"></a>
+            
+          
+            <button class="navbar-toggler" style="border: none;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="text-white fa fa-bars"></i><!--in mobile layout made threelines icon white-->
+            </button>
+        
+            <div class="collapse navbar-collapse align-items-center" id="navbarSupportedContent">
+                <ul class="navbar-nav align-items-center  ml-auto">
+                    <li class="nav-item">
+                    <a class="nav-link align-items-center  border-btn-blue" href="#" title="Book a Cleaner">Book Now</a>
+                        </li>
+                    <li class="nav-item">
+                    <a class="nav-link align-items-center border-btn" asp-controller="Home" asp-action="Prices" title="Prices">Prices & Services</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link nav-text" href="#" title="Our Guarantee">Warranty</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link nav-text" href="#" title="Blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link nav-text" asp-controller="Home" asp-action="Contact" title="Contact us">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link  border-btn-blue" href="#" title="Login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link  border-btn-blue" href="#" title="Become a Helper">Become a
+                        Helper</a>
+                    </li>
+                </ul>
+             
+            </div>
+              
+      
+        </nav>
+    </div>
+    <div >
+        <main role="main" >
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-2 footer-widget">
+                        <a href="#" title="helperland">
+                            <img src="~/assets/footer-logo.png" alt="helperland">
+                        </a>
+                    </div>
+                    <div class="col-lg-8 footer-widget">
+                        <ul class="footer-navigation d-flex justify-content-center">
+                            <li>
+                                <a asp-controller="Home" asp-action="Index" title="Home">Home</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Home" asp-action="About" title="About">About</a>
+                            </li>
+                            <li>
+                                <a href="#" title="Testimonials">Testimonials</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Home" asp-action="Faqs" title="FAQs">FAQs</a>
+                            </li>
+                            <li>
+                                <a href="#" title="Insurance Policy">Insurance Policy</a>
+                            </li>
+                            <li>
+                                <a href="#" title="Impressum">Impressum</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 footer-widget">
+                        <ul class="social-media-list d-flex justify-content-end">
+                            <li>
+                                <a href="#" target="_blank" title="Facebook">
+                                    <img src="~/assets/ic-facebook.png" alt="Facebook">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank" title="Instagram">
+                                    <img src="~/assets/ic-instagram.png" alt="Instagram">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container text-center">
+                <p>HelperLand. All right reserverd. Terms and Condition | <a href="#" title="Privacy Policy">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+     </body>
+      </html>
+

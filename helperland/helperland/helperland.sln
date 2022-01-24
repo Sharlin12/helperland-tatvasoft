@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "helperland", "helperland\helperland.csproj", "{59DB9E72-40F2-4272-986E-BA84431997AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59DB9E72-40F2-4272-986E-BA84431997AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59DB9E72-40F2-4272-986E-BA84431997AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59DB9E72-40F2-4272-986E-BA84431997AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59DB9E72-40F2-4272-986E-BA84431997AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FD751122-6DA7-49B2-ADBD-F57827F0B658}
+	EndGlobalSection
+EndGlobal
