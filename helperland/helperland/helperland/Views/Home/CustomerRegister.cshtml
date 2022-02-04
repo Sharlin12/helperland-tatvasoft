@@ -1,0 +1,92 @@
+﻿@model helperland.Models.RegisterModel
+
+@{
+   ViewBag.Title = "Customer Registration";
+   Layout = "~/Views/Shared/_Layout1.cshtml";
+  
+}
+<div class="faq-section">
+            <h1 class="text-center" id="CreateAccount">Create an account</h1>
+            <div class="design ">
+                <div class="d-flex justify-content-center">
+                    <div class="lhs-line"></div>
+                    <img  src="~/assets/forma-1-copy-5.png">
+                    <div class="rhs-line"></div>
+                </div>
+            </div>
+        </div>
+<div class="get-in-touch" id="CreateAccountForm">
+<div class="container-fluid row  justify-content-center align-items-center">
+    <div class=" col-lg-3 col-md-2 col-sm-1 "></div>
+    <div class="col-lg-5  col-md-6 col-sm-8">
+        <form asp-action="CustomerRegister">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-row">
+            <div class="form-group col">
+                
+                <input asp-for="FirstName" class="form-control" placeholder="First Name"/>
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group col">
+                
+                <input asp-for="LastName" class="form-control" placeholder="Last Name"/>
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            </div>
+            <div class="form-row">
+            <div class="form-group col">
+               
+                <input asp-for="Email" class="form-control" placeholder="E-mail address"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group col">
+                <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">+91</div>
+                                  </div>
+                                  <input type="tel" class="form-control" id="phone"  placeholder="Phone Number" asp-for="Mobile"
+                                    >
+                                </div>
+                         <span asp-validation-for="Mobile" class="text-danger"></span>
+            </div>
+            </div>
+            <div class="form-row">
+            <div class="form-group col">
+         
+                <input asp-for="Password" class="form-control"  placeholder="Password"/>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group col">
+            
+                <input asp-for="Confirmpwd" class="form-control"  placeholder="Confirm Password"/>
+                <span asp-validation-for="Confirmpwd" class="text-danger"></span>
+            </div>
+            </div>
+           
+                  
+                 
+            <div class="col align-items-left">
+                <label>
+                    <input formcontrolname="Privacy policy" asp-for="privacyPolicy" type="checkbox" class="checkboxinput ng-untouched ng-pristine ng-valid" required>
+                    <span>
+                        I have read the <span class="stretched-link">privacy policy .</span>
+                    </span><br/>
+                    <span asp-validation-for="privacyPolicy" class="text-danger"></span>
+                </label>
+            </div>
+                    
+                    
+            
+           
+            <div class="form-group text-center">
+                <input type="submit" id="submit-btn" value="Register" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class=" col-lg-3 col-md-2 "></div>
+</div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

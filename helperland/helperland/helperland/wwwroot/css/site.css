@@ -3318,3 +3318,37 @@ input[type="password"] {
         float: none;
     }
 }
+
+/*register*/
+
+#CreateAccount {
+    margin-top: 100px;
+    font-weight: 400;
+    font-size: 35px;
+}
+
+#CreateAccountForm {
+    margin-top: 30px;
+}
+
+/*forgot password*/
+#Forgotpassword {
+    padding-top:183px ;
+    font-weight: 400;
+    font-size: 35px;
+}
+.succesfull {
+    margin-top: 30px;
+    color: #4f4f4f;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+
+    
+
+    .get-in-touch .container-fluid .col-lg .upload-btn-wrapper .myinput {
+       
+    }
+
+

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model helperland.Models.LoginForgotPassModel
+<!DOCTYPE html>
 <head>
     <title>@ViewBag.Title</title>
     <meta charset="utf-8">
@@ -53,7 +54,7 @@
                     <a class="nav-link nav-text" asp-controller="Home" asp-action="Contact" title="Contact us">Contact</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link  border-btn-blue" href="#" title="Login">Login</a>
+                    <a class="nav-link  border-btn-blue" href="#" onclick="document.getElementById('id01').style.display='block'" title="Login">Login</a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link  border-btn-blue" href="#" title="Become a Helper">Become a
@@ -66,7 +67,60 @@
       
         </nav>
     </div>
+      <div id="id01" class="modal">
+  
+        <form class="modal-content animate" asp-controller="Shared" asp-action="Login">
+          
+            <p class="login">Login to your account <i class="fa fa-close float-right" 
+                onclick="document.getElementById('id01').style.display='none'"></i></p>
+          <div class="container">
+            @Html.ValidationMessage("Invalid",new { @class="text-danger"})
+            <input  placeholder="Email" asp-for="LoginModel.Email">
+               <span asp-validation-for="LoginModel.Email" class="text-danger"></span>
+            
+            <input  placeholder="Enter Password" asp-for="LoginModel.Password">
+              <span asp-validation-for="LoginModel.Password" class="text-danger"></span>
+              
+            
+            <label>
+              <input type="checkbox"  name="remember"> Remember me
+            </label>
+            <div class="text-center">
+                <button type="submit" class="btn login-btn" >login</button>
+            </div>
+          </div>
+      
+          <div class="container text-center" style="margin-top: -40px;">
+            <span> <a href="#" onclick="document.getElementById('id02').style.display='block';document.getElementById('id01').style.display='none'">Forgot Password?</a></span><br/>
+            <span class="psw ">Don't have account? <a asp-controller="Home" asp-action="CustomerRegister">Create an account</a></span>
+          </div>
+        </form>
+      </div>
     <div >
+         <div id="id02" class="modal">
+  
+        <form class="modal-content animate" asp-controller="Shared" asp-action="checkEmailExist">
+          
+            <p class="login">Forgot password <i class="fa fa-close float-right" 
+                onclick="document.getElementById('id02').style.display='none'"></i></p>
+                
+          <div class="container">
+            @Html.ValidationMessage("Email1",new { @class="text-danger"})
+            <input  placeholder="Email" asp-for="ForgotPasswordModel.Email1">
+             <span asp-validation-for="ForgotPasswordModel.Email1" class="text-danger"></span>
+            
+              <br/>
+            <div class="text-center" style="margin-top: 20px;">
+                <button type="submit" class="btn login-btn" >Send</button>
+            </div>
+          </div>
+      
+          <div class="container text-center" style="margin-top: -40px;">
+            <span> <a href="#" onclick="document.getElementById('id02').style.display='none';document.getElementById('id01').style.display='block'">Login Now</a></span><br/>
+           
+          </div>
+        </form>
+      </div>
         <main role="main" >
             @RenderBody()
         </main>
@@ -125,6 +179,38 @@
             </div>
         </div>
     </footer>
+    @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+      @RenderSection("Scripts", required: false)
+       <script>
+        // Get the modal
+        var modal = document.getElementById('id01');
+        
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        </script>
+        @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+
+            document.getElementById('id01').style.display = 'block';
+        </script>
+
+    }
+     @if (ViewBag.Message1 != null)
+    {
+        <script type="text/javascript">
+
+            document.getElementById('id02').style.display = 'block';
+        </script>
+
+    }
      </body>
       </html>
 
