@@ -19,7 +19,7 @@ namespace helperland.Models
         [DataType(DataType.Password)]
         public String Password { get; set; }
         
-
+        public String hiddenfield { get; set; }
 
     }
 }

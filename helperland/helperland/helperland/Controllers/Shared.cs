@@ -39,11 +39,26 @@ namespace helperland.Controllers
                 if (details.FirstOrDefault().UserTypeId == 1)
                 {
 
+                    HttpContext.Session.SetInt32("CustomerId", details.FirstOrDefault().UserId);
                     HttpContext.Session.SetString("Customerfname", details.FirstOrDefault().FirstName);
-                    return RedirectToAction("Welcome", "Home");
+                    if (reg.LoginModel.hiddenfield!=null)
+                    {
+                        return RedirectToAction("BookService", "Home");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Welcome", "Home");
+                    }
+                   
                 }
                 else if(details.FirstOrDefault().UserTypeId==2)
                 {
+                    if (reg.LoginModel.hiddenfield != null)
+                    {
+                        ModelState.AddModelError("Invalid","Only Customer can apply for service");
+                        ViewBag.Message = String.Format("Invalid Login");
+                        return View("~/Views/Home/Index.cshtml");
+                    }
                     if (details.FirstOrDefault().IsApproved)
                     {
                         HttpContext.Session.SetString("SPfname", details.FirstOrDefault().FirstName);
@@ -58,6 +73,12 @@ namespace helperland.Controllers
                 }
                 else if (details.FirstOrDefault().UserTypeId == 3)
                 {
+                    if (reg.LoginModel.hiddenfield != null)
+                    {
+                        ModelState.AddModelError("Invalid", "Only Customer can apply for service");
+                        ViewBag.Message = String.Format("Invalid Login");
+                        return View("~/Views/Home/Index.cshtml");
+                    }
                     return RedirectToAction("WelcomeForAdmin", "Home");
                 }
                 else

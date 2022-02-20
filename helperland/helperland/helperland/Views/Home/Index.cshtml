@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -15,9 +17,19 @@
                 <li>secure online payment method
                     </li>
             </ul>
+            @if (HttpContextAccessor.HttpContext.Session.GetString("Customerfname") != null)
+        {
             <div class="btn-wrapper text-center">
-                <a href="#" title="BookCleaner" class="blue-btn-cleaner">Let's Book a Cleaner</a>
+                <a  title="BookCleaner" asp-action="BookService" asp-controller="Home" class="blue-btn-cleaner">Let's Book a Cleaner</a>
             </div>
+        }
+        else
+        {
+            <div class="btn-wrapper text-center">
+                <a  title="BookCleaner" onclick="BookCleaner()" class="blue-btn-cleaner">Let's Book a Cleaner</a>
+            </div>
+        }
+        
         </div>
         <div class="instruction align-items-center">
             <div class="container px-7  ">
@@ -189,3 +201,4 @@
     <div class="text-center">
         <a href="#" class="scroll-top1 float-right"><img src="~/assets/layer-598.png" alt="up-arrow"></a>
     </div>
+    <script src="~/js/site.js"></script>

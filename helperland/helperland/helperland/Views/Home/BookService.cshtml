@@ -1,0 +1,769 @@
+﻿@using helperland.Models.Data
+@model helperland.Models.BookServiceModel
+@{
+    ViewBag.Title = "Book Service";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<div class="faq-banner"><img style="width: 100%;" src="~/assets/book-service-banner.jpg"  alt="faq banner"></div>
+    <div class="faq-section" style="overflow-x:auto;">
+        <h1 class="text-center" >Set up your cleaning service</h1>
+        <div class="design ">
+            <div class="d-flex justify-content-center">
+                <div class="lhs-line"></div>
+                <img  src="~/assets/forma-1-copy-5.png">
+                <div class="rhs-line"></div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="book-now" style="overflow-x:auto;">
+        <div class="container">
+            <div class="row">
+                <div class=" col-md-8 col-lg float-left " >
+                    <ul  class="nav nav-tabs nav-justified payment-steps">
+                        <li  class=" active step1" id="div1">
+                          <a  title="Setup Service" onclick="func1()">
+                            <span >
+                              <span class="icon"></span>
+                              <span  class="text">Setup Service</span>
+                            </span>
+                          </a>
+                        </li>
+                        <li  class=" step2" id="myDIV">
+                          <a  title="Schedule and Plan"  id="myschedule" class="disabled-link" onclick="func2()" >
+                            <span >
+                              <span  class="icon"></span>
+                              <span  class="text">Schedule &amp; Plan</span>
+                            </span>
+              
+                          </a>
+                        </li>
+                        <li  class=" step3" id="div3">
+                          <a  title="Your Details" id="yourdetail" class="disabled-link" onclick="func3()">
+                            <span >
+                              <span  class="icon"></span>
+                              <span  class="text">Your Details</span>
+                            </span>
+                          </a>
+                        </li>
+                        <li  class="step4" id="div4">
+                          <a  title="Make Payment" id="payment1" class="disabled-link" onclick="func4()">
+                            <span>
+                              <span  class="icon"></span>
+                              <span  class="text">Make Payment</span>
+                            </span>
+                          </a>
+                        </li>
+                      </ul>
+                      
+                      <div id="setupService">
+                        <div class="payment-step2">
+                          <div class="room-bath">
+                              <h3>Enter your postal code</h3>
+                              </div>
+                              </div>
+                        <form asp-action="CheckPostalCode">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row">
+                                <div class="enter-pc col-md-5 col-sm-7">
+                                    <input asp-for="ZipCodeMatching.PostalCode" placeholder="Postal Code" >
+                                     <span asp-validation-for="ZipCodeMatching.PostalCode" class="text-danger"></span>
+                                </div>
+                               
+                      
+                                <div class="text-center post">
+                                    <button type="submit" class="btn login-btn" >Check Availability</button>
+                                   
+                                </div>
+                            </div>
+                        </form>
+                      </div>
+                      <div id="schedule">
+                         <form method="post">
+                              <div class="row">
+                        <div class="col-md-6 schedule-plan-1">
+                            <div class="payment-step2">
+                                <div class="room-bath">
+                                    <h3>When do you need the cleaner</h3>
+                                    <div class="d-flex mt-3">
+                                       
+                                      <div class=" mydate">
+                                        <span class="date-picker-calender">
+                                        <img src="~/assets/admin-calendar-blue.png">
+                                        </span>
+                                        <input style="padding-left: 40px;" asp-for="sap.YourDate" class="form-control serviceStartDate" id="txtServiceStartDate" >
+                                       </div>
+                                       
+                                      
+                                        <div class="col-md-3 col-lg-3">
+                                          <select class="drp3 form-control" asp-for="sap.yourtime" id="timeselect" formcontrolname="ServiceTime">
+                                            <option  value="08:00 am">8:00</option>
+                                            <option  value="08:30 am">8:30</option>
+                                            <option  value="09:00 am">9:00</option>
+                                            <option  value="09:30 am">9:30</option>
+                                            <option  value="10:00 am">10:00</option>
+                                            <option  value="10:30 am">10:30</option>
+                                            <option  value="11:00 am">11:00</option>
+                                            <option  value="11:30 am">11:30</option>
+                                            <option  value="12:00 pm">12:00</option>
+                                            <option  value="12:30 pm">12:30</option>
+                                            <option  value="01:00 pm">13:00</option>
+                                            <option  value="01:30 pm">13:30</option>
+                                            <option  value="02:00 pm">14:00</option>
+                                            <option  value="02:30 pm">14:30</option>
+                                            <option  value="03:00 pm">15:00</option>
+                                            <option  value="03:30 pm">15:30</option>
+                                            <option  value="04:00 pm">16:00</option>
+                                            <option  value="04:30 pm">16:30</option>
+                                            <option  value="05:00 pm">17:00</option>
+                                            <option  value="05:30 pm">17:30</option>
+                                            <option  value="06:00 pm">18:00</option>
+                                          </select>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 schedule-plan-2">
+                            <div class="payment-step2">
+                                <div class="room-bath">
+                                    <h3>How long do you need your cleaner to stay?</h3>
+                                    <div class="d-flex mt-3">
+                                      <div class="col-5">
+                                        <select  class=" form-control inline cleaner-hours ng-untouched ng-pristine ng-valid" id="totaltime" formcontrolname="ServiceHours">
+                                          <option  value=3 selected>3.0 Hrs</option>
+                                          <option  value=3.5>3.5 Hrs</option>
+                                          <option  value=4>4.0 Hrs</option>
+                                          <option  value=4.5>4.5 Hrs</option>
+                                          <option  value=5>5.0 Hrs</option>
+                                          <option  value=5.5>5.5 Hrs</option>
+                                          <option  value=6>6.0 Hrs</option>
+                                          <option  value=6.5>6.5 Hrs</option>
+                                          <option  value=7>7.0 Hrs</option>
+                                          <option  value=7.5>7.5 Hrs</option>
+                                          <option  value=8>8.0 Hrs</option>
+                                          <option  value=8.5>8.5 Hrs</option>
+                                          <option  value=9>9.0 Hrs</option>
+                                          <option  value=9.5>9.5 Hrs</option>
+                                          <option  value=10>10.0 Hrs</option>
+                                          <option  value=10.5>10.5 Hrs</option>
+                                          <option  value=11>11.0 Hrs</option>
+                                          <option  value=11.5>11.5 Hrs</option>
+                                          <option  value=12>12.0 Hrs</option>
+                                          
+                                      </select>
+                                      </div>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="payment-step2">
+                      <div class="room-bath">
+                          <h3>Extra Service</h3>
+                      </div>
+                  </div>
+                    <div class="p">
+                      
+                      <div class="row text-center">
+                          <div class="col mx-1">
+                            <label>
+                              <input type="checkbox" class="chbox1" id="chbox1" >
+                              <div class="extra-service "> 
+                                  <img class="white" src="~/assets/3.png">
+                                  <img class="green" src="~/assets/3-green.png" >
+                              </div>
+                              <div class="service-name">
+                                  <p>inside cabinets</p>
+                                  
+                              </div>
+                            </label>
+                            
+                          </div>
+                          
+                          <div class="col mx-1 ">
+                            <label>
+                              <input type="checkbox" id="chbox2">
+                              <div class="extra-service "> 
+                                  <img class="white" src="~/assets/5.png" >
+                                  <img class="green" src="~/assets/5-green.png" >
+                              </div>
+                              <div class="service-name ">
+                                  <p >inside fridge</p>
+                                  
+                              </div>
+                            </label>
+                            
+                                 
+                          </div>
+                          <div class="col mx-1">
+                            <label>
+                              <input type="checkbox" id="chbox3">
+                              <div class="extra-service "> 
+                                  <img class="white" src="~/assets/4.png" >
+                                  <img class="green" src="~/assets/4-green.png" >
+                              </div>
+                                  
+                              <div class="service-name "> <p>inside oven</p></div>
+                            </label>
+                            
+                                 
+                          </div>
+                          <div class="col mx-1">
+                            <label>
+                              <input type="checkbox" id="chbox4">
+                              <div class="extra-service "> 
+                                  <img class="white" src="~/assets/2.png" >
+                                  <img class="green" src="~/assets/2-green.png" >
+                              </div>
+                              <div class="service-name"><p>Laundry wash & dry</p></div>
+                            </label>
+                            
+                                  
+                          </div>
+                          <div class="col mx-1">
+                            <label>
+                              <input type="checkbox" id="chbox5">
+                              <div class="extra-service "> 
+                                  <img class="white" src="~/assets/1.png" >
+                                  <img class="green" src="~/assets/1-green.png" >
+                              </div>
+                              <div class="service-name"><p>interior windows</p></div>
+                            </label>
+                            
+                                  
+                          </div>
+                              
+                          
+                      </div>
+                  </div>
+                              <hr>
+                                <div class="comment">
+                                    <div class="payment-step2">
+                                        <div class="room-bath">
+                                            <h3>Comments</h3>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <textarea class="form-cmt form-control" asp-for="sap.comments"id="exampleFormControlTextarea1" rows="3"
+                                           ></textarea>
+                                    </div>
+                                    <div class="align-items-left">
+                                      <label>
+                                        <input formcontrolname="Privacy policy" asp-for="sap.haspets" type="checkbox" id="servicehaspets1"class="checkboxinput " >
+                                        <span>
+                                            I have pets at home.
+                                        </span>
+                                        
+                                    </label>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="text-right">
+                                   
+                                     <input type="button" class="btn" value="Continue" id="submit-btn" onclick="func3()"/>
+                                    </div>
+                         </form>
+                     
+                                <div class="text-center payment-summary-mobile-button">
+                                  <button type="submit" class="btn" 
+                                  onclick="document.getElementById('id03').style.display='block'">Payment Summary</button>
+                                </div>
+                      </div>
+                      <div id="details">
+                        <div class="payment-step2">
+                          <div class="room-bath">
+                              <h3>Enter your contact details, so we can serve you in better way!</h3>
+                              <ul  class="address-picker ng-untouched ng-pristine ng-valid" formarrayname="Address" id="userAddress">
+                                
+                                @if (ViewBag.add !=null)
+                                {
+                                  @foreach (UserAddress userAddress in Model.ua)  
+                                         { 
+                                        <li class="ng-untouched ng-pristine ng-valid">
+                                          <label >
+                                            <input  formcontrolname="address" name="address" type="radio" checked id="@userAddress.AddressId" class="ng-untouched ng-pristine ng-valid">
+                                            <span  class="address-block">
+                                              <b >Address:</b>@userAddress.AddressLine2,@userAddress.AddressLine1</span>
+                                            <span >
+                                                    @if(userAddress.Mobile!=null){
+                                                         <b >Phone number:</b> @userAddress.Mobile
+                                                    }
+                                                 </span>  
+                                            <span  class="radio-pointer"></span>
+                                          </label>
+                                        </li>
+                                        }
+                                }
+                               </ul>
+
+                          </div>
+                      </div>
+                      <div class="text-left"><button type="submit" class="btn add-new-add" id="bttn" 
+                      onclick="document.getElementById('address-form').style.display='block';
+                        document.getElementById('bttn').style.display='none'">+ Add New Address</button>
+                    </div>
+                    
+                      <div class="get-in-touch add-form" id="address-form">
+                       <div class=" col-lg  ">
+                            <form  class="form-container" >
+                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-row">
+                                    <div class="col">
+                                      <label>Street Name</label>
+                                  <input type="text" asp-for="UserAddressModel.AddressLine1" id="streetname" class="form-control add-form-input" placeholder="Street Name" required>
+                                  <span asp-validation-for="UserAddressModel.AddressLine1" class="text-danger"></span>
+                                  
+                                </div>
+                                <div class="col">
+                                  <label>House Number</label>
+                                  <input type="text" asp-for="UserAddressModel.AddressLine2" id="housenumber" class="form-control add-form-input" placeholder="House Number"  required>
+                                   <span asp-validation-for="UserAddressModel.AddressLine2" class="text-danger"></span>
+                                </div>
+                                </div>
+                                <div class="form-row">
+                                  <div class="col">
+                                    <label>Postal code</label>
+                                <input type="text" asp-for="UserAddressModel.PostalCode" id="postalcode" class="form-control add-form-input"  value="@ViewBag.zip"  readonly>
+                                
+                              </div>
+                              <div class="col">
+                                <label>City</label>
+                                <select asp-for="UserAddressModel.City" id="city" class="form-control" >
+                                  <option>@ViewBag.city</option>
+                                  
+                                </select>
+                                
+                              </div>
+                              </div>
+                                <div class="form-row ">
+                                    <div class="col ">
+                                      <label>Phone Number</label>
+                                        <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">+91</div>
+                                          </div>
+                                          <input type="text"  asp-for="UserAddressModel.Mobile" class="form-control" id="phone"  placeholder="Phone Number"
+                                           pattern="[0-9]" >
+                                        </div>
+                                  
+                                </div>
+                                <div class="col"></div>                               
+                                </div>
+                                
+                                    
+                                   
+                                  <div class="text-left"><input type="button" class="btn get-started" value="Save" onclick="saveAddress()">
+                                  <button type="submit" class="btn cncl-btn" onclick="document.getElementById('address-form').style.display='none';
+                                    document.getElementById('bttn').style.display='block'">Cancel</button></div>
+                                
+                              </form>
+
+                              </div>
+                             
+                        
+                    </div>
+                    <div class="text-right"><input type="button" class="btn" value="Continue" id="submit-btn" onclick="func4()"/></div>
+                    <div class="text-center payment-summary-mobile-button">
+                      <button type="submit" class="btn" 
+                      onclick="document.getElementById('id03').style.display='block'">Payment Summary</button>
+                    </div>
+                      </div>
+                      <div id="payment">
+                        <div class="payment-step2">
+                          <div class="room-bath">
+                              <h3>Pay securely with Helperland payment gateway!</h3>
+                              </div>
+                              </div>
+                              <p class="pc-text">Promo code (optional)</p>
+                              <form class="promo-code">
+                                
+                                <div class="form-row">
+                                    <div class="col">
+                                      
+                                  <input type="text"  class=" add-form-input" placeholder="Promo code (optional)"  required>
+                                  
+                                </div>
+                                <div class="col">
+                                 <div class="apply-pc">
+                                  <button type="submit" class="btn add-new-add">Apply</button>
+                                 </div>
+                                  
+                                  
+                                </div>
+                                </div>
+                                </form>
+                                <hr>
+                                <iframe name="__privateStripeFrame52510" frameborder="0" allowtransparency="true"
+                                                scrolling="no" allow="payment *"
+                                                src="https://js.stripe.com/v3/elements-inner-card-6f95dd34a5c89aae610bcf619d0b2112.html#locale=en&amp;wait=false&amp;mids[guid]=26be9e97-86fa-42b9-a15e-5580bc4b93c6697bcd&amp;mids[muid]=b9c63c2a-e1e3-4391-af0e-035491e42cff6f2065&amp;mids[sid]=50a9fbe1-5a7d-44fa-bb11-fabf27d5d426d48d0d&amp;hidePostalCode=true&amp;style[base][iconColor]=%23666EE8&amp;style[base][color]=%2331325F&amp;style[base][lineHeight]=36px&amp;style[base][fontSize]=16px&amp;style[base][::placeholder][color]=%23c5c5c5&amp;rtl=false&amp;componentName=card&amp;keyMode=test&amp;apiKey=pk_test_CbN2mTsadzVC1WpDPDgcDWbG&amp;referrer=https%3A%2F%2Fweb1.anasource.com%2Ftrainee2021%2Fbook-service&amp;controllerId=__privateStripeController5256"
+                                                title="Secure card payment input frame"
+                                                style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important; transform: translate(0px) !important; height: 36px;">
+                                              </iframe>
+                                <img src="~/assets/visa.jpeg" class="float-right" width="10%" height="10%">
+                                <hr>
+                                <form asp-action="ServiceBooking">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" id="serviceHrs" value="3" asp-for="sap.serviceHrs" />
+                                    <input type="hidden" id="extraHrs" value="0" asp-for="sap.extraHrs" />
+                                    <input type="hidden" id="subtotal" value="54" asp-for="sap.subtotal" />
+                                    <input type="hidden" id="totalcost" value="54" asp-for="sap.totalcost" />
+
+                                    <input type="hidden" id="servicedate" asp-for="sap.YourDate" />
+                                    <input type="hidden" id="servicetime" value="08:00 am" asp-for="sap.yourtime" />
+                                    <input type="hidden" id="servicehaspats" asp-for="sap.haspets" />
+                                    <input type="hidden" id="sevicecomments" asp-for="sap.comments" />
+
+                                    <input type="hidden" asp-for="ZipCodeMatching.PostalCode" value="@ViewBag.zip" />
+                                   <input type="hidden" value="" id="selectedadd" asp-for="selectedaddress" />
+
+                                    <input type="hidden" id="newad1" asp-for="UserAddressModel.AddressLine1" />
+                                    <input type="hidden" id="newad2" asp-for="UserAddressModel.AddressLine2" />
+                                    <input type="hidden" id="newpc" asp-for="UserAddressModel.PostalCode" />
+                                    <input type="hidden" id="newcity" asp-for="UserAddressModel.City" />
+                                    <input type="hidden" id="newmobile" asp-for="UserAddressModel.Mobile" />
+
+                                    <input type="hidden" id="extra1" asp-for="sap.extra1" />
+                                    <input type="hidden" id="extra2" asp-for="sap.extra2" />
+                                    <input type="hidden" id="extra3" asp-for="sap.extra3" />
+                                    <input type="hidden" id="extra4" asp-for="sap.extra4" />
+                                    <input type="hidden" id="extra5" asp-for="sap.extra5" />
+                                    <div class="col align-items-left">
+                                  <label>
+                                    <input formcontrolname="Privacy policy" asp-for="privacycheck" type="checkbox" class="checkboxinput ng-untouched ng-pristine ng-valid" required>
+                                    <span>
+                                      I accepted terms and conditions, the cancellation policy and the privacy policy.
+                                       I confirm that Helperland starts to execute the contract before the expiry of the withdrawal period 
+                                      and I lose my right of withdrawal as a consumer with full performance of the contract.
+                                    </span>
+                                    
+                                </label>
+                                <span asp-validation-for="privacycheck" class="text-danger"></span>
+                                </div>
+                                <hr>
+                                <div class="text-right"><button type="submit" class="btn  " id="submit-btn">Complete Booking</button></div>
+                                </form>
+                                
+                                <div class="text-center payment-summary-mobile-button">
+                                  <button type="submit" class="btn" 
+                                  onclick="document.getElementById('id03').style.display='block'">Payment Summary54,00&nbsp;€</button>
+                                </div>
+                      </div>
+                    </div>
+                   
+                <div class="col-sm-5 col-md-4 col-lg-4 payment">
+                  <div class="payment-details">
+                      <div class="payment-info">
+                          <h3 class="title">
+                              Payment Summary
+                          </h3>
+                          <div class="payment-content">
+                            <span class="dateinsummary" id="dateinsummary"></span>  <span class="timeinsummary">08:00</span>
+                              <table>
+                                  <thead>
+                                      <tr>
+                                          <th>Duration</th>
+                                          <th></th>
+                                      </tr>
+                                  </thead>
+                                  <tbody class="basicHr1">
+                                      <tr >
+                                          <td>Basic</td>
+                                          <td ><span class="basicHr" id="basicHr">3</span> Hrs</td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                              <hr>
+                              <table>
+                                  <tbody>
+                                      <tr>
+                                          <td><b>Total Service Time</b></td>
+                                          <td ><b><span class="tst" id="tst">3</span> Hrs</b></td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                          <div class="payment-content">
+                              <table>
+                                  <tbody>
+                                      <tr>
+                                          <td>Per cleaning</td>
+                                          <td><span class="totalprice" id="totalprice">54.00</span> &euro;</td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                          <div class="payment-content total">
+                              <table>
+                                  <tbody>
+                                      <tr>
+                                          <td>Total Payment</td>
+                                          <td><span class="totalprice1" id="totalprice1">54.00</span> &euro;</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-start mt-1" colspan="2">
+                                              <p>According to § 19 UStG no sales tax is calculated.</p>
+                                          </td>
+                                      </tr>
+                                      <tr class="price">
+                                          <td>Effective Price</td>
+                                          <td><b><span class="Effectiveprice">0.00</span> &euro;</b></td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                              <p><span>*</span>You will save 20% according to
+                                §35a EStG.</p>
+                    </div>
+                    <div class="payment-footer">
+                      <img alt="smiley" src="~/assets/smiley.png">
+                      <a data-bs-toggle="modal" data-bs-target="#WhatWeInclude">See what is always included</a>
+                  </div>
+            
+                </div>
+              </div>
+              <div class="payment-faq">
+                <h3>Questions?</h3>
+                
+                    <ul>
+                      <li>
+                      <button type="button" class="btn "  data-toggle="collapse" data-target="#one">
+                        <img src="~/assets/right-arrow.png">
+                      </button>
+                      <text class="txt">What's included in a cleaning? </text>
+                      <div id="one" class="collapse">
+                      Bedroom, Living Room & Common Areas, Bathrooms, Kitchen, Extras
+                      </div> 
+                    </li>
+                    <div class="line1"></div>
+                    <li>
+                        <button type="button" class="btn "  data-toggle="collapse" data-target="#q2">
+                          <img src="~/assets/right-arrow.png">
+                        </button>
+                        <text class="txt">Which Helperland proffessional will come to my place? </text>
+                        <div id="q2" class="collapse">
+                            Helperland has a vast network of experienced, top-rated cleaners. Based on the time and date of your request, 
+                            we work to assign the best professional available.Like working with a specific pro? Add them to your Pro Team 
+                            from the mobile app and they'll be requested first for all future bookings.
+                            You will receive an email with details about your professional prior to your appointment.
+                        </div> 
+                      </li>
+                      <div class="line1"></div>
+                      <li>
+                        <button type="button" class="btn "  data-toggle="collapse" data-target="#q3">
+                          <img src="~/assets/right-arrow.png">
+                        </button>
+                        <text class="txt">Can skip or reschedule bookings? </text>
+                        <div id="q3" class="collapse">
+                            You can reschedule any booking for free at least 24 hours in advance of the scheduled start time. 
+                            If you need to skip a booking within the minimum commitment, we’ll credit the value of the booking to your account. 
+                            You can use this credit on future cleanings and other Helperland services.
+                        </div> 
+                      </li>
+                    </ul>
+                
+            </div>
+            <a class="faq-link">For more help</a>
+    
+    </div>
+    </div>
+    
+    
+    </div>
+    </div>
+
+    <div id="id03" class="modal">
+  
+      <form class="modal-content animate" >
+        
+        <div class="payment-details">
+          <div class="payment-info">
+              <h3 class="title">
+                  Payment Summary <i class="fa fa-close float-right" 
+                  onclick="document.getElementById('id03').style.display='none'"></i>
+              </h3>
+              <div class="payment-content">
+                <span class="dateinsummary" id="dateinsummary"></span>  <span class="timeinsummary">08:00</span>
+                  <table>
+                      <thead>
+                          <tr>
+                              <th>Duration</th>
+                              <th></th>
+                          </tr>
+                      </thead>
+                      <tbody class="basicHr1">
+                          <tr >
+                              <td>Basic</td>
+                              <td ><span class="basicHr">3</span> Hrs</td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  <hr>
+                  <table>
+                      <tbody>
+                          <tr>
+                              <td ><b>Total Service Time</b></td>
+                              <td ><b><span class="tst">3</span> Hrs</b></td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+              <div class="payment-content">
+                  <table>
+                      <tbody>
+                          <tr>
+                              <td>Per cleaning</td>
+                              <td><span class="totalprice">54.00</span> &euro;</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+              <div class="payment-content total">
+                  <table>
+                      <tbody>
+                          <tr>
+                              <td>Total Payment</td>
+                              <td><span class="totalprice1">54.00</span> &euro;</td>
+                          </tr>
+                          <tr>
+                              <td class="text-start mt-1" colspan="2">
+                                  <p>According to § 19 UStG no sales tax is calculated.</p>
+                              </td>
+                          </tr>
+                          <tr class="price">
+                              <td>Effective Price</td>
+                              <td><b><span class="Effectiveprice">0.00</span> &euro;</b></td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  <p><span>*</span>You will save 20% according to
+                    §35a EStG.</p>
+        </div>
+        <div class="payment-footer">
+          <img alt="smiley" src="~/assets/smiley.png">
+          <a data-bs-toggle="modal" data-bs-target="#WhatWeInclude">See what is always included</a>
+      </div>
+
+    </div>
+  </div>
+    
+        
+      </form>
+    </div>
+    <div id="id05" class="modal">
+  
+        <form class="modal-content animate" >
+            <p class="login">Alert</p>
+                <div class="container">
+                    <span class="psw " style="color:#646464">We regret to inform you that your selected zip code is not covered by 
+                        Helperland services until now!</span>
+                        <div class="text-center">
+                            <button type="submit" asp-action="Index" asp-controller="Home" class="btn login-btn" >Ok!</button>
+                        </div>
+                </div>
+        </form>
+      </div>
+      <div id="success" class="modal">
+  
+        <form class="modal-content animate" >
+            <p class="succesfull text-center">Successfully Booked!</p><br/>
+                 <span class="psw text-center" style="color:#646464">Your service id is:@ViewBag.serviceid</span>
+          <div class="container text-center">
+           <img src="~/assets/Sucess.jpg"  width="100px" height="100px"alt="Success">
+            
+          <br />
+                            <button type="submit" asp-action="Index" asp-controller="Home" class="btn login-btn" >Ok!</button>
+                        </div>
+                
+        </form>
+      </div>
+@if (ViewBag.MatchedPC != null)
+{
+    <script>
+        document.getElementById('schedule').style.display='block';
+        document.getElementById('setupService').style.display='none';
+        var element =document.getElementById("myDIV");
+        element.classList.add("active");
+        document.getElementById('details').style.display='none';
+        document.getElementById("div1").classList.remove("active");
+        document.getElementById("div3").classList.remove("active");
+        document.getElementById("div4").classList.remove("active");
+        document.getElementById('payment').style.display='none';
+        document.getElementById('myschedule').classList.remove("disabled-link");
+    </script>
+}
+
+@if (ViewBag.UnmatchedPc != null)
+{
+    <script>
+        document.getElementById('id05').style.display='block';
+    </script>
+}
+@if ( ViewBag.serviceid != null)
+{
+    <script>
+        document.getElementById('success').style.display='block';
+    </script>
+}
+<script>
+      
+      function func1(){
+        document.getElementById('setupService').style.display='block';
+        document.getElementById('schedule').style.display='none';
+        document.getElementById('details').style.display='none';
+        document.getElementById("div1").classList.add("active");
+        document.getElementById("myDIV").classList.remove("active");
+        document.getElementById("div3").classList.remove("active");
+        document.getElementById("div4").classList.remove("active");
+        document.getElementById('payment').style.display='none';
+      }
+      function func2(){
+           document.getElementById('schedule').style.display='block';
+        document.getElementById('setupService').style.display='none';
+        var element =document.getElementById("myDIV");
+        element.classList.add("active");
+        document.getElementById('details').style.display='none';
+        document.getElementById("div1").classList.remove("active");
+        document.getElementById("div3").classList.remove("active");
+        document.getElementById("div4").classList.remove("active");
+        document.getElementById('payment').style.display='none';
+      }
+     
+      function func3(){
+        document.getElementById('details').style.display='block';
+        document.getElementById('schedule').style.display='none';
+        document.getElementById('setupService').style.display='none';
+        document.getElementById("div3").classList.add("active");
+        document.getElementById("myDIV").classList.remove("active");
+        document.getElementById("div1").classList.remove("active");
+        document.getElementById("div4").classList.remove("active");
+        document.getElementById('payment').style.display='none';
+        document.getElementById('yourdetail').classList.remove("disabled-link");
+        
+      }
+
+      function func4(){
+        document.getElementById('payment').style.display='block';
+        document.getElementById('schedule').style.display='none';
+        document.getElementById('setupService').style.display='none';
+        document.getElementById('details').style.display='none';
+        document.getElementById("div4").classList.add("active");
+        document.getElementById("myDIV").classList.remove("active");
+        document.getElementById("div1").classList.remove("active");
+        document.getElementById("div3").classList.remove("active");
+        document.getElementById('payment1').classList.remove("disabled-link");
+        var getSelectedValue = document.querySelector('input[name="address"]:checked');
+        if (getSelectedValue != null) {
+            document.getElementById('selectedadd').value = getSelectedValue.id;
+        }
+      }
+     
+      
+   
+</script>
+    <script src="~/js/site.js"></script>
+ @section scripts{  
+     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+ }

@@ -1932,6 +1932,10 @@ label {
         margin-left: 10px;
         margin-right: 10px;
     }
+    .book-now .address-picker > li > label > input {
+        margin-left: -330px !important;
+        height: 1em !important;
+    }
 }
 /*made responsive for tablet view*/
 @media (max-width: 993px) and (min-width: 763px) {
@@ -2424,6 +2428,49 @@ label {
             .admin-wrapper .main-wrapper .user-management-dt .datatable-um .avtar img {
                 display: none;
             }
+    .payment-steps .step1,
+    .step2,
+    .step3 {
+        padding: 10px 10px 10px 0px !important;
+        border-right: 0.5px solid #d4d3d4;
+    }
+
+        .payment-steps .step1 span,
+        .step2 span,
+        .step3 span,
+        .step4 span {
+            padding-left: 5px !important;
+            border-right: 0.5px solid #d4d3d4;
+        }
+
+    .payment-steps .step4 {
+        padding: 10px 10px 10px 0px !important;
+    }
+
+    .book-now .payment-steps .text {
+        font-size: 14px;
+    }
+
+    .payment-steps .step2 .icon {
+        display: none;
+    }
+
+    .payment-steps .step1 .icon {
+        display: none;
+    }
+
+    .payment-steps .step3 .icon {
+        display: none;
+    }
+
+    .payment-steps .step4 .icon {
+        display: none;
+    }
+
+    .book-now .address-picker > li > label > input {
+        margin-left: -250px !important;
+        height: 1em !important;
+    }
 }
 
 /*made responsive for mobile view*/
@@ -2996,9 +3043,64 @@ label {
         .admin-wrapper .main-wrapper .user-management-dt .datatable-um .avtar img {
             display: none;
         }
+    .payment-steps .step1,
+    .step2,
+    .step3 {
+        padding: 10px 10px 10px 10px !important;
+        border-right: 0.5px solid #d4d3d4;
+    }
+
+        .payment-steps .step1 span,
+        .step2 span,
+        .step3 span,
+        .step4 span {
+            padding-left: 5px !important;
+            border-right: 0.5px solid #d4d3d4;
+        }
+
+    .payment-steps .step4 {
+        padding: 10px 10px 10px 10px !important;
+    }
+
+    .book-now .payment-steps .text {
+        font-size: 14px;
+    }
+
+    .payment-steps .step2 .icon {
+        display: none;
+    }
+
+    .payment-steps .step1 .icon {
+        display: none;
+    }
+
+    .payment-steps .step3 .icon {
+        display: none;
+    }
+
+    .payment-steps .step4 .icon {
+        display: none;
+    }
+
+    .book-now .payment {
+        display: none;
+    }
+
+    .book-now .address-picker > li > label > input {
+        margin-left: -270px !important;
+        height: 1em !important;
+    }
+
+    .book-now .payment-summary-mobile-button {
+        display: block !important;
+    }
 }
 
 @media (max-width: 576px) and (min-width: 460px) {
+    .book-now .address-picker > li > label > input {
+        margin-left: -280px !important;
+        height: 1em !important;
+    }
     .how-it-works .myimg img {
         display: none;
     }
@@ -3044,6 +3146,10 @@ label {
 }
 
 @media (max-width: 550px) and (min-width: 460px) {
+    .book-now .address-picker > li > label > input {
+        margin-left: -250px !important;
+        height: 1em !important;
+    }
     .footer ul.footer-navigation li {
         flex: 0 0 100%;
         max-width: 100%;
@@ -3055,6 +3161,10 @@ label {
 }
 
 @media (max-width: 460px) and (min-width: 360px) {
+    .book-now .address-picker > li > label > input {
+        margin-left: -230px !important;
+        height: 1em !important;
+    }
     .home {
         width: 100%;
     }
@@ -3108,6 +3218,10 @@ label {
 }
 
 @media (max-width: 360px) and (min-width: 200px) {
+    .book-now .address-picker > li > label > input {
+        margin-left: -200px !important;
+        height: 1em !important;
+    }
     .modal-content {
         width: 300px !important; /* Could be more or less, depending on screen size */
     }
@@ -3344,11 +3458,700 @@ input[type="password"] {
     font-weight: 700;
 }
 
+/*book-now*/
+/*Book-service*/
+.payment-steps {
+    margin-bottom: 30px;
+    background-color: #f3f3f3;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    list-style: none;
+}
 
-    
-
-    .get-in-touch .container-fluid .col-lg .upload-btn-wrapper .myinput {
-       
+    .payment-steps.nav-justified > li > a > span {
+        position: relative;
+        display: inline-block;
+        padding-left: 37px;
     }
 
+    .payment-steps.nav-justified li a {
+        color: #646464;
+        text-align: center;
+    }
 
+    .payment-steps .step1,
+    .step2,
+    .step3 {
+        padding: 19px 16px 15px 14px;
+        border-right: 0.5px solid #d4d3d4;
+    }
+
+    .payment-steps .step4 {
+        padding: 19px 16px 15px 14px;
+    }
+
+    .payment-steps .text {
+        font-size: 18px;
+    }
+
+.book-now .col-md-8 {
+    position: relative;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.payment-steps .step2 .icon {
+    background: url(../assets/schedule.png) center no-repeat;
+    background-size: 32px;
+    background-position: 0 0;
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -16px;
+}
+
+.payment-steps .step1 .icon {
+    background: url(../assets/setup-service.png) center no-repeat;
+    background-size: 32px;
+    background-position: 0 0;
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -16px;
+}
+
+.payment-steps .step3 .icon {
+    background: url(../assets/details.png) center no-repeat;
+    background-size: 32px;
+    background-position: 0 0;
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -16px;
+}
+
+.payment-steps .step4 .icon {
+    background: url(../assets/payment.png) center no-repeat;
+    background-size: 32px;
+    background-position: 0 0;
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -16px;
+}
+
+.payment-steps .active {
+    background-color: #1d7a8c;
+    border: none;
+    position: relative;
+}
+
+    .payment-steps .active:after {
+        position: absolute;
+        content: "";
+        height: 0;
+        width: 0;
+        top: 100%;
+        border-width: 14px 14px 0 14px;
+        border-color: #1d7a8c transparent transparent transparent;
+        border-style: solid;
+        left: 50%;
+        margin-left: -14px;
+    }
+
+    .payment-steps .active .text {
+        color: white !important;
+    }
+
+    .payment-steps .active.step1 .icon {
+        background: url(../assets/setup-service-white.png) center no-repeat !important;
+    }
+
+    .payment-steps .active.step2 .icon {
+        background: url(../assets/schedule-white.png) center no-repeat !important;
+    }
+
+    .payment-steps .active.step3 .icon {
+        background: url(../assets/details-white.png) center no-repeat !important;
+    }
+
+    .payment-steps .active.step4 .icon {
+        background: url(../assets/payment-white.png) center no-repeat !important;
+    }
+
+.book-now .pc {
+    color: #4f4f4f;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+#setupService input {
+    margin-left: 15px;
+    height: 46px;
+    width: 130%;
+}
+
+#setupService .post {
+    margin-left: 100px;
+    margin-top: 25px;
+}
+
+.payment-details {
+    position: relative;
+}
+
+    .payment-details .payment-info {
+        box-shadow: 0 0 10px rgb(0 0 0 / 30%);
+        margin-bottom: 25px;
+    }
+
+        .payment-details .payment-info .title {
+            margin: 0;
+            background: #1d7a8c;
+            color: #fff;
+            font-size: 18px;
+            line-height: 22px;
+            padding: 22px 20px;
+            font-family: "Roboto";
+        }
+
+        .payment-details .payment-info .payment-content {
+            padding: 20px;
+            border-bottom: 1px solid #c8c8c8;
+        }
+
+            .payment-details .payment-info .payment-content span {
+                font-size: 16px;
+                line-height: 26px;
+                color: #4f4f4f;
+                font-family: "Roboto";
+            }
+
+            .payment-details .payment-info .payment-content table {
+                width: 100%;
+                font-family: "Roboto";
+                color: #4f4f4f;
+            }
+
+                .payment-details .payment-info .payment-content table th {
+                    font-size: 18px;
+                    line-height: 26px;
+                    color: #646464;
+                    font-weight: normal;
+                }
+
+                .payment-details .payment-info .payment-content table td:last-child {
+                    text-align: right;
+                }
+
+                .payment-details .payment-info .payment-content table td {
+                    font-size: 16px;
+                    line-height: 26px;
+                }
+
+                    .payment-details .payment-info .payment-content table td p {
+                        color: #646464;
+                        font-size: 14px;
+                        font-weight: normal;
+                        text-align: start;
+                    }
+
+            .payment-details .payment-info .payment-content hr {
+                border-color: #e1e1e1;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+        .payment-details .payment-info .total {
+            color: #1d7a8c;
+            border-bottom: none;
+        }
+
+            .payment-details .payment-info .total table td {
+                color: #1d7a8c;
+                font-size: 20px;
+                line-height: 24px;
+            }
+
+            .payment-details .payment-info .total table tr {
+                vertical-align: baseline;
+            }
+
+            .payment-details .payment-info .total table td:last-child {
+                font-size: 42px;
+                line-height: 36px;
+                font-weight: 700;
+            }
+
+            .payment-details .payment-info .total table td p {
+                color: #646464;
+                font-size: 14px;
+                line-height: 22px;
+                margin-top: 5px;
+                margin-bottom: 0;
+            }
+
+            .payment-details .payment-info .total table .price td {
+                font-size: 16px;
+                color: #4f4f4f;
+            }
+
+                .payment-details .payment-info .total table .price td:last-child {
+                    font-size: 20px;
+                }
+
+            .payment-details .payment-info .total p {
+                color: #646464;
+                font-size: 14px;
+                line-height: 22px;
+                margin: 0;
+                font-family: "Roboto";
+                cursor: pointer;
+            }
+
+                .payment-details .payment-info .total p span {
+                    display: inline-block;
+                    color: #f00;
+                    font-size: 14px;
+                    line-height: 22px;
+                }
+
+        .payment-details .payment-info .payment-footer {
+            background: #f3f3f3;
+            font-size: 14px;
+            line-height: 21px;
+            padding: 12px 20px;
+            margin: 0;
+            display: block;
+        }
+
+            .payment-details .payment-info .payment-footer img {
+                margin-right: 5px;
+                vertical-align: middle;
+            }
+
+            .payment-details .payment-info .payment-footer a {
+                text-decoration: none;
+                color: #8d8d8d;
+                font-family: "Roboto";
+                font-size: 14px;
+                vertical-align: middle;
+                cursor: pointer;
+            }
+
+.book-now .payment-faq {
+    margin-bottom: 10px;
+}
+
+    .book-now .payment-faq h3 {
+        text-align: center;
+        font-size: 20px;
+        color: #4f4f4f;
+        font-family: "Roboto";
+        line-height: 24px;
+        margin: 0 0 10px;
+    }
+
+    .book-now .payment-faq ul {
+        list-style-type: none;
+        margin-left: -35px;
+    }
+
+        .book-now .payment-faq ul li {
+            margin-top: 15px;
+        }
+
+    .book-now .payment-faq .btn {
+        padding: 0%;
+        outline: none !important;
+        box-shadow: none;
+    }
+
+        .book-now .payment-faq .btn.active {
+            transform: rotate(90deg) !important;
+            padding: 0%;
+            outline: none !important;
+            box-shadow: none;
+            transition: all 1s;
+        }
+
+    .book-now .payment-faq button img {
+        width: 22px;
+        height: 22px;
+    }
+
+    .book-now .payment-faq text {
+        margin-left: 15px;
+        color: #646464;
+    }
+
+    .book-now .payment-faq div {
+        margin-left: 37px;
+        color: #646464;
+        font-size: 16px;
+    }
+
+    .book-now .payment-faq .line1 {
+        background-color: #cccccc;
+        width: 100%;
+        height: 1px;
+        margin-top: 10px;
+        opacity: 0.7;
+    }
+
+#schedule {
+    display: none;
+}
+
+#details {
+    display: none;
+}
+
+.book-now .room-bath h3 {
+    font-size: 16px;
+    color: #4f4f4f;
+    font-weight: bold;
+    line-height: 20px;
+    font-family: "Roboto";
+    margin-top: 40px;
+}
+
+.book-now .payment-step2 .room-bath .dropdown button {
+    color: #646464;
+    background: transparent;
+    border: 1px solid #dedddd;
+    padding: 10px;
+}
+
+    .book-now .payment-step2 .room-bath .dropdown button:focus {
+        box-shadow: none;
+    }
+
+.book-now .payment-step2 .room-bath .drop2 {
+    margin-left: 10px;
+}
+
+.book-now .payment-step2 .room-bath .drp3 {
+    margin-left: -95px;
+    height: 45px;
+    width: auto;
+}
+
+.book-now hr {
+    margin: 30px 0;
+    border-color: #dcdcdc;
+}
+
+.book-now .payment-step2 .room-bath .date-picker-calender img {
+    width: 19px;
+    height: 20px;
+}
+
+.book-now .payment-step2 .room-bath .date-picker-calender {
+    position: absolute;
+    margin-left: 11px;
+    margin-top: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-now .payment-step2 .room-bath .serviceStartDate {
+    width: 60%;
+    height: 45px;
+}
+
+.book-now .payment-step2 .mydate {
+    margin-top: -7px;
+}
+
+.book-now .row .row {
+    padding-left: 0;
+    margin-top: -30px;
+}
+
+.book-now input:checked ~ .extra-service {
+    border: 3px solid #1d7a8c;
+    padding: 18px;
+}
+
+.book-now .p input {
+    opacity: 0;
+}
+
+.book-now .p .green {
+    display: none;
+}
+
+.book-now input:checked ~ .extra-service .white {
+    display: none;
+}
+
+.book-now input:checked ~ .extra-service .green {
+    display: block;
+}
+
+.book-now .text-right button {
+    margin-top: 0px !important;
+}
+
+.book-now .address-picker {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .book-now .address-picker .address-block {
+        display: block;
+        margin-right: 0;
+    }
+
+    .book-now .address-picker > li > label {
+        font-size: 16px;
+        line-height: 24px;
+        color: #4f4f4f;
+        font-weight: 400;
+        position: relative;
+        border: 1px solid #c8c8c8;
+        display: block;
+        border-radius: 3px;
+        margin-bottom: 20px;
+        cursor: pointer;
+        padding: 13px 15px 13px 60px;
+    }
+
+        .book-now .address-picker > li > label > input {
+            position: absolute;
+            margin-top: 15px;
+            margin-left: -390px;
+            width: 100%;
+            height: 1.1em;
+        }
+
+.book-now .add-new-add:hover {
+    display: inline-block;
+    background-color: #1d7a8c;
+    border-radius: 20px;
+    border: 1px solid #ffffff;
+    height: 46px;
+    line-height: 32px;
+    padding: 0 20px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    transition: all 0.3s;
+    min-width: 163px;
+    text-align: center;
+}
+
+.book-now .add-new-add {
+    display: inline-block;
+    background-color: #ffffff;
+    border-radius: 20px;
+    border: 1px solid #1d7a8c;
+    height: 46px;
+    line-height: 32px;
+    padding: 0 20px;
+    color: #1d7a8c;
+    font-size: 18px;
+    font-weight: 500;
+    transition: all 0.3s;
+    min-width: 163px;
+    text-align: center;
+}
+
+.book-now .apply-pc {
+    margin-top: 10px;
+}
+
+.book-now .add-form {
+    padding: 15px;
+    border: 1px solid #c8c8c8;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    background: #f8f8f8;
+    display: none;
+}
+
+    .book-now .add-form .get-started {
+        display: inline-block;
+        background-color: #1d7a8c;
+        border-radius: 23px;
+        height: 46px;
+        line-height: 32px;
+        padding: 0 20px;
+        color: #fff;
+        margin-top: 19px;
+        margin-bottom: 19px;
+        font-size: 16px;
+        font-weight: 500;
+        transition: all 0.3s;
+        min-width: 100px;
+        text-align: center;
+    }
+
+        .book-now .add-form .get-started:hover {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+
+    .book-now .add-form .cncl-btn {
+        display: inline-block;
+        background-color: white;
+        border-radius: 23px;
+        height: 46px;
+        line-height: 32px;
+        padding: 0 20px;
+        color: #4f4f4f;
+        border: 1px solid #4f4f4f;
+        margin-top: 19px;
+        margin-bottom: 19px;
+        font-size: 16px;
+        font-weight: 500;
+        transition: all 0.3s;
+        min-width: 100px;
+        text-align: center;
+    }
+
+        .book-now .add-form .cncl-btn:hover {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+
+    .book-now .add-form label {
+        font-size: 17px;
+    }
+
+    .book-now .add-form .add-form-input {
+        margin-top: -20px;
+    }
+
+    .book-now .add-form select {
+        margin-top: -6px;
+    }
+
+    .book-now .add-form .input-group {
+        margin-top: -20px;
+    }
+
+#payment {
+    display: none;
+}
+
+.book-now .enter-pc {
+    margin-top: 20px;
+}
+
+.book-now .promo-code {
+    margin-top: -18px;
+}
+
+.book-now .pc-text {
+    font-size: 16px;
+    line-height: 24px;
+    color: #4f4f4f;
+    margin-top: 15px;
+}
+
+.book-now .payment-summary-mobile-button {
+    display: none;
+}
+
+    .book-now .payment-summary-mobile-button button {
+        display: inline-block;
+        background-color: #76b644;
+        border-radius: 40px;
+        border: 1px solid #ffffff;
+        height: 46px;
+        color: #fff;
+        font-size: 14px;
+        transition: all 0.3s;
+        min-width: 200px;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        z-index: 3;
+        left: 50%;
+        margin-left: -98px;
+        border-bottom-right-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        padding: 9px 7px 10px !important;
+        font-size: 14px !important;
+    }
+
+.book-now .disabled-link {
+    pointer-events: none;
+}
+/*home nav-bar after login*/
+.nav-section .navbar-nav .nav-item .notification {
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+}
+
+    .nav-section .navbar-nav .nav-item .notification .badge {
+        position: absolute;
+        top: 3px;
+        right: 5px;
+        border-radius: 50%;
+        background: #ff1616;
+        color: white;
+    }
+
+.nav-section .navbar-nav  .dropdown a{
+    margin-left: 10px;
+}
+
+.nav-section .navbar-nav .nav-bar-line {
+    background-color: #e1e1e1;
+    width: 0.5px;
+    height: 48px;
+    margin-left: 15px;
+}
+
+.nav-section .navbar-nav .dropdown .dropdown-toggle::after {
+    display: none !important;
+}
+    
+.nav-section .navbar-nav .dropdown img {
+    margin-top: 10px;
+    margin-left: -15px;
+    margin-right: 14px;
+}
+
+.nav-section .navbar-nav .nav-item .dropdown .dropdown-menu.show {
+    display: block ;
+    visibility: visible;
+    opacity: 1;
+    width: 200px;
+    transform: translateY(0px);
+    transition: 0.5s ease all;
+    max-height: 800px;
+}
+    
+.nav-section .navbar-nav .nav-item .dropdown .dropdown-menu {
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 0.5s ease all;
+    max-height: 0;
+    overflow: hidden;
+}
+
+    .nav-section .navbar-nav .nav-item .dropdown .dropdown-menu .dropdown-item {
+        margin-top: 10px;
+    }

@@ -1,5 +1,6 @@
 ﻿@model helperland.Models.LoginForgotPassModel
-
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
 <!DOCTYPE html>
 <head>
     <title>Home</title>
@@ -28,7 +29,79 @@
   <body>
     
   <!--nav bar-->
-      <div class="nav-section d-flex align-items-center">
+  @if (HttpContextAccessor.HttpContext.Session.GetString("Customerfname") != null)
+    {
+        <div class="nav-section d-flex align-items-center">
+        <nav class="navbar navbar-expand-lg  fixed-top align-items-center" >
+            <a href="#" title="helperland" class="logo-img" ><img src="./assets/logo-large.png"  alt="logo"></a>
+            
+          
+          <button class="navbar-toggler" style="border: none;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="text-white fa fa-bars"></i><!--in mobile layout made threelines icon white-->
+          </button>
+        
+          <div class="collapse navbar-collapse align-items-center" id="navbarSupportedContent">
+            <ul class="navbar-nav align-items-center  ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link align-items-center  border-btn" asp-action="BookService" asp-controller="Home" title="Book a Cleaner">Book a
+                        Cleaner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link  nav-text"asp-action="Prices" asp-controller="Home" title="Prices">Prices</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-text" href="#" title="Our Guarantee">Our Guarantee</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-text" href="#" title="Blog">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-text"  asp-controller="Home" asp-action="Contact" title="Contact us">Contact us</a>
+                </li>
+                <li class="nav-item " >
+                    <div class="row">
+                    <div class="nav-bar-line"></div>
+                    <a class="nav-link nav-img notification" href="#" title="Notification">
+                      <img src="./assets/icon-notification.png">
+                      <span class="badge">2</span>
+                    </a>
+                </div>
+                </li>
+               
+                <li class="nav-item " >
+                    <div class="row">
+                    <div class="nav-bar-line"></div>
+                    <a class="nav-link nav-img" href="#" title="Settings"><img src="~/assets/user.png"></a>
+                    <div class=" dropdown ">
+                      <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img  src="~/assets/sp-arrow-down.png">
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right" id="helllo" aria-labelledby="navbarDropdown1">
+                        
+                        <a class="dropdown-item" href="#">Welcome,<br/>@HttpContextAccessor.HttpContext.Session.GetString("Customerfname")</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">My Dashboard</a>
+                        <a class="dropdown-item" href="#">My Settings</a>
+                        <a class="dropdown-item"  asp-controller="Home" asp-action="logout">Logout</a>
+                      </div>
+                      
+                      
+                          
+                   
+                    </div>
+                </div>
+                </li>
+            </ul>
+             
+            </div>
+              
+      
+        </nav>
+      </div>
+    }
+    else
+    {
+        <div class="nav-section d-flex align-items-center">
         <nav class="navbar navbar-expand-lg  fixed-top align-items-center" >
             <a href="#" title="helperland" class="logo-img" ><img src="~/assets/logo-large.png"  alt="logo"></a>
             
@@ -40,7 +113,7 @@
           <div class="collapse navbar-collapse align-items-center" id="navbarSupportedContent">
             <ul class="navbar-nav align-items-center  ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link align-items-center  border-btn" href="#" title="Book a Cleaner">Book a
+                    <a class="nav-link align-items-center  border-btn" onclick="BookCleaner()" title="Book a Cleaner">Book a
                         Cleaner</a>
                 </li>
                 <li class="nav-item">
@@ -71,6 +144,8 @@
       
         </nav>
       </div>
+    }
+    
       <div id="id01" class="modal">
   
         <form class="modal-content animate" asp-controller="Shared" asp-action="Login">
@@ -84,7 +159,7 @@
             
             <input  placeholder="Enter Password" asp-for="LoginModel.Password">
               <span asp-validation-for="LoginModel.Password" class="text-danger"></span>
-              
+               <input id="#hiddenfield" asp-for="LoginModel.hiddenfield" type="hidden">
             
             <label>
               <input type="checkbox"  name="remember"> Remember me
@@ -247,6 +322,7 @@
         </script>
 
     }
+    <script src="~/js/site.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

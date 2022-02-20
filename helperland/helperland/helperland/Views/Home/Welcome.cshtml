@@ -1,7 +1,9 @@
-﻿
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
     ViewData["Title"] = "Welcome";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 
-<h1>Welcome  @ViewBag.data </h1>
+<h1 style="margin-top:50px">Welcome  @HttpContextAccessor.HttpContext.Session.GetString("Customerfname") </h1>

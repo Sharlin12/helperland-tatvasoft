@@ -271,3 +271,5 @@ D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcor
 D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\SPregisteration.cshtml.g.cs
 D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\WelcomeForAdmin.cshtml.g.cs
 D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\WelcomeForSp.cshtml.g.cs
+D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\BookService.cshtml.g.cs
+D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\schedule.cshtml.g.cs

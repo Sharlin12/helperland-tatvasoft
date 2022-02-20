@@ -26,6 +26,7 @@ namespace helperland
             services.AddControllersWithViews();
             services.AddDbContext<HelperLandDBContext>();
             services.AddSession();
+            services.AddHttpContextAccessor();
 
         }
 
