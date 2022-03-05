@@ -2,85 +2,11 @@
 @using helperland.Models.Data
 @inject IHttpContextAccessor HttpContextAccessor
 @model helperland.Models.CustomerSideModel
-
 @{
-    ViewData["Title"] = "Dashboard";
+    ViewData["Title"] = "Service History";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
-
- <div id="cancel" class="modal">
-  
-        <form class="modal-content animate" asp-action="cancelrequest" >
-          <input type="hidden" asp-for="Cancelrequestid" id="serviceReqId1"/>
-            <p class="login">Cancel Service Request <i class="fa fa-close float-right" 
-                onclick="document.getElementById('cancel').style.display='none'"></i></p>
-          <div class="container">
-            
-            <span class="psw " style="color:#646464">Are you sure you want to cancel this service request?</span>
-              <div class="text-center">
-               <img src="~/assets/alert1.jpg" width="120" height="120">
-                  <button type="submit" class="btn login-btn" >Cancel Now</button>
-              </div>
-            </div>
-        </form>
-      </div>
-      <div id="reschedule" class="modal">
-  
-        <form class="modal-content animate" asp-action="RescheduleSR">
-          <input type="hidden" asp-for="Cancelrequestid" id="serviceReqId"/>
-            <p class="login">Reschedule Service Request <i class="fa fa-close float-right" 
-                onclick="document.getElementById('reschedule').style.display='none'"></i></p>
-          <div class="container">
-            
-            <span class="psw " style="color:#646464">Select New Date & Time</span>
-              <div class=" book-now">
-                <div class="payment-step2">
-                  <div class="room-bath">
-                    <div class="d-flex mt-3 ">
-                      <div class=" mydate">
-                        <span class="date-picker-calender">
-                        <img src="~/assets/admin-calendar-blue.png">
-                        </span>
-                        <input asp-for="date" style="padding-left: 40px;" type="text" class="form-control date1" id="txtServiceStartDate" 
-                        placeholder="DD/MM/YYYY" name="date" >
-                       </div>
-                       
-                       
-                        <select asp-for="time" class="drp4 form-control" id="timeselect" formcontrolname="ServiceTime">
-                          <option  value="08:00 am">8:00</option>
-                          <option  value="08:30 am">8:30</option>
-                          <option  value="09:00 am">9:00</option>
-                          <option  value="09:30 am">9:30</option>
-                          <option  value="10:00 am">10:00</option>
-                          <option  value="10:30 am">10:30</option>
-                          <option  value="11:00 am">11:00</option>
-                          <option  value="11:30 am">11:30</option>
-                          <option  value="12:00 pm">12:00</option>
-                          <option  value="12:30 pm">12:30</option>
-                          <option  value="01:00 pm">13:00</option>
-                          <option  value="01:30 pm">13:30</option>
-                          <option  value="02:00 pm">14:00</option>
-                          <option  value="02:30 pm">14:30</option>
-                          <option  value="03:00 pm">15:00</option>
-                          <option  value="03:30 pm">15:30</option>
-                          <option  value="04:00 pm">16:00</option>
-                          <option  value="04:30 pm">16:30</option>
-                          <option  value="05:00 pm">17:00</option>
-                          <option  value="05:30 pm">17:30</option>
-                          <option  value="06:00 pm">18:00</option>
-                        </select>
-                      
-                        
-                    </div>
-                  </div>
-                </div>
-                
-                  <button type="submit" class="btn login-btn" >Update</button>
-              </div>
-            </div>
-        </form>
-      </div>
-       <div class="service-history">
+<div class="service-history">
       <div class="container-fluid"><p class="text-center" >Welcome,<span>@HttpContextAccessor.HttpContext.Session.GetString("Customerfname")</span></p></div>
         
         <div class="line"></div>
@@ -96,7 +22,7 @@
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Service Schedule</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" asp-action="FavoritePros">Favorite Pros</a>
+            <a class="dropdown-item"  asp-action="FavoritePros">Favorite Pros</a>
             
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Invoice</a>
@@ -108,23 +34,23 @@
           <div class="container">
             <div class="row">
               <div class="buttons" >
-                
-                  <button type="button" class="btn active" >Dashboard</button>
-                
-                <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
-                <form asp-action="ServiceHistory">
-                    <button type="submit" class="btn ">Service History</button>
+                <form asp-action="Welcome">
+                    <button type="submit" class="btn ">Dashboard</button>
                 </form>
                   
-                 <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                
+                <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                
+                  <button type="button" class="btn active">Service History</button>
+                
+                  <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
                 
                   <button type="button" class="btn ">Service Schedule</button>
                 
                   <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
-                  <form asp-action="FavoritePros" asp-controller="Home">
+                <form asp-action="FavoritePros" asp-controller="Home">
                        <button type="submit" class="btn ">Favorite Pros</button>
                   </form>
-               
                 <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
                 <button type="button" class="btn ">Invoice</button>
                 <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
@@ -133,73 +59,135 @@
               </div>
               <div class="col-lg col-md" >
                 <div class="row">
-                  <p class="text1" >Current Service Requests</p>
-                <a class="ml-auto export " id="data" asp-action="BookService" asp-controller="Home" title="Export">Add New Service Request</a>
+                  <p class="text1" >Service History</p>
+                <a class="ml-auto export " id="button_export_excel" title="Export">Export</a>
                 </div>
                 
                 <div class="datatable-style" style="overflow-x:auto;">
-                <table class="datatable border row-border">
+                <table class="datatable border row-border" id="table-data">
                   <thead >
                     <tr>
-                      <th>Service Id</th>
-                        <th>Service Date</th>
+                      
+                        <th>Service Details</th>
                       <th>Service Provider</th>
                       <th>Payments</th>
-                      
-                      <th >Actions</th>
+                      <th>Status</th>
+                      <th >
+                        Rate SP
+                        </th>
                       
                       
                     </tr>
                   </thead>
-                 
                   <tbody>
-                                @foreach(ServiceRequest sr in Model.serviceRequests)
+                      @foreach(ServiceRequest sr in Model.serviceRequests)
                                 {
+                                    var serviceid11=0;
+                                    var ratingid = 0;
+                                    var ratingidmodel = 0;
                                     var sid = @sr.ServiceRequestId;
+                                    var sp_count = 0;
+                                    decimal sp_avg = 0;
                                     <tr >
-                                    <td onclick="openmodel(@sid.ToString())"><p  id="service-id">@sr.ServiceId</p></td>
-                                      <td >
-                                        <div class="row"><img class="calender" src="~/assets/calendar2.png">
+                                      <td onclick="openmodel(@sid.ToString())">
+                                        <div class="row"><img class="calender" src="~/assets/calendar.png">
                                           <p id="date" >@sr.ServiceStartDate.ToShortDateString()</p></div>
-                                        <div class="row"> <img class="clock" src="~/assets/layer-14.png">
+                          
                                         <p id="time">@sr.ServiceStartDate.ToString("HH:mm")-@sr.ServiceStartDate.AddHours(sr.ServiceHours).ToString("HH:mm")</p>
-                                        </div>
-                                    </td>
-                                        @if(sr.ServiceProviderId !=null){
-                                            <td >
+                                        </td>
+                                        @if(sr.ServiceProviderId != null)
+                                        {
+                                             <td >
                                         <div class="row ">
                                           <div class="avtar "> <img  src="~/assets/forma-1-copy-19.png"></div>
                          
                                         <div>
-                                        <p class="sp-name">Lyum Watson</p>
-                                        <div class="row star">
-                                          <img src="~/assets/star1.png">
-                                          <img src="~/assets/star1.png">
-                                          <img src="~/assets/star1.png">
-                                          <img src="~/assets/star1.png">
-                                          <img src="~/assets/star2.png">
-                                        </div>
+                                                        @foreach(User u in Model.user){
+                                                            if(sr.ServiceProviderId == u.UserId)
+                                                            {
+                                                                 <p class="sp-name">@u.FirstName @u.LastName</p>
+                                                            }
+                                                        }
+
+                                                        @foreach (Rating rating in Model.myrate)
+                                    {
+                                        if (sr.ServiceProviderId == rating.RatingTo)
+                                        {
+                                            sp_count = sp_count + 1;
+                                            sp_avg = sp_avg + rating.Ratings;
+                                        }
+
+                                    }
+                                    @if (sp_count >= 1)
+                                    {
+                                        sp_avg = sp_avg / sp_count;
+                                        sp_avg = Convert.ToDecimal(String.Format("{0:0.00}", sp_avg));
+                                        var rand1 = new Random();
+                                              ratingid = rand1.Next(1000, 99999);
+                                    }
+                                     <div class="row star" onload="avgrating('@ratingid',@sp_avg)">
+                                        
+                                        <div id="@ratingid" style="z-index:0"></div>
+                                        <div class="ratingnum">@sp_avg</div>
+                                    </div>
+                                         
                                       </div>
                                     </div>
-                                      </td>
+                                            </td>
                                         }
-                                        else{
+                                        else
+                                        {
                                             <td></td>
                                         }
-                                        
+
+                                     
                                       <td><p class="bill">€<span>@sr.TotalCost</span></p></td>
-                     
-                                      <td>
-                                        <a class="align-items-center  reschedule" onclick="reschedule(@sid)" title="Reschedule">Reschedule</a>
-                                        <a class="align-items-center " id="cancel-btn" onclick="cancel(@sid)"  title="Cancel">Cancel</a>
+                                      @if(sr.Status==3){
+                                                var rand = new Random();
+                                              serviceid11 = rand.Next(1000, 99999);
+                                            <td >
+                                        <div class="status1"><p class="text-white">Completed</p>
+                                        </div>
+                        
+                                            </td>
+                                            <td>
+                                             <a class="align-items-center  rate " onclick="rateservice(@serviceid11)" title="Rate">Rate SP</a>
                                         </td>
-                                    </tr> 
-                                   
+                                        }
+                                        else if (sr.Status == 2)
+                                        {
+                                             <td >
+                                              <div class="status2"><p class="text-white">Cancelled</p>
+                                              </div>
+                          
+                                            </td>
+                                            <td>
+                                        <a class="align-items-center  rate" style="cursor: not-allowed" disable title="Rate">Rate SP</a>
+                                        </td>
+                                        }
+
+                                      
+                                    </tr>
                                     <div id="@sid" class="modal" >
   
                                      <div class="modal-content animate  edit-address ">
                                          <p class="login">Service Details <i class="fa fa-close float-right" 
                                             onclick="document.getElementById(@sid).style.display='none'"></i></p>
+                                            @if(sr.Status==3){
+                                            
+                                        <div id="status11"><p class="text-white">Completed</p>
+                                        </div>
+                        
+                                            
+                                        }
+                                        else if (sr.Status == 2)
+                                        {
+                                             
+                                              <div id="status22"><p class="text-white">Cancelled</p>
+                                              </div>
+                          
+                                            
+                                        }
                                                <div class="container">
                                                     <p class="date-time"> @sr.ServiceStartDate.ToShortDateString()  @sr.ServiceStartDate.ToString("HH:mm")-@sr.ServiceStartDate.AddHours(sr.ServiceHours).ToString("HH:mm")</p>
                                                     <span class="duration1"><b>Duration:</b> @sr.ServiceHours Hrs</span>
@@ -281,19 +269,75 @@
                                                     }
                                                     
                                             </span>
-                                          <div class="">
-
-              
-                                            <a class="align-items-center  " id="reschedule1" onclick="reschedule(@sid)" title="Rate">
-                                                <img src="~/assets/reschedule-icon-small.png">Reschedule</a>
-                                                    <a class="align-items-center " id="cancel-btn" onclick="cancel(@sid)" title="Cancel">
-                                                         <img src="~/assets/close-icon-small.png">Cancel</a>
-                                          </div>
+                                          
                                      </div>
                                      </div>
                                      </div>
-                              }
-                                
+                                     <div id="@serviceid11" class="modal">
+                                       <div class="modal-content rate-sp-model animate">
+                                           <form method="post" asp-action="RateService">
+          <input type="hidden" value="@sr.ServiceRequestId" asp-for="rate.ServiceRequestId"/>
+          <input type="hidden" value="@sr.UserId" asp-for="rate.RatingFrom"/>
+          <input type="hidden" value="@sr.ServiceProviderId" asp-for="rate.RatingTo"/>
+          <input type="hidden" value="0" asp-for="friendly" id="friendlyrate"/>
+           <input type="hidden" value="0" asp-for="ontime" id="ontimerate"/>
+            <input type="hidden" value="0" asp-for="quality" id="qrate"/>
+            <div class="login "> <div class="row ">
+              <div class="avtar "> <img  src="~/assets/forma-1-copy-19.png"></div>
+           
+            <div>
+            @foreach(User u in Model.user){
+                 if(sr.ServiceProviderId == u.UserId)
+                 {
+                        <p class="sp-name">@u.FirstName @u.LastName</p>
+                  }
+               }
+             @{ var rand2 = new Random();
+                ratingidmodel = rand2.Next(1000, 99999);
+               }
+                <div class="row star" onload="avgrating('@ratingidmodel',@sp_avg)">
+                     <div id="@ratingidmodel"></div>
+                     <div class="ratingnum">@sp_avg</div>
+                 </div>
+            
+          </div>
+          <i class="fa fa-close ml-auto mr-4" 
+                onclick="document.getElementById(@serviceid11).style.display='none'"></i>
+        </div> </div>
+          <div class="container">
+            
+            <p class="sp-name2">Rate your Service provider</p>
+              <hr>
+              <div class="row ratingg">
+                <text id="rating11">Ontime Arrival</text>
+                <div style="margin:5px 0px 0px 42px" class="rateYo1"></div>
+                </div>
+                
+                <div class="row ratingg">
+                  <text id="rating11">Friendly</text>
+                  <div style="margin:5px 0px 0px 87px" class="rateYo2"></div>
+                </div>
+               
+                <div class="row ratingg">
+                  <text id="rating11">Quality of service</text>
+                  <div style="margin:5px 0px 0px 21px" class="rateYo3"></div>
+                </div>
+                <div class="ratingg" style="margin-top: 15px;">
+                  <text id="rating11">Feedback On Service Provider</text>
+             
+                  <textarea  asp-for="rate.Comments" class="form-control" rows="2" cols="50"></textarea>
+                </div>
+               
+                  <button type="submit" class="btn " id="save-btn">Submit</button>
+              </div>
+             
+            </form>
+                                       </div>
+        
+                                  </div>
+                                      
+                                }
+                    
                     
                     
                   </tbody>
@@ -306,17 +350,25 @@
           </div>
         </div>
     </div>
-  
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     
+     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+       
+   
     <script type="text/javascript" >
          jQuery(document).ready(function() {
            
-        $('.service-history .history-container .datatable-style .datatable').dataTable(
+       $('#table-data').DataTable(
         {
           searching: false,
           "dom": '<"top"i>rt<"bottom"flp><"clear">',
           "bInfo" : false,
+          "pageLength": 5,
+          lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
           language: {
               paginate: {
                 next: '<i class="fa fa-fw fa-angle-right">',
@@ -325,6 +377,13 @@
                 last: '<i class="fa fa-fw fa-step-forward">'
               }
             },
+            buttons: [{
+                extend: 'csv',
+                exportOptions: {
+                  columns: 'th:not(:last-child)'
+              }
+            }],
+
             'columnDefs': [ {
 
               'targets': [4], /* column index */
@@ -332,32 +391,75 @@
               'orderable': false, /* true or false */
           
             }],
-          
+            drawCallback: function(settings) {
+                  $('div[onload]').trigger('onload');
+            },
             "pagingType": "full_numbers"
         }
         );
 
-
+        $('#button_export_excel').click(() => {
+          $('.service-history .history-container .datatable-style .datatable').DataTable().buttons(0,0).trigger()
+      });
+       
           var count=0;
           $('.service-history .history-container .datatable-style .datatable tr').each(function(){
             count++;
           });
           $("label").append(" Total Record:"+(count+1));
          });
-        function reschedule(id){
-            document.getElementById(id).style.display='none';
-            document.getElementById('reschedule').style.display='block';
-            document.getElementById('serviceReqId').value=id;
-           
-        }
-        function cancel(id){
-            document.getElementById('cancel').style.display='block';
-            document.getElementById('serviceReqId1').value=id;
-            document.getElementById(id).style.display='none';
-            
-        }
+        
+               
         function openmodel(id){
              document.getElementById(id).style.display='block';
         }
+        function rateservice(xx){
+             document.getElementById(xx).style.display='block';
+        }
+        jQuery(document).ready(function () {
+    $(".rateYo1").rateYo({
+       rating: 1.6,
+        onSet: function (rating1, rateYoInstance) {
+
+           
+            $("input[id=ontimerate]").val(rating1);
+        },
+        starWidth: "20px"
+    });
+    $(".rateYo2").rateYo({
+        rating: 1.6,
+        onSet: function (rating, rateYoInstance) {
+
+           
+             $("input[id=friendlyrate]").val(rating);
+        },
+        starWidth: "20px"
+    });
+    $(".rateYo3").rateYo({
+        rating: 1.6,
+        onSet: function (rating, rateYoInstance) {
+
+           
+             $("input[id=qrate]").val(rating);
+        },
+        starWidth: "20px"
+    });
+    
+});
+jQuery(document).ready(function() {
+        $('div[onload]').trigger('onload');
+    });
+    
+    function avgrating(id,num) {
+     jQuery(document).ready(function() {
+           
+            $("#"+id).rateYo({
+                rating: num,
+                halfStar: true,
+                readOnly: true,
+                starWidth: "20px"
+            });
+        });
+    }
     </script>
-    <script src="~/js/site.js"></script>
+

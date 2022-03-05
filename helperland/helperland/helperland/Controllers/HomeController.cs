@@ -96,10 +96,52 @@ namespace helperland.Controllers
             var IsCheck = _helperlandDBContext.Users.Where(email => email.Email == eMail).FirstOrDefault();
             return IsCheck != null;
         }
+        [HttpPost]
+        public IActionResult RescheduleSR(CustomerSideModel model)
+        {
+            ServiceRequest serviceRequest = _helperlandDBContext.ServiceRequests.Where(x => x.ServiceRequestId == model.
+            Cancelrequestid).FirstOrDefault();
+            serviceRequest.ServiceStartDate = DateTime.Parse(model.date + " " + model.time);
+            _helperlandDBContext.ServiceRequests.Update(serviceRequest);
+            _helperlandDBContext.SaveChanges();
+            return RedirectToAction("Welcome");
+        }
+        [HttpPost]
+        public IActionResult cancelrequest(CustomerSideModel model)
+        {
+            ServiceRequest serviceRequest = _helperlandDBContext.ServiceRequests.Where(x => x.ServiceRequestId == model.
+            Cancelrequestid).FirstOrDefault();
+            
+            serviceRequest.Status = 2;
+            _helperlandDBContext.ServiceRequests.Update(serviceRequest);
+            _helperlandDBContext.SaveChanges();
+
+            return RedirectToAction("Welcome");
+
+        }
         public IActionResult Welcome()
         {
             ViewBag.data = HttpContext.Session.GetString("Customerfname");
-            return View();
+          
+            if (HttpContext.Session.GetInt32("CustomerId") != null)
+            {
+                CustomerSideModel csmodel = new CustomerSideModel();
+                csmodel.serviceRequests = from ServiceRequest in _helperlandDBContext.ServiceRequests
+                                     where ServiceRequest.UserId == HttpContext.Session.GetInt32("CustomerId") && ServiceRequest.Status == 1  
+                                     select ServiceRequest;
+                csmodel.serviceRequestAddresses = from serviceRequestAddresses in _helperlandDBContext.ServiceRequestAddresses
+                                             select serviceRequestAddresses;
+                csmodel.serviceRequestExtras = from serviceRequestExtras in _helperlandDBContext.ServiceRequestExtras
+                                          select serviceRequestExtras;
+
+
+                return View(csmodel);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+            
         }
         public IActionResult WelcomeForSp()
         {
@@ -110,6 +152,232 @@ namespace helperland.Controllers
         {
             
             return View();
+        }
+        public IActionResult ServiceHistory()
+        {
+            if (HttpContext.Session.GetInt32("CustomerId") != null)
+            {
+                CustomerSideModel csmodel = new CustomerSideModel();
+                csmodel.serviceRequests = from ServiceRequest in _helperlandDBContext.ServiceRequests
+                                          where ServiceRequest.UserId == HttpContext.Session.GetInt32("CustomerId") && ServiceRequest.Status != 1
+                                          select ServiceRequest;
+                csmodel.serviceRequestAddresses = from serviceRequestAddresses in _helperlandDBContext.ServiceRequestAddresses
+                                                  select serviceRequestAddresses;
+                csmodel.serviceRequestExtras = from serviceRequestExtras in _helperlandDBContext.ServiceRequestExtras
+                                               select serviceRequestExtras;
+
+                csmodel.user = from u in _helperlandDBContext.Users select u;
+                csmodel.myrate = from r in _helperlandDBContext.Ratings select r;
+
+
+                return View(csmodel);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+            
+        }
+        [HttpPost]
+        public IActionResult AddNewAddress(CustomerSettingsModel model)
+        {
+            UserAddress userAddress = new UserAddress();
+            userAddress.UserId = (int)HttpContext.Session.GetInt32("CustomerId");
+            userAddress.AddressLine1 = model.myaddress.AddressLine2.ToString();
+            userAddress.AddressLine2 = model.myaddress.AddressLine1.ToString();
+            userAddress.City = model.myaddress.City.ToString();
+            userAddress.PostalCode = model.myaddress.PostalCode.ToString();
+            userAddress.IsDefault = false;
+            userAddress.IsDeleted = false;
+            if (model.myaddress.Mobile != null)
+            {
+                userAddress.Mobile = model.myaddress.Mobile.ToString();
+            }
+            _helperlandDBContext.UserAddresses.Add(userAddress);
+            _helperlandDBContext.SaveChanges();
+            TempData["newadd"] = "Bill";
+            return RedirectToAction("CustomerSettings");
+        }
+        [HttpPost]
+        public IActionResult changeUserPassword(CustomerSettingsModel model)
+        {
+            User u = _helperlandDBContext.Users.Where(x => x.UserId == HttpContext.Session.GetInt32("CustomerId")).FirstOrDefault();
+            if (u.Password == model.oldpassword)
+            {
+                u.Password = model.Password.ToString();
+                _helperlandDBContext.Users.Update(u);
+                _helperlandDBContext.SaveChanges();
+                TempData["changepass"] = "Bill";
+                return RedirectToAction("CustomerSettings");
+            }
+            else
+            {
+                TempData["errorchangepass"] = "Bill";
+                return RedirectToAction("CustomerSettings");
+            }
+            
+        }
+      
+        public IActionResult FavoritePros()
+        {
+            CustomerSideModel csmodel = new CustomerSideModel();
+            if (HttpContext.Session.GetInt32("CustomerId") != null)
+            {
+                csmodel.serviceRequests = from sr in _helperlandDBContext.ServiceRequests
+                                          where sr.UserId == HttpContext.Session.GetInt32("CustomerId") && sr.Status == 3
+                                          select sr;
+                csmodel.user= from sr in _helperlandDBContext.Users
+                              where sr.UserTypeId==2
+                              select sr;
+                csmodel.sr = from sr in _helperlandDBContext.ServiceRequests
+                                          where sr.Status == 3
+                                          select sr;
+                csmodel.myrate = from r in _helperlandDBContext.Ratings select r;
+
+                csmodel.favoriteAndBlockeds = from fb in _helperlandDBContext.FavoriteAndBlockeds where fb.UserId == HttpContext.Session.GetInt32("CustomerId") select fb;
+
+                return View(csmodel);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+                
+        }
+        [HttpPost]
+        public IActionResult unfavorite(CustomerSideModel m)
+        {
+        FavoriteAndBlocked fb = _helperlandDBContext.FavoriteAndBlockeds.Where(x => x.UserId == m.userid && x.TargetUserId == m.spid).FirstOrDefault();
+            if (fb != null)
+            {
+
+                fb.IsFavorite = false;
+                fb.IsBlocked = false;
+                _helperlandDBContext.FavoriteAndBlockeds.Update(fb);
+                _helperlandDBContext.SaveChanges();
+            }
+            return RedirectToAction("FavoritePros");
+        }
+            [HttpPost]
+        public IActionResult makeFavorite(CustomerSideModel m)
+        {
+
+
+            FavoriteAndBlocked fb = _helperlandDBContext.FavoriteAndBlockeds.Where(x => x.UserId == m.userid && x.TargetUserId == m.spid).FirstOrDefault();
+            if (fb != null)
+            {
+                
+                fb.IsFavorite = true;
+                fb.IsBlocked = false;
+                _helperlandDBContext.FavoriteAndBlockeds.Update(fb);
+                _helperlandDBContext.SaveChanges();
+            }
+            else
+            {
+                FavoriteAndBlocked fb1 = new FavoriteAndBlocked();
+                fb1.UserId = m.userid;
+                fb1.TargetUserId = m.spid;
+                fb1.IsFavorite = true;
+                fb1.IsBlocked = false;
+                _helperlandDBContext.FavoriteAndBlockeds.Add(fb1);
+                _helperlandDBContext.SaveChanges();
+            }
+           
+            return RedirectToAction("FavoritePros");
+        }
+        [HttpPost]
+        public IActionResult makeblock(CustomerSideModel m)
+        {
+            FavoriteAndBlocked fb = _helperlandDBContext.FavoriteAndBlockeds.Where(x => x.UserId == m.userid && x.TargetUserId == m.spid).FirstOrDefault();
+            if (fb != null)
+            {
+
+                fb.IsFavorite = false;
+                fb.IsBlocked = true;
+                _helperlandDBContext.FavoriteAndBlockeds.Update(fb);
+                _helperlandDBContext.SaveChanges();
+            }
+            else
+            {
+                FavoriteAndBlocked fb1 = new FavoriteAndBlocked();
+                fb1.UserId = m.userid;
+                fb1.TargetUserId = m.spid;
+                fb1.IsFavorite = false;
+                fb1.IsBlocked = true;
+                _helperlandDBContext.FavoriteAndBlockeds.Add(fb1);
+                _helperlandDBContext.SaveChanges();
+            }
+
+            return RedirectToAction("FavoritePros");
+        }
+        [HttpPost]
+        public IActionResult deleteaddress(CustomerSettingsModel m)
+        {
+            UserAddress ua = _helperlandDBContext.UserAddresses.Where(x => x.AddressId == m.deleteaddid).FirstOrDefault();
+            ua.IsDeleted = true;
+            _helperlandDBContext.UserAddresses.Update(ua);
+            _helperlandDBContext.SaveChanges();
+            TempData["deleteadd"] = "Bill";
+            return RedirectToAction("CustomerSettings");
+        }
+        [HttpPost]
+        public IActionResult editaddress(CustomerSettingsModel m)
+        {
+            UserAddress ua1 = _helperlandDBContext.UserAddresses.Where(x => x.AddressId == m.deleteaddid).FirstOrDefault();
+            ua1.AddressLine1 = m.myaddress.AddressLine2.ToString() ;
+            ua1.AddressLine2 = m.myaddress.AddressLine1.ToString();
+            ua1.PostalCode = m.myaddress.PostalCode.ToString();
+           
+            ua1.City = m.myaddress.City.ToString();
+            if (m.myaddress.Mobile != null)
+            {
+                ua1.Mobile = m.myaddress.Mobile.ToString();
+            }
+            _helperlandDBContext.UserAddresses.Update(ua1);
+            _helperlandDBContext.SaveChanges();
+            TempData["editadd"] = "Bill";
+            return RedirectToAction("CustomerSettings");
+        }
+        public IActionResult CustomerSettings()
+        {
+            if (HttpContext.Session.GetInt32("CustomerId") != null)
+            {
+                
+                var x = from u in _helperlandDBContext.Users
+                               where u.UserId == HttpContext.Session.GetInt32("CustomerId")
+                                      select u;
+                ViewBag.personal = x.FirstOrDefault();
+                CustomerSettingsModel csmodel = new CustomerSettingsModel();
+                csmodel.userAddresses = from ua in _helperlandDBContext.UserAddresses
+                                          where ua.UserId == HttpContext.Session.GetInt32("CustomerId") && ua.IsDeleted!=true
+                                          select ua;
+                return View(csmodel);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        [HttpPost]
+        public IActionResult customersettingstab1(CustomerSettingsModel model)
+        {
+            
+            User u = _helperlandDBContext.Users.Where(x => x.UserId == HttpContext.Session.GetInt32("CustomerId")).FirstOrDefault();
+            u.FirstName = model.fname;
+            u.LastName = model.lname;
+            u.Mobile = model.phone;
+            u.ModifiedDate = DateTime.Now;
+            if(model.day!=null && model.month!=null && model.year != null)
+            {
+                u.DateOfBirth = DateTime.Parse(model.day + "-" + model.month + "-" + model.year);
+            }
+            
+            u.LanguageId =int.Parse( model.lang);
+            _helperlandDBContext.Users.Update(u);
+            _helperlandDBContext.SaveChanges();
+            HttpContext.Session.SetString("Customerfname", model.fname);
+            TempData["personald"] = "Bill";
+            return RedirectToAction("CustomerSettings");
         }
         public IActionResult BookService()
         {
@@ -139,7 +407,7 @@ namespace helperland.Controllers
             {
                 BookServiceModel model1 = new BookServiceModel();
                 model1.ua = from UserAddress in _helperlandDBContext.UserAddresses
-                            where UserAddress.UserId== HttpContext.Session.GetInt32("CustomerId")
+                            where UserAddress.UserId== HttpContext.Session.GetInt32("CustomerId") && UserAddress.IsDeleted != true && UserAddress.PostalCode==model.ZipCodeMatching.PostalCode
                             select UserAddress;
                 ViewBag.MatchedPC = "Matched";
                 ViewBag.zip = model.ZipCodeMatching.PostalCode;
@@ -152,7 +420,12 @@ namespace helperland.Controllers
                                    userlist.City,
 
                                }).ToList();
-                ViewBag.city = cities.FirstOrDefault().City;
+                ViewBag.cityy = cities.FirstOrDefault();
+                if (ViewBag.cityy != null)
+                {
+                    ViewBag.city = cities.FirstOrDefault().City;
+                }
+               
                 return View("BookService",model1);
             }
             else
@@ -160,6 +433,32 @@ namespace helperland.Controllers
                 ViewBag.UnmatchedPc = "Not Matched";
                 return View("BookService");
             }
+        }
+        [HttpPost]
+        public IActionResult RateService(CustomerSideModel model)
+        {
+            if (HttpContext.Session.GetInt32("CustomerId") != null)
+            {
+                Rating rating = new Rating();
+                var rateavg = (decimal.Parse(model.friendly) + decimal.Parse(model.ontime) + decimal.Parse(model.quality)) / 3;
+                rating.ServiceRequestId = model.rate.ServiceRequestId;
+                rating.RatingFrom = model.rate.RatingFrom;
+                rating.RatingTo = model.rate.RatingTo;
+                rating.Ratings = rateavg;
+                rating.Comments = model.rate.Comments;
+                rating.RatingDate = DateTime.Now;
+                rating.OnTimeArrival = decimal.Parse(model.ontime);
+                rating.Friendly = decimal.Parse(model.friendly);
+                rating.QualityOfService = decimal.Parse(model.quality);
+                _helperlandDBContext.Ratings.Add(rating);
+                _helperlandDBContext.SaveChanges();
+                return RedirectToAction("ServiceHistory");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+           
         }
         [HttpPost]
         public IActionResult ServiceBooking(BookServiceModel model)
@@ -172,6 +471,7 @@ namespace helperland.Controllers
             sr.ServiceStartDate= DateTime.Parse(model.sap.YourDate + " " + model.sap.yourtime);
             sr.ZipCode = model.ZipCodeMatching.PostalCode.ToString();
             sr.ServiceHourlyRate = 18;
+            sr.Status = 1;
             sr.ServiceHours = float.Parse(model.sap.serviceHrs);
             if ((model.sap.extraHrs) != null)
             {
@@ -196,7 +496,7 @@ namespace helperland.Controllers
 
             /*add address*/
             var oldadd = (from userlist in _helperlandDBContext.UserAddresses
-                          where userlist.AddressId == int.Parse(model.selectedaddress)
+                          where userlist.AddressId == int.Parse(model.selectedaddress) && userlist.IsDeleted!=true
                           select new
                           {
                               userlist.AddressLine1,
@@ -208,8 +508,8 @@ namespace helperland.Controllers
                               userlist.Email
                           }).ToList();
             var serviceID = (from userlist in _helperlandDBContext.ServiceRequests
-                            where userlist.ServiceId == serviceid
-                            select new
+                            where userlist.ServiceId == serviceid 
+                             select new
                             {
                                 userlist.ServiceRequestId
                             }).ToList();

@@ -1298,6 +1298,7 @@
     color: #646464;
     font-size: 16px;
     margin-top: 6px;
+    margin-left:5px;
 }
 
 .service-history .history-container .datatable-style .datatable .sp-name {
@@ -1317,7 +1318,7 @@
 }
 
 .service-history .history-container .datatable-style .datatable .star {
-    margin-left: 12px;
+    margin-left: 5px;
 }
 
     .service-history .history-container .datatable-style .datatable .star img {
@@ -1366,6 +1367,20 @@
     align-items: center;
     justify-content: center;
 }
+#status11{
+    border-radius: 0%;
+    display: flex;
+    margin-left:10px;
+    background-color: #67b644;
+    width: 90px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
+}
+#status11 p,#status22 p{
+    font-size: 13px;
+    margin: auto;
+}
 
     .service-history .history-container .datatable-style .datatable .status1 p {
         font-size: 13px;
@@ -1382,7 +1397,16 @@
     align-items: center;
     justify-content: center;
 }
-
+#status22 {
+    border-radius: 0%;
+    display: flex;
+    margin-left: 10px;
+    background-color: #ff6b6b;
+    width: 76px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
+}
     .service-history .history-container .datatable-style .datatable .status2 p {
         font-size: 13px;
         margin: auto;
@@ -1402,21 +1426,21 @@
     min-width: 94px;
     text-align: center;
 }
-
-.service-history .history-container .datatable-style .datatable1 .cancel {
-    display: inline-block;
-    background-color: #ff6b6b;
-    border-radius: 17px;
-    text-decoration: none;
-    height: 34px;
-    line-height: 35px;
-    padding: 0 20px;
-    color: #fff;
-    font-size: 14px;
-    transition: all 0.3s;
-    min-width: 94px;
-    text-align: center;
-}
+    
+    .service-history .history-container .datatable-style .datatable1 .cancel {
+        display: inline-block;
+        background-color: #ff6b6b;
+        border-radius: 17px;
+        text-decoration: none;
+        height: 34px;
+        line-height: 35px;
+        padding: 0 20px;
+        color: #fff;
+        font-size: 14px;
+        transition: all 0.3s;
+        min-width: 94px;
+        text-align: center;
+    }
 
 .service-history .history-container .datatable-style .datatable .rate:hover {
     background-color: #fff;
@@ -1849,8 +1873,19 @@ label {
         margin-left: 2px;
         margin-top: 2px;
     }
-
+.service-history .history-container .buttons button:hover {
+    width: 261px;
+    background-color: #146371;
+    text-align: left;
+}
 @media (max-width: 1200px) and (min-width: 993px) {
+    .service-history .history-container .datatable-style .datatable .avtar {
+        display: none;
+    }
+
+        .service-history .history-container .datatable-style .datatable .avtar img {
+            display: none;
+        }
     .modal-content {
         width: 500px !important; /* Could be more or less, depending on screen size */
     }
@@ -4154,4 +4189,416 @@ input[type="password"] {
 
     .nav-section .navbar-nav .nav-item .dropdown .dropdown-menu .dropdown-item {
         margin-top: 10px;
+    }
+/*customer dashboard*/
+#service-id {
+    margin-left: 17px;
+    font-size: 16px;
+    color: #646464;
+}
+
+#cancel-btn {
+    display: inline-block;
+    background-color: #ff6b6b;
+    border-radius: 17px;
+    text-decoration: none;
+    height: 34px;
+    line-height: 35px;
+    padding: 0 20px;
+    color: #fff;
+    font-size: 14px;
+    transition: all 0.3s;
+    min-width: 94px;
+    text-align: center;
+}
+
+.service-history .history-container .datatable-style .datatable .reschedule {
+    display: inline-block;
+    background-color: #1d7a8c;
+    border-radius: 17px;
+    text-decoration: none;
+    height: 34px;
+    line-height: 35px;
+    padding: 0 20px;
+    color: #fff;
+    font-size: 14px;
+    transition: all 0.3s;
+    min-width: 94px;
+    text-align: center;
+}
+/*settings*/
+.service-history .history-container .settings .nav-item.show .nav-link,
+.service-history .history-container .settings .nav-link.active {
+    color: #1d7a8c;
+    background: 0 0;
+    border: none !important;
+    font-weight: 700;
+    font-size: 16px;
+    border-bottom: 4px solid #1d7a8c !important;
+}
+
+.service-history .history-container .settings {
+    margin-left: 15px;
+}
+
+    .service-history .history-container .settings a {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 20px;
+        color: #646464;
+        border: none;
+        border-radius: 0;
+        border-bottom: 4px solid #e1e1e1;
+        padding: 15px 0;
+        margin-bottom: 0;
+        white-space: nowrap;
+    }
+
+    .service-history .history-container .settings .form-group label {
+        font-weight: 700;
+        color: #646464;
+        font-size: 16px;
+    }
+
+    .service-history .history-container .settings .form-group input[type="text"] {
+        margin-top: -20px;
+    }
+
+    .service-history .history-container .settings .form-group .input-group {
+        margin-top: -20px;
+    }
+
+        .service-history
+        .history-container
+        .settings
+        .form-group
+        .input-group
+        .input-group-prepend {
+            padding-top: 15px;
+        }
+
+    .service-history .history-container .settings .date-group {
+        display: inline-block;
+    }
+
+        .service-history .history-container .settings .date-group select {
+            height: 45px;
+            margin-top: -5px;
+        }
+
+        .service-history .history-container .settings .date-group .inner {
+            padding: 0px 4px 0px 12px;
+        }
+
+        .service-history .history-container .settings .date-group .inner1 {
+            padding: 0px 4px 0px 5px;
+        }
+
+    .service-history .history-container .settings .lang {
+        padding-left: 0px !important;
+    }
+
+#save-btn {
+    display: inline-block;
+    background-color: #1d7a8c;
+    border-radius: 30px;
+    border: 1px solid #ffffff;
+    height: 46px;
+    line-height: 32px;
+    padding: 0 20px;
+    color: #fff;
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: 500;
+    transition: all 0.3s;
+    min-width: 100px;
+    text-align: center;
+}
+
+.service-history .history-container .settings .cngpassword .form-group {
+    margin-bottom: 0px !important;
+}
+
+.service-history .history-container .settings table thead {
+    background: #f3f3f3;
+    border-bottom: 2px solid #e1e1e1;
+}
+
+    .service-history .history-container .settings table thead tr th {
+        padding: 10px 15px;
+        color: #646464;
+    }
+
+.service-history .history-container .settings table {
+    margin-top: 15px;
+    width: 100%;
+    border: 1px solid #e5e5e5;
+}
+
+    .service-history .history-container .settings table tr td {
+        padding: 15px;
+    }
+
+        .service-history .history-container .settings table tr td span:first-child {
+            display: block;
+        }
+
+    .service-history .history-container .settings table tr {
+        border-bottom: 1px solid #e1e1e1;
+    }
+
+        .service-history .history-container .settings table tr td span {
+            color: #646464;
+        }
+
+.edit-address {
+    width: 45%;
+}
+
+    .edit-address label {
+        font-weight: 700;
+        color: #646464;
+        font-size: 16px;
+    }
+
+    .edit-address input[type="text"] {
+        margin-top: -20px;
+    }
+
+    .edit-address select {
+        margin-top: -7px;
+    }
+
+    .edit-address .input-group .input-group-prepend {
+        padding-top: 15px;
+    }
+
+    .edit-address .input-group {
+        margin-top: -20px;
+    }
+
+.book-now .payment-step2 .room-bath .drp4 {
+    height: 45px;
+    width: auto;
+}
+
+.book-now .payment-step2 .room-bath .date1 {
+    width: 60%;
+    height: 45px;
+    width: 95%;
+}
+#reschedule{
+    padding-top:50px;
+}
+/*new*/
+.edit-address .date-time {
+    font-size: 22px;
+    line-height: 26px;
+    color: #4f4f4f;
+    font-weight: 700;
+}
+
+.edit-address .duration1 {
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+    color: #4f4f4f;
+    margin-bottom: 5px;
+}
+
+.edit-address .content .title-text {
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+    color: #4f4f4f;
+    margin-bottom: 5px;
+}
+
+.edit-address .duration1 .price {
+    font-size: 26px;
+    line-height: 26px;
+    color: #1d7a8c;
+    font-weight: 700;
+    display: inline-block;
+    margin-left: 5px;
+    text-align: right;
+    padding-left:70px;
+}
+
+.edit-address .duration1 table {
+    width: 50%;
+}
+
+#reschedule1 {
+    display: inline-block;
+    background-color: #1d7a8c;
+    border-radius: 17px;
+    text-decoration: none;
+    height: 34px;
+    line-height: 35px;
+    padding: 0 20px;
+    color: #fff;
+    font-size: 14px;
+    transition: all 0.3s;
+    min-width: 94px;
+    text-align: center;
+}
+/*rate sp model*/
+.modal-content .avtar {
+  border-radius: 50%;
+  border: 1px solid #646464;
+  height: 44px;
+  width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  margin: 22px 0px 22px 18px;
+}
+
+.modal-content .avtar img {
+  width: 29px;
+  height: 19px;
+  margin-left: 0px;
+  margin-top: 0px;
+}
+.modal-content .sp-name {
+  color: #646464;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  margin-left: 11px;
+}
+.modal-content .star {
+  margin-left: 5px;
+}
+.modal-content .star img {
+  margin-left: 2px;
+  margin-top: 2px;
+}
+.modal-content .sp-name2 {
+  color: #646464;
+  font-size: 20px;
+
+  margin-left: 11px;
+}
+.rate-sp-model {
+  width: 500px !important; /* Could be more or less, depending on screen size */
+}
+#CreateAccount {
+  margin-top: 100px;
+}
+.faq-section .prof {
+  font-weight: 400 !important;
+  font-size: 30px;
+}
+#coverdamage {
+  background-color: #eef8fa;
+}
+#coverdamage .faq-section {
+  padding-top: 60px;
+}
+#coverdamage p {
+  font-size: 18px;
+}
+#coverdamage .container .row {
+  padding-bottom: 40px;
+}
+#rating11 {
+  color: #646464 !important;
+  margin-top: 3px !important;
+}
+.modal-content .ratingg {
+  margin-left: 11px;
+}
+.details-model{
+    display:none;
+}
+.service-history .history-container .datatable-style .datatable .clock {
+    width: 15px;
+    height: 16px;
+    margin-left: 18px;
+    margin-top: 8px;
+}
+
+#cancel-btn img {
+    margin-top: -3px;
+}
+#reschedule1 img {
+    margin-top: -3px;
+}
+.service-history .history-container .settings .alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    font-size: 16px;
+    margin-top: 5px;
+    display: none;
+}
+
+.service-history .history-container .settings .alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+    .service-history .history-container .settings .alert button.close {
+        cursor: pointer;
+    }
+
+    .service-history .history-container .settings .alert .close {
+        float: right;
+        font-size: 21px;
+        font-weight: 700;
+        line-height: 1;
+        color: #000;
+        text-shadow: 0 1px 0 #fff;
+        filter: alpha(opacity=20);
+        opacity: 0.2;
+    }
+    #myphone.form-control{
+        margin-top:15px !important;
+       
+    }
+.border11 {
+    clear: both;
+    margin-top: 6px !important;
+    margin-bottom: 6px !important;
+    max-width: none !important;
+    border-collapse: separate !important;
+    border: none !important;
+}
+
+.cards tbody tr {
+    float: left;
+    margin: 10px;
+    box-shadow: 3px 3px 6px rgb(0 0 0 / 25%);
+    background-color: white;
+    display: inline-flex;
+    flex-direction: column;
+    height: auto;
+    padding-top: 25px;
+    width: 265px;
+    border-top: none;
+    border-bottom: none;
+    text-align: center;
+    padding-left: 0px !important;
+}
+
+.service-history .history-container .datatable-style .datatable .avtar11 {
+    border-radius: 50%;
+    border: 1px solid #646464;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    margin: auto;
+}
+
+    .service-history .history-container .datatable-style .datatable .avtar11 img {
+        width: 35px;
+        height: 25px;
     }

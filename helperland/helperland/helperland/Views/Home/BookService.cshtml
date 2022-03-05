@@ -276,6 +276,12 @@
                       <div id="details">
                         <div class="payment-step2">
                           <div class="room-bath">
+                              <div role="alert" class="alert alert-success " style="background:rgba(255,0,0, 0.5);display:none;" id="closebtn5">
+                      <button  class="close" type="button" onclick="document.getElementById('closebtn5').style.display='none'">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                      <span class="break-word" style="color:white" >Please add address to proceed further!!</span>
+                    </div>
                               <h3>Enter your contact details, so we can serve you in better way!</h3>
                               <ul  class="address-picker ng-untouched ng-pristine ng-valid" formarrayname="Address" id="userAddress">
                                 
@@ -330,14 +336,27 @@
                                 <input type="text" asp-for="UserAddressModel.PostalCode" id="postalcode" class="form-control add-form-input"  value="@ViewBag.zip"  readonly>
                                 
                               </div>
-                              <div class="col">
+                              @if(ViewBag.city!=null){
+                                  <div class="col">
                                 <label>City</label>
+
                                 <select asp-for="UserAddressModel.City" id="city" class="form-control" >
                                   <option>@ViewBag.city</option>
                                   
                                 </select>
                                 
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col">
+                                    <label>City</label>
+                                <input type="text" asp-for="UserAddressModel.City" id="postalcode" class="form-control add-form-input">
+                                <span asp-validation-for="UserAddressModel.City" class="text-danger"></span>
+                                
                               </div>
+                                    }
+
                               </div>
                                 <div class="form-row ">
                                     <div class="col ">
@@ -745,7 +764,11 @@
       }
 
       function func4(){
-        document.getElementById('payment').style.display='block';
+        
+        var getSelectedValue = document.querySelector('input[name="address"]:checked');
+        if (getSelectedValue != null) {
+            document.getElementById('selectedadd').value = getSelectedValue.id;
+            document.getElementById('payment').style.display='block';
         document.getElementById('schedule').style.display='none';
         document.getElementById('setupService').style.display='none';
         document.getElementById('details').style.display='none';
@@ -754,9 +777,9 @@
         document.getElementById("div1").classList.remove("active");
         document.getElementById("div3").classList.remove("active");
         document.getElementById('payment1').classList.remove("disabled-link");
-        var getSelectedValue = document.querySelector('input[name="address"]:checked');
-        if (getSelectedValue != null) {
-            document.getElementById('selectedadd').value = getSelectedValue.id;
+        }
+        else{
+            document.getElementById('closebtn5').style.display='block';
         }
       }
      

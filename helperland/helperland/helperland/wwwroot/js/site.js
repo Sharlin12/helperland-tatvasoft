@@ -411,12 +411,12 @@ function saveAddress() {
         var city = $("#city").val();
         var ps = $("#postalcode").val();
         if (street!="" && house !="") {
-            $("#userAddress").append("<li class='ng - untouched ng - pristine ng - valid'><label><input formcontrolname='address' class='ng - untouched ng - pristine ng - valid' name='address' type='radio' id='109' ><span class='address-block'><b >Address:</b>" + street + "," + house + "</span><span><b>Phone number:</b>" + phone + "</span><span class='radio-pointer'></span></label></li>");
+            $("#userAddress").append("<li class='ng - untouched ng - pristine ng - valid'><label><input formcontrolname='address' checked class='ng - untouched ng - pristine ng - valid' name='address' type='radio' id='109' ><span class='address-block'><b >Address:</b>" + street + "," + house + "</span><span><b>Phone number:</b>" + phone + "</span><span class='radio-pointer'></span></label></li>");
             $('#address-form').hide();
             $('#bttn').show();
         }
         else if (phone=="" && street != "" && house != ""){
-            $("#userAddress").append("<li class='ng - untouched ng - pristine ng - valid'><label><input formcontrolname='address' class='ng - untouched ng - pristine ng - valid' name='address' type='radio' id='109' ><span class='address-block'><b >Address:</b>" + street + "," + house + "</span><span class='radio-pointer'></span></label></li>");
+            $("#userAddress").append("<li class='ng - untouched ng - pristine ng - valid'><label><input formcontrolname='address' checked class='ng - untouched ng - pristine ng - valid' name='address' type='radio' id='109' ><span class='address-block'><b >Address:</b>" + street + "," + house + "</span><span class='radio-pointer'></span></label></li>");
             $('#address-form').hide();
             $('#bttn').show();
         }

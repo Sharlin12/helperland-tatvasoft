@@ -1,0 +1,267 @@
+﻿@using Microsoft.AspNetCore.Http
+@using helperland.Models.Data
+@using System.Collections;
+@inject IHttpContextAccessor HttpContextAccessor
+@model helperland.Models.CustomerSideModel
+
+@{
+    ViewData["Title"] = "Favorite Pros";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<div class="service-history">
+            <div class="container-fluid"><p class="text-center" >Welcome,<span>@HttpContextAccessor.HttpContext.Session.GetString("Customerfname")!</span></p></div>
+              
+              <div class="line"></div>
+              <div class=" dropdown ">
+                <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-fw fa-arrow-circle-right "></i>
+                </a>
+                <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" asp-action="Welcome">Dashboard</a>
+                  
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" asp-action="ServiceHistory">Service History</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Service Schedule</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item"  asp-action="FavoritePros">Favorite Pros</a>
+                  
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Invoice</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Notification</a>
+                </div>
+                </div>
+              <div class="history-container">
+                <div class="container">
+                  <div class="row">
+                    <div class="buttons" >
+                      <form asp-action="Welcome">
+                   <button type="button" class="btn ">Dashboard</button>
+                        </form>
+                        
+                      
+                      <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                      <form asp-action="ServiceHistory">
+                    <button type="submit" class="btn ">Service History</button>
+                </form>
+                      
+                        <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                      
+                        <button type="button" class="btn ">Service Schedule</button>
+                      
+                        <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                      <button type="button" class="btn active">Favorite Pros</button>
+                      <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                      <button type="button" class="btn ">Invoice</button>
+                      <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                      <button type="button" class="btn ">Notifications</button>
+                      <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                    </div>
+                    <div class="col-lg col-md" >
+                       
+                        
+                        <div class="datatable-style" style="overflow-x:auto;">
+                            
+                        <table class="datatable  border11 cards">
+                            <thead style="display: none;">
+                                <tr>
+                                  <th>Service Details</th>
+                                  <th>Service Provider</th>
+                                  <th>Payments</th>
+                                  </tr>
+                              </thead>
+                              <tbody class="justify-content-center">
+                                @{
+                                    
+                                    var arlist1 = new ArrayList();
+                                }
+                                @foreach(ServiceRequest service in Model.serviceRequests)
+                                {
+                                   var total_service = 0;
+                                    var ratingid = 0;
+                                    var sp_count = 0;
+                                    var check = 0;
+                                    decimal sp_avg = 0;
+                                    if (arlist1.Contains(service.ServiceProviderId))
+                                    {
+                                       
+                                    }
+                                    else
+                                    {
+                                        arlist1.Add(service.ServiceProviderId);
+                                        
+                                        <tr>
+                                   
+                                    <td >
+                                      <div >
+                                        <div class="avtar11 "> <img  src="~/assets/forma-1-copy-19.png"></div>
+                                      <div>
+                                           @foreach(User user in Model.user)
+                                                    {
+                                                        if (service.ServiceProviderId == user.UserId)
+                                                        {
+                                                             
+                                                            <p class="sp-name " style="margin-left: 0px;margin-top: 5px;"><b>@user.FirstName @user.LastName</b></p>
+                                                            
+                                                        }
+                                                   }
+                                      @foreach (Rating rating in Model.myrate)
+                                    {
+                                        if (service.ServiceProviderId == rating.RatingTo)
+                                        {
+                                            sp_count = sp_count + 1;
+                                            sp_avg = sp_avg + rating.Ratings;
+                                        }
+
+                                    }
+                                    @if (sp_count >= 1)
+                                    {
+                                        sp_avg = sp_avg / sp_count;
+                                        sp_avg = Convert.ToDecimal(String.Format("{0:0.00}", sp_avg));
+                                        var rand1 = new Random();
+                                              ratingid = rand1.Next(1000, 99999);
+                                    }
+                                     <div class="row justify-content-center" onload="avgrating('@ratingid',@sp_avg)">
+                                        
+                                        <div id="@ratingid" ></div>
+                                        <div class="ratingnum">@sp_avg</div>
+                                       
+                                    </div>
+                                    </div>
+                                  </div>
+                                    </td>
+                                    @foreach (ServiceRequest s in Model.sr)
+                                            {
+                                                if (service.ServiceProviderId == s.ServiceProviderId)
+                                                {
+                                                    total_service = total_service + 1;
+                                                }
+                                            }
+                                            <td class="sp-name " style="margin-left: 0px;margin-top: 5px;">@total_service <span>Cleanings</span></td>
+                                   <td>
+                                       @foreach(FavoriteAndBlocked fbb in Model.favoriteAndBlockeds){
+                                                    if (fbb.TargetUserId == service.ServiceProviderId && fbb.IsFavorite == true && fbb.IsBlocked == false)
+                                                    {
+                                                        <form asp-action="unfavorite">
+                                                            <input type="hidden" value="@service.ServiceProviderId" asp-for="spid">
+                                                            <input type="hidden" value="@service.UserId" asp-for="userid">
+                                                            <button type="submit" class="btn">
+                                                                <a class="align-items-center" id="cancel-btn" title="Unfavorite">Unfavorite</a></button>
+                                                        </form>
+                                                        check = 1;
+                                                    }
+                                                    else if (fbb.TargetUserId == service.ServiceProviderId && fbb.IsBlocked == true && fbb.IsFavorite == false)
+                                                    {
+                                                        <form asp-action="unfavorite">
+                                                            <input type="hidden" value="@service.ServiceProviderId" asp-for="spid">
+                                                            <input type="hidden" value="@service.UserId" asp-for="userid">
+                                                            <button type="submit"  class="btn">
+                                                                <a class="align-items-center " id="cancel-btn" title="Unblock">Unblock</a></button>
+                                                        </form>
+                                                        check = 1;
+                                                    }
+                                                    else if (fbb.TargetUserId == service.ServiceProviderId && fbb.IsBlocked == false && fbb.IsFavorite == false)
+                                                    {
+                                                         <div class="row justify-content-center">
+                                       <form asp-action="makeFavorite">
+                                           <input type="hidden" value="@service.ServiceProviderId" asp-for="spid">
+                                           <input type="hidden" value="@service.UserId" asp-for="userid">
+                                             <button type="submit" class="btn" style="padding:0px">
+                                                 <a class="align-items-center  reschedule "  title="Favorite">Favorite</a></button>
+                                       </form>
+                                      <form asp-action="makeblock">
+                                           <input type="hidden" value="@service.ServiceProviderId" asp-for="spid">
+                                           <input type="hidden" value="@service.UserId" asp-for="userid">
+                                          <button type="submit"  class="btn" style="padding:0px">
+                                              <a class="align-items-center " id="cancel-btn" title="Cancel">Block</a></button>
+                                      </form>
+                                                        </div>
+                                                        check = 1;
+                                                    }
+                                                   
+                                                }
+                                                @if(check==0){
+                                                    <div class="row">
+                                                   <form asp-action="makeFavorite">
+                                                       <input type="hidden" value="@service.ServiceProviderId" asp-for="spid">
+                                                       <input type="hidden" value="@service.UserId" asp-for="userid">
+                                                         <button type="submit" class="btn">
+                                                             <a class="align-items-center  reschedule "  title="Favorite">Favorite</a></button>
+                                                   </form>
+                                                  <form asp-action="makeblock">
+                                                       <input type="hidden" value="@service.ServiceProviderId" asp-for="spid">
+                                                       <input type="hidden" value="@service.UserId" asp-for="userid">
+                                                      <button type="submit"  class="btn">
+                                                          <a class="align-items-center " id="cancel-btn" title="Cancel">Block</a></button>
+                                                  </form>
+                                                    </div>
+                                                }
+                                            </td>
+                                     
+                                  </tr>
+                                    }
+                                    
+                                    
+                                }
+                                
+                               
+                     
+                                </tbody>
+                          
+                        </table>
+                      </div>
+                      </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+                   
+              
+                    <script type="text/javascript" >
+                         jQuery(document).ready(function() {
+                           
+                        $('.service-history .history-container .datatable-style .datatable').dataTable(
+                        {
+                          searching: false,
+                          "dom": '<"top"i>rt<"bottom"flp><"clear">',
+                          "bInfo" : false,
+                           drawCallback: function(settings) {
+                                  $('div[onload]').trigger('onload');
+                            },
+                          language: {
+                              paginate: {
+                                next: '<i class="fa fa-fw fa-angle-right">',
+                                previous: '<i class="fa fa-fw fa-angle-left">' ,
+                                first:'<i class="fa fa-fw fa-step-backward">',
+                                last: '<i class="fa fa-fw fa-step-forward">'
+                              }
+                            },
+                            "pagingType": "full_numbers"
+                        }
+                        );
+                
+                        
+                          var count=0;
+                          $('.service-history .history-container .datatable-style .datatable tr').each(function(){
+                            count++;
+                          });
+                          $("label").append(" Total Record:"+(count+1));
+                         });
+                        jQuery(document).ready(function() {
+        $('div[onload]').trigger('onload');
+    });
+    
+    function avgrating(id,num) {
+     jQuery(document).ready(function() {
+           
+            $("#"+id).rateYo({
+                rating: num,
+                halfStar: true,
+                readOnly: true,
+                starWidth: "20px"
+            });
+        });
+    }
+                    </script>
