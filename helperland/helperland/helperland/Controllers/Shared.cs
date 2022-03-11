@@ -61,6 +61,7 @@ namespace helperland.Controllers
                     }
                     if (details.FirstOrDefault().IsApproved)
                     {
+                        HttpContext.Session.SetInt32("SPId", details.FirstOrDefault().UserId);
                         HttpContext.Session.SetString("SPfname", details.FirstOrDefault().FirstName);
                         return RedirectToAction("WelcomeForSp", "Home");
                     }

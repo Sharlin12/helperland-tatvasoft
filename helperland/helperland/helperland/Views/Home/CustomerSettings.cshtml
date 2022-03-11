@@ -301,10 +301,17 @@
                         <hr class="small">
                         <div class="form-group col-sm-4 lang">
                           <label class="control-label">My Preferred Language</label>
-                          <select asp-for="lang"  class="form-control inline ng-untouched ng-pristine ng-valid">
-                            <!----><option value="1">English
-                            </option><option value="2">German
-                            </option>
+                          <select asp-for="lang" id="myselect"  class="form-control inline ng-untouched ng-pristine ng-valid">
+                               @if (ViewBag.personal.LanguageId != null)
+                                                            {
+                                                                 <option value="ViewBag.personal.LanguageId"></option>
+                                                            }
+                                                            else
+                                                            {
+                                                                 <option value="1">English</option>
+                                                            }
+                            <!----><option value="1">English</option>
+                            <option value="2">German</option>
                             
                           </select>
                         </div>
@@ -534,6 +541,14 @@
     $("#closebtn3").show().delay(5000).fadeOut();
     </script>
 }
+@if(ViewBag.personal.LanguageId!=null){
+                   <script>
+                $(document).ready(function () {
+
+                    $('#myselect option[value="@ViewBag.personal.LanguageId"]').prop('selected', 'selected').change();
+                });
+    </script>
+               }
 <script>
     function deleteadd(x){
         document.getElementById('deleteadd').style.display='block';

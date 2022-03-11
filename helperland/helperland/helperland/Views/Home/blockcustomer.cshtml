@@ -1,0 +1,225 @@
+﻿@using System.Collections;
+@using Microsoft.AspNetCore.Http
+@using helperland.Models.Data
+@inject IHttpContextAccessor HttpContextAccessor
+@model helperland.Models.ServiceProviderSideModel
+
+@{
+    ViewData["Title"] = "Block Customer";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+
+<div class="service-history">
+            <div class="container-fluid"><p class="text-center" >Welcome,<span>@HttpContextAccessor.HttpContext.Session.GetString("SPfname")!</span></p></div>
+              
+              <div class="line"></div>
+              <div class=" dropdown ">
+                <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-fw fa-arrow-circle-right"></i>
+                </a>
+                <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Dashboard</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" asp-action="WelcomeForSp">New Service Request</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" asp-action="UpcomingService">Upcoming Service</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Service Schedule</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item"  asp-action="spservicehistory">Service History</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" asp-action="RatingForSp">My Rating</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" asp-action="blockcustomer">Block Customer</a>
+            
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Invoice</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Notification</a>
+          </div>
+                </div>
+              <div class="history-container">
+                <div class="container">
+                  <div class="row">
+                    <div class="buttons" >
+                      
+                        <button type="button" class="btn ">Dashboard</button>
+                      
+                      <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                      <form asp-action="WelcomeForSp">
+                             <button type="submit" class="btn ">New Service Request</button>
+                        </form>
+                        <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                      
+                        <form asp-action="UpcomingService">
+                      <button type="submit" class="btn ">Upcoming Services</button>
+                </form>
+                      
+                        <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                      <button type="button" class="btn ">Service Schedule</button>
+                      <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                     <form asp-action="spservicehistory">
+                    <button type="submit" class="btn " >Service History</button>
+                </form>
+                  <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                <form asp-action="RatingForSp">
+                     <button type="submit" class="btn ">My Rating</button>
+                </form>
+                 
+                  <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                <form asp-action="blockcustomer">
+                      <button type="submit" class="btn ">Block Customer</button>
+                  </form>
+                     <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                <button type="button" class="btn ">Invoice</button>
+                <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                <button type="button" class="btn ">Notifications</button>
+                <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                    </div>
+                    <div class="col-lg col-md" >
+                  
+                       
+                        
+                        <div class="datatable-style" style="overflow-x:auto;">
+                            
+                        <table class="datatable  border11 cards">
+                            <thead style="display: none;">
+                                <tr>
+                                  
+                                    <th>Service Details</th>
+                                  <th>Service Provider</th>
+                                 
+                                 
+                                  
+                                </tr>
+                              </thead>
+                              <tbody class="justify-content-center">
+                                  @{
+                                    
+                                    var arlist1 = new ArrayList();
+                                }
+                                 @foreach(ServiceRequest service in Model.serviceRequests)
+                                {
+                                    var check = 0;
+                                    if (arlist1.Contains(service.UserId))
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        arlist1.Add(service.UserId);
+                                          <tr>
+                                   
+                                    <td >
+                                      <div >
+                                        <div class="avtar11 "> <img  src="~/assets/forma-1-copy-19.png"></div>
+                                      <div>
+                                          @foreach(User user in Model.users)
+                                                    {
+                                                        if (service.UserId == user.UserId)
+                                                        {
+                                                             
+                                                            <p class="sp-name " style="margin-left: 0px;margin-top: 5px;"><b>@user.FirstName @user.LastName</b></p>
+                                                            
+                                                        }
+                                                   }
+                                   
+                                      
+                                    </div>
+                                  </div>
+                                    </td>
+                                    
+                                   <td>
+                                      @foreach(FavoriteAndBlocked fbb in Model.favoriteAndBlockeds){
+                                                    if (fbb.TargetUserId == service.UserId && fbb.IsBlocked == true )
+                                                    {
+                                                        <form asp-action="unblockcust">
+                                                            <input type="hidden" value="@service.ServiceProviderId" asp-for="spid">
+                                                            <input type="hidden" value="@service.UserId" asp-for="userid">
+                                                            <button type="submit"  class="btn">
+                                                                <a class="align-items-center " id="cancel-btn" title="Unblock">Unblock</a></button>
+                                                        </form>
+                                                        check = 1;
+                                                    }
+                                                    else if (fbb.TargetUserId == service.UserId && fbb.IsBlocked == false )
+                                                    {
+                                                         <div class="row justify-content-center">
+                                      
+                                                          <form asp-action="blockcust">
+                                                               <input type="hidden" value="@service.ServiceProviderId" asp-for="spid">
+                                                               <input type="hidden" value="@service.UserId" asp-for="userid">
+                                                              <button type="submit"  class="btn" style="padding:0px">
+                                                                  <a class="align-items-center " id="cancel-btn" title="Cancel">Block</a></button>
+                                                          </form>
+                                                                            </div>
+                                                                            check = 1;
+                                                    }
+                                                   
+                                                }
+                                                @if(check==0){
+                                                    <div class="row justify-content-center">
+                                                 
+                                                  <form asp-action="blockcust">
+                                                       <input type="hidden" value="@service.ServiceProviderId" asp-for="spid">
+                                                       <input type="hidden" value="@service.UserId" asp-for="userid">
+                                                      <button type="submit"  class="btn">
+                                                          <a class="align-items-center " id="cancel-btn" title="Cancel">Block</a></button>
+                                                  </form>
+                                                    </div>
+                                                }
+                                       
+                                    </td>
+                                     
+                                  </tr>
+                                    }
+                                }
+                              
+                               
+                     
+                                </tbody>
+                          
+                        </table>
+                      </div>
+                      </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+                   
+                <script src="./js/script.js"></script>
+                <!-- rateyo-->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+                    <script type="text/javascript" >
+                         jQuery(document).ready(function() {
+                           
+                        $('.service-history .history-container .datatable-style .datatable').dataTable(
+                        {
+                          searching: false,
+                          "dom": '<"top"i>rt<"bottom"flp><"clear">',
+                          "bInfo" : false,
+                          language: {
+                              paginate: {
+                                next: '<i class="fa fa-fw fa-angle-right">',
+                                previous: '<i class="fa fa-fw fa-angle-left">' ,
+                                first:'<i class="fa fa-fw fa-step-backward">',
+                                last: '<i class="fa fa-fw fa-step-forward">'
+                              }
+                            },
+                            
+                           
+                          
+                            "pagingType": "full_numbers"
+                        }
+                        );
+                
+                        
+                          var count=0;
+                          $('.service-history .history-container .datatable-style .datatable tr').each(function(){
+                            count++;
+                          });
+                          $("label").append(" Total Record:"+(count+1));
+                         });
+                        
+                    </script>

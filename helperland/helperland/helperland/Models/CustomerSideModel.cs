@@ -20,6 +20,7 @@ namespace helperland.Models
         public IEnumerable<User> user { get; set; }
         public IEnumerable<Rating> myrate { get; set; }
         public IEnumerable<FavoriteAndBlocked> favoriteAndBlockeds { get; set; }
+        public IEnumerable<FavoriteAndBlocked> favoriteAndBlockeds1 { get; set; }
         public int spid { get; set; }
         public int userid { get; set; }
     }

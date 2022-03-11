@@ -133,7 +133,9 @@ namespace helperland.Controllers
                                              select serviceRequestAddresses;
                 csmodel.serviceRequestExtras = from serviceRequestExtras in _helperlandDBContext.ServiceRequestExtras
                                           select serviceRequestExtras;
-
+                csmodel.user = from u in _helperlandDBContext.Users select u;
+                
+                csmodel.myrate = from r in _helperlandDBContext.Ratings select r;
 
                 return View(csmodel);
             }
@@ -143,10 +145,178 @@ namespace helperland.Controllers
             }
             
         }
+        public IActionResult spservicehistory()
+        {
+            if (HttpContext.Session.GetInt32("SPId") != null)
+            {
+
+                ServiceProviderSideModel sp = new ServiceProviderSideModel();
+                sp.serviceRequests = from serviceRequests in _helperlandDBContext.ServiceRequests
+                                     where serviceRequests.Status == 3 && serviceRequests.ServiceProviderId == HttpContext.Session.GetInt32("SPId")
+                                     select serviceRequests;
+                sp.serviceRequestAddresses = from serviceRequestAddresses in _helperlandDBContext.ServiceRequestAddresses
+                                             select serviceRequestAddresses;
+                sp.serviceRequestExtras = from serviceRequestExtras in _helperlandDBContext.ServiceRequestExtras
+                                          select serviceRequestExtras;
+
+                sp.users = from User in _helperlandDBContext.Users
+                           where User.UserTypeId == 1
+                           select User;
+                return View(sp);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+
+        }
+        public IActionResult UpcomingService()
+        {
+            if (HttpContext.Session.GetInt32("SPId") != null)
+            {
+
+                ServiceProviderSideModel sp = new ServiceProviderSideModel();
+                sp.serviceRequests = from serviceRequests in _helperlandDBContext.ServiceRequests
+                                     where serviceRequests.Status == 1 && serviceRequests.ServiceProviderId == HttpContext.Session.GetInt32("SPId")
+                                     select serviceRequests;
+                sp.serviceRequestAddresses = from serviceRequestAddresses in _helperlandDBContext.ServiceRequestAddresses
+                                             select serviceRequestAddresses;
+                sp.serviceRequestExtras = from serviceRequestExtras in _helperlandDBContext.ServiceRequestExtras
+                                          select serviceRequestExtras;
+
+                sp.users = from User in _helperlandDBContext.Users
+                           where User.UserTypeId == 1
+                           select User;
+                return View(sp);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        [HttpPost]
+        public IActionResult CompleteSr(ServiceProviderSideModel model)
+        {
+            ServiceRequest serviceRequest = _helperlandDBContext.ServiceRequests.Where(x => x.ServiceRequestId == model.srid).FirstOrDefault();
+            serviceRequest.Status = 3;
+            _helperlandDBContext.ServiceRequests.Update(serviceRequest);
+            _helperlandDBContext.SaveChanges();
+            return RedirectToAction("UpcomingService");
+        }
+        [HttpPost]
+        public IActionResult CancellSr(ServiceProviderSideModel model)
+        {
+            ServiceRequest serviceRequest = _helperlandDBContext.ServiceRequests.Where(x => x.ServiceRequestId == model.srid).FirstOrDefault();
+            serviceRequest.Status = 1;
+            serviceRequest.ServiceProviderId = null;
+            serviceRequest.SpacceptedDate = null;
+            _helperlandDBContext.ServiceRequests.Update(serviceRequest);
+            _helperlandDBContext.SaveChanges();
+            return RedirectToAction("UpcomingService");
+        }
+        [HttpPost]
+        public IActionResult AcceptSr(ServiceProviderSideModel model)
+        {
+            var x = from ServiceRequest in _helperlandDBContext.ServiceRequests
+                    where ServiceRequest.ServiceProviderId == HttpContext.Session.GetInt32("SPId")
+                    && ServiceRequest.Status == 1
+                    select ServiceRequest;
+
+            if (x.ToList() != null)
+            {
+                var j = 0;
+                foreach (var servicedatecheck in x)
+                {
+                    var endtimefromdb = servicedatecheck.ServiceStartDate.AddHours(servicedatecheck.ServiceHours + 1);
+                    if (endtimefromdb >= model.starttime && endtimefromdb < model.endtime)
+                    {
+                        j = 1;
+                    }
+                    else if (model.endtime >= servicedatecheck.ServiceStartDate && model.starttime < endtimefromdb)
+                    {
+                        j = 1;
+                    }
+                    else if (model.starttime >= servicedatecheck.ServiceStartDate && model.endtime <= endtimefromdb)
+                    {
+                        j = 1;
+                    }
+                    else if (servicedatecheck.ServiceStartDate >= model.starttime && endtimefromdb <= model.endtime)
+                    {
+                        j = 1;
+                    }
+
+                }
+                if (j == 0)
+                {
+                    ServiceRequest serviceRequest = _helperlandDBContext.ServiceRequests.Where(x => x.ServiceRequestId == model.srid).FirstOrDefault();
+                    serviceRequest.ServiceProviderId = HttpContext.Session.GetInt32("SPId");
+                    serviceRequest.SpacceptedDate = DateTime.Now;
+                    serviceRequest.Status = 1;
+                    _helperlandDBContext.ServiceRequests.Update(serviceRequest);
+                    _helperlandDBContext.SaveChanges();
+                    return RedirectToAction("WelcomeForSp");
+                }
+                else
+                {
+                    TempData["conflict"] = "conflict";
+                    return RedirectToAction("WelcomeForSp");
+
+                }
+
+            }
+            else
+            {
+                ServiceRequest serviceRequest = _helperlandDBContext.ServiceRequests.Where(x => x.ServiceRequestId == model.srid).FirstOrDefault();
+                serviceRequest.ServiceProviderId = HttpContext.Session.GetInt32("SPId");
+                serviceRequest.SpacceptedDate = DateTime.Now;
+                serviceRequest.Status = 1;
+                _helperlandDBContext.ServiceRequests.Update(serviceRequest);
+                _helperlandDBContext.SaveChanges();
+
+                return RedirectToAction("WelcomeForSp");
+            }
+
+
+            
+        }
         public IActionResult WelcomeForSp()
         {
-            ViewBag.data = HttpContext.Session.GetString("SPfname");
-            return View();
+           
+            if (HttpContext.Session.GetInt32("SPId") != null)
+            {
+
+                var x = from User in _helperlandDBContext.Users
+                        where User.UserId == HttpContext.Session.GetInt32("SPId")
+                        select User.ZipCode;
+                ServiceProviderSideModel sp = new ServiceProviderSideModel();
+                sp.serviceRequests = from serviceRequests in _helperlandDBContext.ServiceRequests
+                                     where serviceRequests.ZipCode == x.FirstOrDefault() && serviceRequests.Status == 1 && serviceRequests.ServiceProviderId == null
+                                     select serviceRequests;
+                sp.serviceRequestswithoutpets = from serviceRequests in _helperlandDBContext.ServiceRequests
+                                                where serviceRequests.ZipCode == x.FirstOrDefault() && serviceRequests.Status == 1 && serviceRequests.HasPets == false && serviceRequests.ServiceProviderId == null
+                                                select serviceRequests;
+                sp.serviceRequestAddresses = from serviceRequestAddresses in _helperlandDBContext.ServiceRequestAddresses
+                                             select serviceRequestAddresses;
+                sp.serviceRequestExtras = from serviceRequestExtras in _helperlandDBContext.ServiceRequestExtras
+                                          select serviceRequestExtras;
+                sp.favoriteAndBlockeds = from FavoriteAndBlocked in _helperlandDBContext.FavoriteAndBlockeds
+                                         where FavoriteAndBlocked.TargetUserId == HttpContext.Session.GetInt32("SPId")
+                                         select FavoriteAndBlocked;
+                sp.favoriteAndBlockeds1 = from FavoriteAndBlocked in _helperlandDBContext.FavoriteAndBlockeds
+                                         where FavoriteAndBlocked.UserId == HttpContext.Session.GetInt32("SPId")
+                                         select FavoriteAndBlocked;
+                sp.users = from User in _helperlandDBContext.Users
+                           where User.UserTypeId == 1
+                           select User;
+
+
+                return View(sp);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+            
         }
         public IActionResult WelcomeForAdmin()
         {
@@ -235,6 +405,8 @@ namespace helperland.Controllers
                 csmodel.myrate = from r in _helperlandDBContext.Ratings select r;
 
                 csmodel.favoriteAndBlockeds = from fb in _helperlandDBContext.FavoriteAndBlockeds where fb.UserId == HttpContext.Session.GetInt32("CustomerId") select fb;
+                csmodel.favoriteAndBlockeds1 = from fb in _helperlandDBContext.FavoriteAndBlockeds 
+                                              where fb.TargetUserId == HttpContext.Session.GetInt32("CustomerId") select fb;
 
                 return View(csmodel);
             }
@@ -358,6 +530,132 @@ namespace helperland.Controllers
                 return RedirectToAction("Index");
             }
         }
+        public IActionResult SPsettings()
+        {
+            if (HttpContext.Session.GetInt32("SPId") != null)
+            {
+                var userinfo = (from User in _helperlandDBContext.Users
+                                where User.UserId == HttpContext.Session.GetInt32("SPId")
+                                select new
+                                {
+                                    User.FirstName,
+                                    User.LastName,
+                                    User.Mobile,
+                                    User.DateOfBirth,
+                                    User.Email,
+                                    User.NationalityId,
+                                    User.Gender,
+                                    User.UserProfilePicture,
+                                   
+                                }).ToList();
+                var useradd = (from UserAddress in _helperlandDBContext.UserAddresses
+                               where UserAddress.UserId == HttpContext.Session.GetInt32("SPId")
+                               select new
+                               {
+                                   UserAddress.AddressLine1,
+                                   UserAddress.AddressLine2,
+                                   UserAddress.City,
+                                   UserAddress.PostalCode,
+                               }).ToList();
+                if (userinfo.FirstOrDefault() != null)
+                {
+                    ViewBag.sfName = userinfo.FirstOrDefault().FirstName;
+                    ViewBag.slName = userinfo.FirstOrDefault().LastName;
+                    ViewBag.sMobile = userinfo.FirstOrDefault().Mobile;
+                    
+                   
+                    ViewBag.sDOB = userinfo.FirstOrDefault().DateOfBirth;
+                    ViewBag.sEmail = userinfo.FirstOrDefault().Email;
+                    ViewBag.sNationalityId = userinfo.FirstOrDefault().NationalityId;
+                    ViewBag.sGender = userinfo.FirstOrDefault().Gender;
+                    ViewBag.sUserProfilePicture = userinfo.FirstOrDefault().UserProfilePicture;
+                    ViewBag.sUserProfilePicture1 = userinfo.FirstOrDefault().UserProfilePicture;
+                    if (useradd.FirstOrDefault() != null)
+                    {
+                        ViewBag.sAddressLine1 = useradd.FirstOrDefault().AddressLine1;
+                        ViewBag.sAddressLine2 = useradd.FirstOrDefault().AddressLine2;
+                        ViewBag.sCity = useradd.FirstOrDefault().City;
+                        ViewBag.SPostalCode = useradd.FirstOrDefault().PostalCode;
+                        return View();
+                    }
+                    return View();
+                }
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        [HttpPost]
+        public IActionResult changespPassword(ServiceProviderSideModel model)
+        {
+            User u = _helperlandDBContext.Users.Where(x => x.UserId == HttpContext.Session.GetInt32("SPId")).FirstOrDefault();
+            if (u.Password == model.oldpassword)
+            {
+                u.Password = model.Password.ToString();
+                _helperlandDBContext.Users.Update(u);
+                _helperlandDBContext.SaveChanges();
+                TempData["changepass"] = "Bill";
+                return RedirectToAction("SPsettings");
+            }
+            else
+            {
+                TempData["errorchangepass"] = "Bill";
+                return RedirectToAction("SPsettings");
+            }
+        }
+        [HttpPost]
+        public IActionResult spPersonalInfo(ServiceProviderSideModel model)
+        {
+            User u = _helperlandDBContext.Users.Where(x => x.UserId == HttpContext.Session.GetInt32("SPId")).FirstOrDefault();
+            u.FirstName = model.fname;
+            u.LastName = model.lname;
+            u.Mobile = model.phone;
+            u.ModifiedDate = DateTime.Now;
+            if (model.day != null && model.month != null && model.year != null)
+            {
+                u.DateOfBirth = DateTime.Parse(model.day + "-" + model.month + "-" + model.year);
+            }
+            if (model.natid != null)
+            {
+                u.NationalityId = int.Parse(model.natid);
+            }
+            
+            u.Gender = model.gender;
+            u.UserProfilePicture = model.profiledp;
+            u.ZipCode = model.postal;
+
+            _helperlandDBContext.Users.Update(u);
+            _helperlandDBContext.SaveChanges();
+            HttpContext.Session.SetString("SPfname", model.fname);
+            UserAddress add = _helperlandDBContext.UserAddresses.Where(x => x.UserId == HttpContext.Session.GetInt32("SPId")).FirstOrDefault();
+            if (add != null)
+            {
+                add.AddressLine1 = model.add2;
+                add.AddressLine2 = model.add1;
+                add.PostalCode = model.postal;
+                add.City = model.city;
+                _helperlandDBContext.UserAddresses.Update(add);
+                _helperlandDBContext.SaveChanges();
+            }
+            else
+            {
+                UserAddress add1 = new UserAddress();
+                add1.UserId = (int)HttpContext.Session.GetInt32("SPId");
+                add1.AddressLine1 = model.add2;
+                add1.AddressLine2 = model.add1;
+                add1.PostalCode = model.postal;
+                add1.City = model.city;
+                add1.IsDefault = false;
+                add1.IsDeleted = false;
+                _helperlandDBContext.UserAddresses.Add(add1);
+                _helperlandDBContext.SaveChanges();
+            }
+            TempData["personaldetails"] = "Bill";
+            return RedirectToAction("SPsettings");
+            
+        }
         [HttpPost]
         public IActionResult customersettingstab1(CustomerSettingsModel model)
         {
@@ -439,26 +737,133 @@ namespace helperland.Controllers
         {
             if (HttpContext.Session.GetInt32("CustomerId") != null)
             {
-                Rating rating = new Rating();
-                var rateavg = (decimal.Parse(model.friendly) + decimal.Parse(model.ontime) + decimal.Parse(model.quality)) / 3;
-                rating.ServiceRequestId = model.rate.ServiceRequestId;
-                rating.RatingFrom = model.rate.RatingFrom;
-                rating.RatingTo = model.rate.RatingTo;
-                rating.Ratings = rateavg;
-                rating.Comments = model.rate.Comments;
-                rating.RatingDate = DateTime.Now;
-                rating.OnTimeArrival = decimal.Parse(model.ontime);
-                rating.Friendly = decimal.Parse(model.friendly);
-                rating.QualityOfService = decimal.Parse(model.quality);
-                _helperlandDBContext.Ratings.Add(rating);
-                _helperlandDBContext.SaveChanges();
-                return RedirectToAction("ServiceHistory");
+                Rating r = _helperlandDBContext.Ratings.Where(x => x.ServiceRequestId == model.rate.ServiceRequestId).FirstOrDefault();
+                if (r != null)
+                {
+                    var rateavg = (decimal.Parse(model.friendly) + decimal.Parse(model.ontime) + decimal.Parse(model.quality)) / 3;
+                    r.RatingFrom = model.rate.RatingFrom;
+                    r.RatingTo = model.rate.RatingTo;
+                    r.Ratings = rateavg;
+                    r.Comments = model.rate.Comments;
+                    r.RatingDate = DateTime.Now;
+                    r.OnTimeArrival = decimal.Parse(model.ontime);
+                    r.Friendly = decimal.Parse(model.friendly);
+                    r.QualityOfService = decimal.Parse(model.quality);
+                    _helperlandDBContext.Ratings.Update(r);
+                    _helperlandDBContext.SaveChanges();
+                    return RedirectToAction("ServiceHistory");
+                }
+                else
+                {
+                    Rating rating = new Rating();
+                    var rateavg = (decimal.Parse(model.friendly) + decimal.Parse(model.ontime) + decimal.Parse(model.quality)) / 3;
+                    rating.ServiceRequestId = model.rate.ServiceRequestId;
+                    rating.RatingFrom = model.rate.RatingFrom;
+                    rating.RatingTo = model.rate.RatingTo;
+                    rating.Ratings = rateavg;
+                    rating.Comments = model.rate.Comments;
+                    rating.RatingDate = DateTime.Now;
+                    rating.OnTimeArrival = decimal.Parse(model.ontime);
+                    rating.Friendly = decimal.Parse(model.friendly);
+                    rating.QualityOfService = decimal.Parse(model.quality);
+                    _helperlandDBContext.Ratings.Add(rating);
+                    _helperlandDBContext.SaveChanges();
+                    return RedirectToAction("ServiceHistory");
+                }
+               
             }
             else
             {
                 return RedirectToAction("Index");
             }
            
+        }
+        public IActionResult RatingForSp()
+        {
+            if (HttpContext.Session.GetInt32("SPId") != null)
+            {
+
+                ServiceProviderSideModel sp = new ServiceProviderSideModel();
+                sp.serviceRequests = from serviceRequests in _helperlandDBContext.ServiceRequests
+                                     where serviceRequests.Status == 3 && serviceRequests.ServiceProviderId == HttpContext.Session.GetInt32("SPId")
+                                     select serviceRequests;
+                sp.ratings = from Rating in _helperlandDBContext.Ratings
+                             where Rating.RatingTo == HttpContext.Session.GetInt32("SPId")
+                             select Rating;
+                sp.users = from User in _helperlandDBContext.Users
+                           where User.UserTypeId == 1
+                           select User;
+                return View(sp);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+            
+        }
+        public IActionResult blockcustomer()
+        {
+            if (HttpContext.Session.GetInt32("SPId") != null)
+            {
+
+                ServiceProviderSideModel sp = new ServiceProviderSideModel();
+                sp.serviceRequests = from serviceRequests in _helperlandDBContext.ServiceRequests
+                                     where serviceRequests.Status == 3 && serviceRequests.ServiceProviderId == HttpContext.Session.GetInt32("SPId")
+                                     select serviceRequests;
+
+                sp.users = from User in _helperlandDBContext.Users
+                           where User.UserTypeId == 1
+                           select User;
+                sp.favoriteAndBlockeds = from favoriteAndBlockeds in _helperlandDBContext.FavoriteAndBlockeds
+                                         where favoriteAndBlockeds.UserId == HttpContext.Session.GetInt32("SPId")
+                                         select favoriteAndBlockeds;
+                return View(sp);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        [HttpPost]
+        public IActionResult blockcust(ServiceProviderSideModel model)
+        {
+            FavoriteAndBlocked fb = _helperlandDBContext.FavoriteAndBlockeds.Where(x => x.UserId == model.spid && x.TargetUserId == model.userid).FirstOrDefault();
+            if (fb != null)
+            {
+
+                fb.IsFavorite = false;
+                fb.IsBlocked = true;
+                _helperlandDBContext.FavoriteAndBlockeds.Update(fb);
+                _helperlandDBContext.SaveChanges();
+            }
+            else
+            {
+                FavoriteAndBlocked fb1 = new FavoriteAndBlocked();
+                fb1.UserId = model.spid;
+                fb1.TargetUserId = model.userid;
+                fb1.IsFavorite = false;
+                fb1.IsBlocked = true;
+                _helperlandDBContext.FavoriteAndBlockeds.Add(fb1);
+                _helperlandDBContext.SaveChanges();
+            }
+
+            return RedirectToAction("blockcustomer");
+        }
+
+        [HttpPost]
+        public IActionResult unblockcust(ServiceProviderSideModel model)
+        {
+            FavoriteAndBlocked fb = _helperlandDBContext.FavoriteAndBlockeds.Where(x => x.UserId == model.spid && x.TargetUserId == model.userid).FirstOrDefault();
+            if (fb != null)
+            {
+
+                fb.IsFavorite = false;
+                fb.IsBlocked = false;
+                _helperlandDBContext.FavoriteAndBlockeds.Update(fb);
+                _helperlandDBContext.SaveChanges();
+            }
+            return RedirectToAction("blockcustomer");
+
         }
         [HttpPost]
         public IActionResult ServiceBooking(BookServiceModel model)

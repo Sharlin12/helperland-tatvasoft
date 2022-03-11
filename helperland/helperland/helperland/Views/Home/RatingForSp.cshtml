@@ -1,0 +1,260 @@
+﻿
+@using Microsoft.AspNetCore.Http
+@using helperland.Models.Data
+@inject IHttpContextAccessor HttpContextAccessor
+@model helperland.Models.ServiceProviderSideModel
+
+@{
+    ViewData["Title"] = "My Ratings";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+
+        <div class="service-history">
+            <div class="container-fluid"><p class="text-center" >Welcome,<span>@HttpContextAccessor.HttpContext.Session.GetString("SPfname")</span></p></div>
+              
+              <div class="line"></div>
+              <div class=" dropdown ">
+                <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-fw fa-arrow-circle-right"></i>
+                </a>
+                <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Dashboard</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" asp-action="WelcomeForSp">New Service Request</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" asp-action="UpcomingService">Upcoming Service</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Service Schedule</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item"  asp-action="spservicehistory">Service History</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" asp-action="RatingForSp">My Rating</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" asp-action="blockcustomer">Block Customer</a>
+            
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Invoice</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Notification</a>
+          </div>
+                </div>
+              <div class="history-container">
+                <div class="container">
+                  <div class="row">
+                    <div class="buttons" >
+                      
+                        <button type="button" class="btn ">Dashboard</button>
+                      
+                      <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                      <form asp-action="WelcomeForSp">
+                             <button type="submit" class="btn ">New Service Request</button>
+                        </form>
+                        <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                      <form asp-action="UpcomingService">
+                      <button type="submit" class="btn ">Upcoming Services</button>
+                </form>
+                      
+                        <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                      <button type="button" class="btn ">Service Schedule</button>
+                      <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                      <form asp-action="spservicehistory">
+                    <button type="submit" class="btn " >Service History</button>
+                </form>
+                  <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                <form asp-action="RatingForSp">
+                     <button type="submit" class="btn ">My Rating</button>
+                </form>
+                 
+                  <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                <form asp-action="blockcustomer">
+                      <button type="submit" class="btn ">Block Customer</button>
+                  </form>
+                      <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                <button type="button" class="btn ">Invoice</button>
+                <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                <button type="button" class="btn ">Notifications</button>
+                <div class="border border-top-1 border-right-0 border-left-0 border-bottom-0"></div>
+                    </div>
+                    <div class="col-lg col-md" >
+                        <p style="font-size:18px;">
+                        Rating: 
+                        <select id="table-filter">
+                        <option value="">All</option>
+                        <option value="Excellent">Excellent</option>
+                        <option value="Very Good">Very Good</option>
+                        <option value="Good">Good</option>
+                        <option value="Poor">Poor</option>
+                        <option value="Very Poor">Very Poor</option>
+                        </select>
+                        </p>
+                       
+                        
+                        <div class="datatable-style" style="overflow-x:auto;">
+                          <table class="datatable border row-border"  style="width:99%;   border-collapse: separate;
+                          border-spacing: 0 1em;">
+                            <thead style="display:none">
+                                <tr>
+                                  <th>Service Id</th>
+                                    <th>Service Date</th>
+                                  <th>Customer Details</th>
+                                  <th>Payments</th>
+                                  
+                                  <th >Actions</th>
+                               
+                                  
+                                </tr>
+                              </thead>
+                              <tbody>
+                                @foreach(Rating rating in Model.ratings)
+                                {
+                                    <tr> <td>
+                                    @foreach(ServiceRequest sr in Model.serviceRequests){
+                                            if (sr.ServiceRequestId == rating.ServiceRequestId)
+                                            {
+                                                 <p class="sp-name">@sr.ServiceId</p>
+                                            }
+                                        }
+                                   @foreach(User u in Model.users){
+                                            if (rating.RatingFrom ==u.UserId)
+                                            {
+                                                 <p class="sp-name" style="margin-top:5px;">@u.FirstName @u.LastName</p>
+                                            }
+                                        }
+                                     
+                                      <hr width="199%">
+                                    
+                                      <p class="sp-name" style="margin-top: 5px;"><b>Customer Comments</b></p>
+                                      <p class="sp-name" style="margin-top: 5px;">@rating.Comments </p>
+                                    </td>
+                                    
+                                  <td valign="top">
+                                    <div class="row1">
+                                                @foreach(ServiceRequest sr in Model.serviceRequests){
+                                                    if (sr.ServiceRequestId == rating.ServiceRequestId)
+                                                    {
+                                                        <div class="row" style="margin-right: 0px;"><img class="calender" src="~/assets/calendar2.png">
+                                          
+                                        <p id="date" ><b>@sr.ServiceStartDate.ToShortDateString()</b></p></div>
+                                        <div class="row"> <img class="clock" src="~/assets/layer-14.png">
+                                      <p id="time">@sr.ServiceStartDate.ToString("HH:mm")-@sr.ServiceStartDate.AddHours(sr.ServiceHours).ToString("HH:mm")</p>
+                                      </div>
+                                                    }
+
+                                                }
+                                                
+                                    </div>
+                                    
+                                    </td>
+                                    <td ></td>
+                                  <td></td>
+                                  <td valign="top" style="float:right;"> 
+                                  <div class="row2">
+                                      <p class="sp-name"><b>Ratings</b></p>
+                                      <div class="row star" onload="avgrating('@rating.RatingId',@rating.Ratings)">
+                                        
+                                        <div id="@rating.RatingId" style="z-index:0"></div>
+                                                @if (rating.Ratings >= 4)
+                                                {
+                                                    <div class="ratingnum1">Excellent</div>
+                                                }
+                                                else if (rating.Ratings >= 3 && rating.Ratings < 4)
+                                                {
+                                                     <div class="ratingnum1">Very Good</div>
+                                                }
+                                                else if (rating.Ratings >= 2 && rating.Ratings < 3)
+                                                {
+                                                     <div class="ratingnum1">Good</div>
+                                                }
+                                                else if (rating.Ratings >= 1 && rating.Ratings < 2)
+                                                {
+                                                     <div class="ratingnum1">Poor</div>
+                                                }
+                                                else if (rating.Ratings >= 0 && rating.Ratings < 1)
+                                                {
+                                                     <div class="ratingnum1">Very Poor</div>
+                                                }
+
+                                    </div>
+                                  </div>
+                                    </td>
+                                
+                                  
+                                </tr>
+                                }
+                                
+                              
+                              
+                            
+                            
+                            
+                          </tbody>
+                          
+                        </table>
+                    
+                      </div>
+                      </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+
+                     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+                   
+                <script src="~/js/script.js"></script>
+                <!-- rateyo-->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+                    <script type="text/javascript" >
+                         jQuery(document).ready(function() {
+                           
+                         $('.service-history .history-container .datatable-style .datatable').dataTable(
+                        {
+                          searching:true,
+                          "dom": 'rtlip',
+                          
+                          "bInfo" : false,
+                          language: {
+                              paginate: {
+                                next: '<i class="fa fa-fw fa-angle-right">',
+                                previous: '<i class="fa fa-fw fa-angle-left">' ,
+                                first:'<i class="fa fa-fw fa-step-backward">',
+                                last: '<i class="fa fa-fw fa-step-forward">'
+                              }
+                            },
+                            drawCallback: function(settings) {
+                                  $('div[onload]').trigger('onload');
+                                      
+                            },
+                           
+                          
+                            "pagingType": "full_numbers"
+                        }
+                        );
+                        var table1=$('.service-history .history-container .datatable-style .datatable').DataTable();
+                        $('#table-filter').on('change', function () {
+                            var id=$('#table-filter').val();
+                            table1.column([4]).search(id).draw();
+		                    });
+                         
+                          var count=0;
+                          $('.service-history .history-container .datatable-style .datatable tr').each(function(){
+                            count++;
+                          });
+                          $("label").append(" Total Record:"+(count+1));
+                         });
+                        jQuery(document).ready(function() {
+        $('div[onload]').trigger('onload');
+    });
+    
+    function avgrating(id,num) {
+     jQuery(document).ready(function() {
+           
+            $("#"+id).rateYo({
+                rating: num,
+                halfStar: true,
+                readOnly: true,
+                starWidth: "20px"
+            });
+        });
+    }
+                    </script>

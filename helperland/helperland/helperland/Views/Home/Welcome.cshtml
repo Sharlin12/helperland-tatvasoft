@@ -155,6 +155,11 @@
                   <tbody>
                                 @foreach(ServiceRequest sr in Model.serviceRequests)
                                 {
+                                     
+                                    var ratingid = 0;
+                                    var profile = 0;
+                                    var sp_count = 0;
+                                    decimal sp_avg = 0;
                                     var sid = @sr.ServiceRequestId;
                                     <tr >
                                     <td onclick="openmodel(@sid.ToString())"><p  id="service-id">@sr.ServiceId</p></td>
@@ -168,17 +173,56 @@
                                         @if(sr.ServiceProviderId !=null){
                                             <td >
                                         <div class="row ">
-                                          <div class="avtar "> <img  src="~/assets/forma-1-copy-19.png"></div>
+                                        @foreach(User u1 in Model.user){
+                                             if(sr.ServiceProviderId == u1.UserId)
+                                             {
+                                                   if (u1.UserProfilePicture != null)
+                                                   {
+                                                       <div class="avtar">
+                                                           <img alt="avtar"  src="@u1.UserProfilePicture">
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                          <div class="avtar">
+                                                               <img src='~/assets/avatar-hat.png'>
+                                                          </div>
+                                                     }
+                                                }
+                                           }
+
+
                          
                                         <div>
-                                        <p class="sp-name">Lyum Watson</p>
-                                        <div class="row star">
-                                          <img src="~/assets/star1.png">
-                                          <img src="~/assets/star1.png">
-                                          <img src="~/assets/star1.png">
-                                          <img src="~/assets/star1.png">
-                                          <img src="~/assets/star2.png">
-                                        </div>
+                                                        @foreach(User u in Model.user){
+                                                            if(sr.ServiceProviderId == u.UserId)
+                                                            {
+                                                                 <p class="sp-name">@u.FirstName @u.LastName</p>
+                                                            }
+                                                        }
+
+                                                        @foreach (Rating rating in Model.myrate)
+                                    {
+                                        if (sr.ServiceProviderId == rating.RatingTo)
+                                        {
+                                            sp_count = sp_count + 1;
+                                            sp_avg = sp_avg + rating.Ratings;
+                                        }
+
+                                    }
+                                    @if (sp_count >= 1)
+                                    {
+                                        sp_avg = sp_avg / sp_count;
+                                        sp_avg = Convert.ToDecimal(String.Format("{0:0.00}", sp_avg));
+                                        var rand1 = new Random();
+                                              ratingid = rand1.Next(1000, 99999);
+                                    }
+                                     <div class="row star" onload="avgrating('@ratingid',@sp_avg)">
+                                        
+                                        <div id="@ratingid" style="z-index:0"></div>
+                                        <div class="ratingnum">@sp_avg</div>
+                                    </div>
+                                         
                                       </div>
                                     </div>
                                       </td>
@@ -332,7 +376,9 @@
               'orderable': false, /* true or false */
           
             }],
-          
+           drawCallback: function(settings) {
+                  $('div[onload]').trigger('onload');
+            },
             "pagingType": "full_numbers"
         }
         );
@@ -359,5 +405,21 @@
         function openmodel(id){
              document.getElementById(id).style.display='block';
         }
+        jQuery(document).ready(function() {
+        $('div[onload]').trigger('onload');
+    });
+    
+    function avgrating(id,num) {
+     jQuery(document).ready(function() {
+           
+            $("#"+id).rateYo({
+                rating: num,
+                halfStar: true,
+                readOnly: true,
+                starWidth: "20px"
+            });
+        });
+       
+    }
     </script>
     <script src="~/js/site.js"></script>

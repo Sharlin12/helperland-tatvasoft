@@ -276,3 +276,8 @@ D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcor
 D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\ServiceHistory.cshtml.g.cs
 D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\CustomerSettings.cshtml.g.cs
 D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\FavoritePros.cshtml.g.cs
+D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\spservicehistory.cshtml.g.cs
+D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\UpcomingService.cshtml.g.cs
+D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\RatingForSp.cshtml.g.cs
+D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\blockcustomer.cshtml.g.cs
+D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\SPsettings.cshtml.g.cs

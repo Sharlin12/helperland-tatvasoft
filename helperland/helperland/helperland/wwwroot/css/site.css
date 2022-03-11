@@ -1339,8 +1339,8 @@
 }
 
     .service-history .history-container .datatable-style .datatable .avtar img {
-        width: 29px;
-        height: 19px;
+        width: 40px;
+        height: 40px;
         margin-left: 0px;
         margin-top: 0px;
     }
@@ -1971,9 +1971,18 @@ label {
         margin-left: -330px !important;
         height: 1em !important;
     }
+    .service-history .history-container .datatable-style .datatable .row1 {
+        margin-left: -100px;
+    }
 }
 /*made responsive for tablet view*/
 @media (max-width: 993px) and (min-width: 763px) {
+    .service-history .history-container .datatable-style .datatable .clock {
+        display: none;
+    }
+    .service-history .history-container .datatable-style .datatable .row1 {
+        margin-left: -70px;
+    }
     .modal-content {
         width: 400px !important; /* Could be more or less, depending on screen size */
     }
@@ -2510,6 +2519,12 @@ label {
 
 /*made responsive for mobile view*/
 @media (max-width: 763px) and (min-width: 10px) {
+    .service-history .history-container .datatable-style .datatable .clock {
+        display: none;
+    }
+    .service-history .history-container .datatable-style .datatable .row1 {
+        margin-left: -70px;
+    }
     .modal-content {
         width: 400px !important; /* Could be more or less, depending on screen size */
     }
@@ -3132,6 +3147,9 @@ label {
 }
 
 @media (max-width: 576px) and (min-width: 460px) {
+    .service-history .history-container .datatable-style .datatable .row1 {
+        margin-left: -50px;
+    }
     .book-now .address-picker > li > label > input {
         margin-left: -280px !important;
         height: 1em !important;
@@ -3193,9 +3211,15 @@ label {
         .footer ul.footer-navigation li + li {
             margin-left: 0;
         }
+    .service-history .history-container .datatable-style .datatable .row1 {
+        margin-left: -50px;
+    }
 }
 
 @media (max-width: 460px) and (min-width: 360px) {
+    .service-history .history-container .datatable-style .datatable .row1 {
+        margin-left: -50px;
+    }
     .book-now .address-picker > li > label > input {
         margin-left: -230px !important;
         height: 1em !important;
@@ -3251,8 +3275,17 @@ label {
         width: 700px;
     }
 }
-
+@media (max-width: 383px) and (min-width: 200px) {
+    .service-history .history-container .datatable-style .datatable .row1 {
+        margin-left: -40px;
+    }
+}
 @media (max-width: 360px) and (min-width: 200px) {
+    @media (max-width: 383px) and (min-width: 200px) {
+        .service-history .history-container .datatable-style .datatable .row1 {
+            margin-left: -10px;
+        }
+    }
     .book-now .address-picker > li > label > input {
         margin-left: -200px !important;
         height: 1em !important;
@@ -4599,6 +4632,81 @@ input[type="password"] {
 }
 
     .service-history .history-container .datatable-style .datatable .avtar11 img {
-        width: 35px;
-        height: 25px;
+        width: 55px;
+        height: 55px;
+    }
+.row1 {
+    margin-left: -170px;
+}
+
+.columnAvatar {
+    float: left;
+    cursor: pointer;
+    padding: 5px;
+}
+.ratingnum1{
+    color:#646464;
+    font-size:16px;
+    margin-right:15px;
+}
+.service-history .history-container .settings .form-group .radio.inline {
+    display: inline-block;
+}
+
+.service-history .history-container .settings .form-group .radio.inline1 {
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.service-history .history-container .settings .form-group .mylabel {
+    font-weight: 400;
+    color: #646464;
+    font-size: 16px;
+}
+
+.service-history .history-container .settings .form-group .mylabel1 {
+    margin-left: 0px;
+    padding-left: 0px;
+    margin-bottom: 0px;
+}
+
+.columnAvatar .avatar {
+    height: 85px;
+    border-radius: 85px;
+}
+
+#mylabel2 {
+    margin-left: 0px;
+    padding-left: 0px;
+    margin-bottom: 0px;
+    margin-top: 25px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #646464;
+}
+
+.service-history .history-container .settings .date-group .select1 {
+    height: 45px;
+    margin-top: -5px;
+}
+
+.service-history .history-container .settings .date-group .inner2 {
+    padding: 0px 0px 0px 2px;
+}
+
+.columnAvatar .active {
+    border: 3px solid #1d7a8c;
+}
+
+.service-history .history-container .settings .account-status {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 700;
+    margin: 20px 0 25px;
+    color: #646464;
+}
+
+    .service-history .history-container .settings .account-status span {
+        color: #67b644;
+        font-weight: 400;
     }

@@ -78,6 +78,10 @@
                                 }
                                 @foreach(ServiceRequest service in Model.serviceRequests)
                                 {
+                                    @foreach (FavoriteAndBlocked favorite in Model.favoriteAndBlockeds1)
+                                    {
+                                        if (favorite.UserId == service.ServiceProviderId && favorite.IsBlocked == false)
+                                        {
                                    var total_service = 0;
                                     var ratingid = 0;
                                     var sp_count = 0;
@@ -95,7 +99,23 @@
                                    
                                     <td >
                                       <div >
-                                        <div class="avtar11 "> <img  src="~/assets/forma-1-copy-19.png"></div>
+                                        @foreach(User u1 in Model.user){
+                                             if(service.ServiceProviderId == u1.UserId)
+                                             {
+                                                   if (u1.UserProfilePicture != null)
+                                                   {
+                                                       <div class="avtar11">
+                                                           <img alt="avtar"  src="@u1.UserProfilePicture">
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                          <div class="avtar11">
+                                                               <img src='~/assets/avatar-hat.png'>
+                                                          </div>
+                                                     }
+                                                }
+                                           }
                                       <div>
                                            @foreach(User user in Model.user)
                                                     {
@@ -203,6 +223,8 @@
                                     }
                                     
                                     
+                                }
+                                }
                                 }
                                 
                                

@@ -3,6 +3,7 @@
 
 // Write your JavaScript code.
 // equal height
+
 function BookCleaner() {
     document.getElementById('id01').style.display = 'block';
     document.getElementById('#hiddenfield').value = 'bookcleaner'
@@ -102,7 +103,6 @@ jQuery(window).on('load', function () {
 jQuery(window).scroll(function () {
     fixed_header();
 });
-
 
 var totaltime;
 var totalprice;
@@ -400,6 +400,7 @@ jQuery(document).ready(function () {
     });
     
 });
+
 var today = new Date();
 document.getElementById('dateinsummary').innerHTML = (today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear());
 $("#servicedate").val((today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear()));

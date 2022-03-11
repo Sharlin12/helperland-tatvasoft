@@ -99,7 +99,23 @@
                                         {
                                              <td >
                                         <div class="row ">
-                                          <div class="avtar "> <img  src="~/assets/forma-1-copy-19.png"></div>
+                                         @foreach(User u1 in Model.user){
+                                             if(sr.ServiceProviderId == u1.UserId)
+                                             {
+                                                   if (u1.UserProfilePicture != null)
+                                                   {
+                                                       <div class="avtar">
+                                                           <img alt="avtar"  src="@u1.UserProfilePicture">
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                          <div class="avtar">
+                                                               <img src='~/assets/avatar-hat.png'>
+                                                          </div>
+                                                     }
+                                                }
+                                           }
                          
                                         <div>
                                                         @foreach(User u in Model.user){
@@ -283,7 +299,23 @@
            <input type="hidden" value="0" asp-for="ontime" id="ontimerate"/>
             <input type="hidden" value="0" asp-for="quality" id="qrate"/>
             <div class="login "> <div class="row ">
-              <div class="avtar "> <img  src="~/assets/forma-1-copy-19.png"></div>
+              @foreach(User u1 in Model.user){
+                                             if(sr.ServiceProviderId == u1.UserId)
+                                             {
+                                                   if (u1.UserProfilePicture != null)
+                                                   {
+                                                       <div class="avtar">
+                                                           <img alt="avtar"  src="@u1.UserProfilePicture">
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                          <div class="avtar">
+                                                               <img src='~/assets/avatar-hat.png'>
+                                                          </div>
+                                                     }
+                                                }
+                                           }
            
             <div>
             @foreach(User u in Model.user){
