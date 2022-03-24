@@ -1,0 +1,529 @@
+﻿@using Microsoft.AspNetCore.Http
+@using helperland.Models.Data
+@inject IHttpContextAccessor HttpContextAccessor
+@model helperland.Models.AdminSideModel
+
+@{
+    ViewData["Title"] = "Service Request";
+    Layout = "~/Views/Shared/_LayoutForAdmin.cshtml";
+}
+
+
+     <div class="admin-wrapper">
+      <div class="container-fluid">
+        <div class=" dropdown " id="drop-down">
+          <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-fw fa-arrow-circle-right "></i>
+          </a>
+          <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+           
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Service Requests</a>
+            
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" asp-action="WelcomeForAdmin">User Management</a>
+          
+          </div>
+          </div>
+        <div class="row">
+          <div class="admin-buttons" >
+            
+          
+            <div class="border "></div>
+          <button type="button" class="btn active">Service Requests</button>
+         
+          <div class="border "></div>
+          <form asp-action="WelcomeForAdmin">
+               <button type="submit" class="btn ">User Management</button>
+          </form>
+
+         
+          
+          <div class="border "></div>
+        </div>
+        <div class="main-wrapper">
+          <div class=""><p class="my-header">Service Requests</p>
+            <div class="white-box "  style="overflow-x:auto;">
+              
+                <div class="form-row ">
+                  <div class="col">
+                    <input class="form-control" id="s-id" placeholder="Service ID" name="s-id" >
+                   </div>
+                   <div class="col">
+                    <select id="mycustt" class="form-control" >
+                      <option value="">Customer</option>
+                                    @foreach(User u in Model.myuser)
+                                    {
+                                        if (u.UserTypeId==1)
+                                        {
+                                            <option value="@u.FirstName">@u.FirstName @u.LastName</option>
+                                        }
+                                        
+                                    }
+                                   
+                    </select>
+                  </div>
+                  <div class="col">
+                    <select id="myspp" class="form-control" >
+                      <option value="">Service Provider</option>
+                      @foreach(User u in Model.myuser)
+                                    {
+                                        if (u.UserTypeId==2)
+                                        {
+                                            <option value="@u.FirstName">@u.FirstName @u.LastName</option>
+                                        }
+                                        
+                                    }
+                    </select>
+                  </div>
+                   <div class="col">
+                    <select id="status" class="form-control" >
+                      <option value="">Status</option>
+                      <option value="New">New</option>
+                      <option value="Pending">Pending</option>
+                      <option value="Completed">Completed</option>
+                      <option value="Cancelled">Cancelled</option>
+                    </select>
+                   </div>
+                   <div class="col">
+                    <span class="date-picker-calender">
+                    <img  src="~/assets/admin-calendar-blue.png">
+                    </span>
+                    <input  style="padding-left: 40px;"  class="form-control" id="date-picker5" placeholder="From Date" >
+                   </div>
+                   <div class="col">
+                    <span class="date-picker-calender">
+                    <img  src="~/assets/admin-calendar-blue.png">
+                    </span>
+                    <input  style="padding-left: 40px;"  class="form-control" id="date-picker6" placeholder="To Date"  >
+                   </div>
+                    <button  class="btn" id="search-btn" >Search</button>
+                  
+                    <button  class="btn " id="clear-btn">clear</button>
+                  
+                   </div>
+                  
+            </div>
+                
+            
+              
+            </div>
+            <div class="user-management-dt " style="overflow-x:auto;">
+              
+              <table class="datatable-um border row-border" id="admin-datatable">
+                <thead >
+                  <tr>
+                    
+                    <th>Service ID</th>
+                  <th>Service Date</th>
+                  <th>Customer Details</th>
+                  <th>Service Provider</th>
+                  <th>Payment</th>
+                  <th>Status</th>
+
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                  
+                      @foreach(ServiceRequest sr in Model.sr){
+                          var serviceid11=0;
+                                    var ratingid = 0;
+                                    var ratingidmodel = 0;
+                                    var sid = @sr.ServiceRequestId;
+                                    var sp_count = 0;
+                                    decimal sp_avg = 0;
+                                    <tr>
+                           <td ><p class="service-id">@sr.ServiceId</p></td>
+                           <td >
+                    <div class="row"><img class="calender" src="~/assets/calendar2.png">
+                      <p id="date" >@sr.ServiceStartDate.ToShortDateString()</p></div>
+                     <div class="row">
+                        <img class="clock" src="~/assets/layer-14.png">
+                        <p id="time">@sr.ServiceStartDate.ToString("HH:mm")-@sr.ServiceStartDate.AddHours(sr.ServiceHours).ToString("HH:mm")</p>
+                     </div> 
+                    
+                    </td>
+                    <td >
+                                    @foreach(User u in Model.myuser)
+                                    {
+                                        if(sr.UserId==u.UserId){
+                                             
+                                            <p id="customer-name">@u.FirstName @u.LastName</p>
+                                            
+                                            
+                                        }
+                                    }
+                                        @foreach(ServiceRequestAddress add in Model.sradd){
+                                            if (sr.ServiceRequestId == add.ServiceRequestId)
+                                            {
+                                                <div class="row">
+                                              <img class="house" src="~/assets/layer-15.png">
+                                              <p id="time">@add.AddressLine1,@add.AddressLine2<br/>@add.City-@add.PostalCode</p>
+                                           </div> 
+                                            }
+
+                                        }
+                                    </td>
+                                     @if(sr.ServiceProviderId != null)
+                                        {
+                                             <td >
+                                        <div class="row ">
+                                         @foreach(User u1 in Model.myuser){
+                                             if(sr.ServiceProviderId == u1.UserId)
+                                             {
+                                                   if (u1.UserProfilePicture != null)
+                                                   {
+                                                       <div class="avtar">
+                                                           <img alt="avtar"  src="@u1.UserProfilePicture">
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                          <div class="avtar">
+                                                               <img src='~/assets/avatar-hat.png'>
+                                                          </div>
+                                                     }
+                                                }
+                                           }
+                         
+                                        <div>
+                                                        @foreach(User u in Model.myuser){
+                                                            if(sr.ServiceProviderId == u.UserId)
+                                                            {
+                                                                  <p id="spname">@u.FirstName @u.LastName</p>
+                                                            }
+                                                        }
+
+                                                        @foreach (Rating rating in Model.myrate)
+                                    {
+                                        if (sr.ServiceProviderId == rating.RatingTo)
+                                        {
+                                            sp_count = sp_count + 1;
+                                            sp_avg = sp_avg + rating.Ratings;
+                                        }
+
+                                    }
+                                    @if (sp_count >= 1)
+                                    {
+                                        sp_avg = sp_avg / sp_count;
+                                        sp_avg = Convert.ToDecimal(String.Format("{0:0.00}", sp_avg));
+                                        var rand1 = new Random();
+                                              ratingid = rand1.Next(1000, 99999);
+                                    }
+                                     <div class="row star" onload="avgrating('@ratingid',@sp_avg)">
+                                        
+                                        <div id="@ratingid" style="z-index:0"></div>
+                                        <div class="ratingnum">@sp_avg</div>
+                                    </div>
+                                         
+                                      </div>
+                                    </div>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+                                        <td><p id="bill">€<span>@sr.TotalCost</span></p></td>
+                                    @if(sr.Status==2){
+                                         <td>
+                    <a class="align-items-center status2" href="#" title="Cancel"><p class="text-white">Cancelled</p></a>
+                    </td>
+                    <td></td>
+                                    }
+                                    else if(sr.Status==3){
+                                         <td>
+                      <a class="align-items-center status1" href="#" title="Cancel"><p class="text-white">Completed</p></a>
+                                        </td>
+                                        <td></td>
+                                    }
+                                    else if(sr.Status==1){
+                                        if (sr.ServiceProviderId != null)
+                                        {
+                                            <td>
+                  <a class="align-items-center pending-req" href="#" title="Cancel"><p class="text-white">Pending</p></a>
+                                            </td>
+                                             <td>
+                      <div class=" dropdown ">
+                        <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <div class="hello"><img  src="~/assets/group-38.png"></div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            @{
+                                 var rand = new Random();
+                                              serviceid11 = rand.Next(1000, 99999);
+                            }
+                          <a class="dropdown-item" onclick="editinfo(@serviceid11)" >Edit & Reschedule</a>
+                         <form asp-action="CancelSRbyCust">
+                             <input type="hidden" asp-for="Srid" value="@sr.ServiceRequestId">
+                              <button class="dropdown-item" >Cancel SR by Cust</button>
+                         </form>
+                          <form asp-action="CancelSRbySP">
+                             <input type="hidden" asp-for="Srid" value="@sr.ServiceRequestId">
+                          <button class="dropdown-item" >Cancel SR by SP </button>
+                          </form>
+                          
+                        </div>
+                      </div>
+                      </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                          <a class="align-items-center new-req" href="#" title="Cancel"><p class="text-white">New</p></a>
+                                          </td>
+                                           <td>
+                      <div class=" dropdown ">
+                        <a class=" dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <div class="hello"><img  src="~/assets/group-38.png"></div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            @{
+                                 var rand = new Random();
+                                              serviceid11 = rand.Next(1000, 99999);
+                            }
+                          <a class="dropdown-item" onclick="editinfo(@serviceid11)" >Edit & Reschedule</a>
+                         
+                           <form asp-action="CancelSRbyCust">
+                             <input type="hidden" asp-for="Srid" value="@sr.ServiceRequestId">
+                              <button class="dropdown-item" >Cancel SR by Cust</button>
+                         </form>
+                          
+                          
+                          
+                        </div>
+                      </div>
+                      </td>
+                                        }
+                                    }
+
+                                     </tr>
+                                   <div id="@serviceid11" class="modal ">
+            
+      <div class="modal-content animate edit-address" >
+          <p class="login">Edit Service Request <i class="fa fa-close float-right" 
+              onclick="document.getElementById(@serviceid11).style.display='none'"></i></p>
+              
+                
+            <form asp-action="editsrbyadmin">
+                 <div class="container">
+              <div class="form-row">
+                
+                <div class="col">
+                  <p class="formlabel1">Date</p>
+                  <span class="date-picker-calender">
+                  <img  src="~/assets/admin-calendar-blue.png">
+                  </span>
+                  <input asp-for="date1" style="padding-left: 40px;" value="@sr.ServiceStartDate.ToShortDateString()" class="form-control" id="txtServiceStartDate"  placeholder="DD/MM/YYYY"  readonly="">
+                             </div>
+                <div class="col">
+                  <p class="formlabel1">Time</p>
+                  <select asp-for="time1" class=" form-control " id="timeselectadmin" formcontrolname="ServiceTime">
+                      <option  value=@sr.ServiceStartDate.ToString("HH:mm")>@sr.ServiceStartDate.ToString("HH:mm")</option>
+                    <option  value="08:00 am">8:00</option>
+                    <option  value="08:30 am">8:30</option>
+                    <option  value="09:00 am">9:00</option>
+                    <option  value="09:30 am">9:30</option>
+                    <option  value="10:00 am">10:00</option>
+                    <option  value="10:30 am">10:30</option>
+                    <option  value="11:00 am">11:00</option>
+                    <option  value="11:30 am">11:30</option>
+                    <option  value="12:00 pm">12:00</option>
+                    <option  value="12:30 pm">12:30</option>
+                    <option  value="01:00 pm">13:00</option>
+                    <option  value="01:30 pm">13:30</option>
+                    <option  value="02:00 pm">14:00</option>
+                    <option  value="02:30 pm">14:30</option>
+                    <option  value="03:00 pm">15:00</option>
+                    <option  value="03:30 pm">15:30</option>
+                    <option  value="04:00 pm">16:00</option>
+                    <option  value="04:30 pm">16:30</option>
+                    <option  value="05:00 pm">17:00</option>
+                    <option  value="05:30 pm">17:30</option>
+                    <option  value="06:00 pm">18:00</option>
+                  </select>
+                </div>
+              </div>
+               @foreach(ServiceRequestAddress add in Model.sradd){
+                                                if (sr.ServiceRequestId==add.ServiceRequestId)
+                                                {
+                                                    <div class="form-row mt-2">
+                              <div class="col ">
+                                <p class="formlabel">Street Name</p>
+                            <input type="text" asp-for="Add1" value="@add.AddressLine2" class="form-control add-form-input" placeholder="Street Name"  >
+                
+                          </div>
+                          <div class="col">
+                            <p class="formlabel">House Number</p>
+                            <input type="text" asp-for="Add2" value="@add.AddressLine1" class="form-control add-form-input" placeholder="House Number"  >
+                
+                          </div>
+                          </div>
+                           <div class="form-row">
+                              <div class="col">
+                                <p class="formlabel">Postal code</p>
+                            <input type="text" asp-for="zipcode" value="@add.PostalCode" class="form-control add-form-input"  placeholder="Postal Code"  >
+                
+                          </div>
+                          <div class="col">
+                            <p class="formlabel">City</p>
+                            <input type="text" asp-for="City"value="@add.City" class="form-control add-form-input"  placeholder="City"  >
+                  
+                            <input type="hidden" asp-for="Srid" value="@sr.ServiceRequestId">
+                
+                          </div>
+                          </div>
+                                                }
+                                            }
+                                            
+               
+            <div class="container text-center">
+             
+              <button type="submit" style="width: auto!important;" class="btn " id="search-btn1" >Update</button>
+           </div>
+             </div>
+            </form>
+          
+              
+      </div>
+    </div>
+                                }
+                   
+                   
+              
+                              
+
+                </tbody>
+                </table>
+            </div>
+            <p id="admin-footer">©2022 Helperland. All rights reserved.</p>
+              </div>
+              
+            </div>
+            </div>
+            
+          </div>
+           <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+           <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+           <script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
+          
+                    <script type="text/javascript" >
+                      
+                      jQuery(document).ready(function() {
+                        
+                       $('.admin-wrapper .main-wrapper .datatable-um').DataTable(
+                     {
+                       searching: true,
+                       "dom": 'tlp',
+                       "bInfo" : false,
+                       language: {
+                           paginate: {
+                             next: '<i class="fa fa-fw fa-angle-right">',
+                             previous: '<i class="fa fa-fw fa-angle-left">' ,
+                             
+                           }
+                         },
+                         drawCallback: function(settings) {
+                  $('div[onload]').trigger('onload');
+            },
+                         'columnDefs': [ {
+             
+                           'targets': [6], /* column index */
+                       
+                           'orderable': false, /* true or false */
+                       
+                         }],
+                       
+                         
+                     }
+                     );
+                     var minDate, maxDate;
+ 
+                                  // Custom filtering function which will search data in column four between two values
+                                  $.fn.dataTable.ext.search.push(
+                                      function( settings, data, dataIndex ) {
+                                          var min = minDate.val();
+                                          var max = maxDate.val();
+                                          
+                                          const a= data[1].trim();
+                                          
+                                          const myArray = a.split(" ");
+                                          
+                                          var parts= (myArray[0]).split("/");
+                                          var date = new Date(parseInt(parts[2], 10),
+                                                    parseInt(parts[1], 10) -1,
+                                                    parseInt(parts[0], 10));
+                                          if (
+                                              ( min === null && max === null ) ||
+                                              ( min === null && date <= max ) ||
+                                              ( min <= date   && max === null ) ||
+                                              ( min <= date   && date <= max )
+                                          ) {
+                                              return true;
+                                          }
+                                          return false;
+                                      }
+                                  );
+                                  minDate = new DateTime($('#date-picker5'), {
+                      format: 'DD/MM/YYYY'
+                  });
+                  maxDate = new DateTime($('#date-picker6'), {
+                      format: 'DD/MM/YYYY'
+                  });
+                     $('#button_export_excel').click(() => {
+                    $('.admin-wrapper .main-wrapper .datatable-um').DataTable().buttons(0,0).trigger()
+                });
+             
+                     var count1=0;
+                    $('.admin-wrapper .main-wrapper .user-management-dt  .datatable-um  tr').each(function(){
+                      count1++;
+                    });
+                    $("label").append(" Total Record:"+(count1+1));
+                    var oTable=$("#admin-datatable").DataTable();
+                    
+                
+                
+                    $("#search-btn").click(function(){
+                      
+                      oTable.column([0]).search($("#s-id").val()).draw();
+                      oTable.column([2]).search($("#mycustt").val()).draw();
+                    oTable.column([3]).search($("#myspp").val()).draw();
+                    oTable.column([5]).search($("#status").val()).draw();
+                    oTable.draw();
+                     }
+                     );
+                     $('#clear-btn').click(function () {
+                      
+                      location.reload();
+          
+                    });
+                    
+                    
+                   });
+                  
+                   jQuery(document).ready(function() {
+        $('div[onload]').trigger('onload');
+    });
+    
+    function avgrating(id,num) {
+     jQuery(document).ready(function() {
+           
+            $("#"+id).rateYo({
+                rating: num,
+                halfStar: true,
+                readOnly: true,
+                starWidth: "20px"
+            });
+        });
+    }
+    function editinfo(id){
+                       $(document).ready(function () {
+          
+               document.getElementById(id).style.display='block';
+            
+        });
+                    }
+                    
+                 </script>
+

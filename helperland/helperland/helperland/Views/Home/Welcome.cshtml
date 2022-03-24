@@ -28,6 +28,9 @@
   
         <form class="modal-content animate" asp-action="RescheduleSR">
           <input type="hidden" asp-for="Cancelrequestid" id="serviceReqId"/>
+          <input type="hidden" id="serviceproid" asp-for="serviceproid" />
+           
+          <input type="hidden" id="endtime1" asp-for="endtime" />
             <p class="login">Reschedule Service Request <i class="fa fa-close float-right" 
                 onclick="document.getElementById('reschedule').style.display='none'"></i></p>
           <div class="container">
@@ -136,7 +139,14 @@
                   <p class="text1" >Current Service Requests</p>
                 <a class="ml-auto export " id="data" asp-action="BookService" asp-controller="Home" title="Export">Add New Service Request</a>
                 </div>
-                
+                <div role="alert" class="alert alert-success " style="background:rgba(255,0,0, 0.5);display:none;" id="closebtn5">
+                      <button  class="close" type="button" onclick="document.getElementById('closebtn5').style.display='none'">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                      <span class="break-word" style="color:white" >Another service request has been assigned to the 
+                          service provider on @TempData["date"] from @TempData["s"] to @TempData["e"]. Either choose another date or pick up a different time slot.
+                        </span>
+                    </div>
                 <div class="datatable-style" style="overflow-x:auto;">
                 <table class="datatable border row-border">
                   <thead >
@@ -234,8 +244,17 @@
                                       <td><p class="bill">€<span>@sr.TotalCost</span></p></td>
                      
                                       <td>
-                                        <a class="align-items-center  reschedule" onclick="reschedule(@sid)" title="Reschedule">Reschedule</a>
-                                        <a class="align-items-center " id="cancel-btn" onclick="cancel(@sid)"  title="Cancel">Cancel</a>
+                                           @if(sr.ServiceProviderId>0){
+                                               
+                                                <a class="align-items-center  reschedule" 
+                                               onclick="reschedulefun1(@sid,@sr.ServiceProviderId,@sr.ServiceHours)" title="Reschedule">Reschedule</a>
+                                                    
+                                          }
+                                           else
+                                            {
+                                                 <a class="align-items-center  reschedule" onclick="reschedulefun1(@sid,0)" title="Reschedule">Reschedule</a>
+                                            }
+                                         <a class="align-items-center " id="cancel-btn" onclick="cancel(@sid)"  title="Cancel">Cancel</a>
                                         </td>
                                     </tr> 
                                    
@@ -326,10 +345,18 @@
                                                     
                                             </span>
                                           <div class="">
-
+                                              @if(sr.ServiceProviderId>0){
+                                               
+                                                <a class="align-items-center" id="reschedule1"
+                                               onclick="reschedulefun1(@sid,@sr.ServiceProviderId,@sr.ServiceHours)" title="Reschedule"> <img src="~/assets/reschedule-icon-small.png">Reschedule</a>
+                                                    
+                                          }
+                                           else
+                                            {
+                                                 <a class="align-items-center" id="reschedule1" onclick="reschedulefun1(@sid,0)" title="Reschedule"> <img src="~/assets/reschedule-icon-small.png">Reschedule</a>
+                                            }
               
-                                            <a class="align-items-center  " id="reschedule1" onclick="reschedule(@sid)" title="Rate">
-                                                <img src="~/assets/reschedule-icon-small.png">Reschedule</a>
+                                           
                                                     <a class="align-items-center " id="cancel-btn" onclick="cancel(@sid)" title="Cancel">
                                                          <img src="~/assets/close-icon-small.png">Cancel</a>
                                           </div>
@@ -390,12 +417,14 @@
           });
           $("label").append(" Total Record:"+(count+1));
          });
-        function reschedule(id){
+        function reschedulefun1(id,spid,end){
             document.getElementById(id).style.display='none';
             document.getElementById('reschedule').style.display='block';
             document.getElementById('serviceReqId').value=id;
-           
-        }
+            document.getElementById('serviceproid').value=spid;
+            document.getElementById('endtime1').value=end;
+            
+         }
         function cancel(id){
             document.getElementById('cancel').style.display='block';
             document.getElementById('serviceReqId1').value=id;
@@ -422,4 +451,10 @@
        
     }
     </script>
+     @if(TempData["conflict11"]  !=null){
+        <script>
+            $("#closebtn5").show().delay(10000).fadeOut();
+        </script>
+       
+    }
     <script src="~/js/site.js"></script>

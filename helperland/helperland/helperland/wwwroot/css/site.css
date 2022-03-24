@@ -1859,8 +1859,8 @@ label {
 }
 
     .admin-wrapper .main-wrapper .user-management-dt .datatable-um .avtar img {
-        width: 29px;
-        height: 19px;
+        width: 40px;
+        height: 40px;
         margin-left: 0px;
         margin-top: 0px;
     }
@@ -1977,6 +1977,14 @@ label {
 }
 /*made responsive for tablet view*/
 @media (max-width: 993px) and (min-width: 763px) {
+    #admin-navbar {
+        background-color: #1fb6ff;
+        height: auto;
+    }
+
+    #admin-user-img {
+        display: none;
+    }
     .service-history .history-container .datatable-style .datatable .clock {
         display: none;
     }
@@ -2519,6 +2527,14 @@ label {
 
 /*made responsive for mobile view*/
 @media (max-width: 763px) and (min-width: 10px) {
+    #admin-navbar {
+        background-color: #1fb6ff;
+        height: auto;
+    }
+
+    #admin-user-img {
+        display: none;
+    }
     .service-history .history-container .datatable-style .datatable .clock {
         display: none;
     }
@@ -4490,8 +4506,8 @@ input[type="password"] {
 }
 
 .modal-content .avtar img {
-  width: 29px;
-  height: 19px;
+  width: 44px;
+  height: 40px;
   margin-left: 0px;
   margin-top: 0px;
 }
@@ -4710,3 +4726,64 @@ input[type="password"] {
         color: #67b644;
         font-weight: 400;
     }
+
+/**/
+#bill {
+    color: #1d7a8c;
+    font-size: 20px;
+    margin-left: 20px;
+    font-weight: 700;
+}
+
+.edit-address .formlabel1 {
+    font-weight: 700;
+    color: #646464;
+    font-size: 16px;
+    margin-bottom: 0px;
+}
+
+.edit-address .formlabel {
+    font-weight: 700;
+    color: #646464;
+    font-size: 16px;
+}
+
+#timeselectadmin {
+    margin-top: 0px;
+}
+
+.edit-address .date-picker-calender img {
+    width: 19px;
+    height: 20px;
+}
+
+.edit-address .date-picker-calender {
+    position: absolute;
+    margin-left: 11px;
+    margin-top: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#search-btn1 {
+    display: inline-block;
+    background-color: #1fb6ff;
+    border-radius: 5px;
+    border: 1px solid #ffffff;
+    height: 46px;
+    line-height: 32px;
+    padding: 0 20px;
+    color: #fff;
+    margin-top: 1px;
+    margin-bottom: 19px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s;
+    min-width: 100%;
+    text-align: center;
+}
+
+#notitable tbody tr:first-child td {
+    border-top: 1px solid #ddd;
+}

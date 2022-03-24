@@ -99,12 +99,69 @@ namespace helperland.Controllers
         [HttpPost]
         public IActionResult RescheduleSR(CustomerSideModel model)
         {
-            ServiceRequest serviceRequest = _helperlandDBContext.ServiceRequests.Where(x => x.ServiceRequestId == model.
+            if (model.serviceproid == 0)
+            {
+                ServiceRequest serviceRequest = _helperlandDBContext.ServiceRequests.Where(x => x.ServiceRequestId == model.
+                Cancelrequestid).FirstOrDefault();
+                serviceRequest.ServiceStartDate = DateTime.Parse(model.date + " " + model.time);
+                _helperlandDBContext.ServiceRequests.Update(serviceRequest);
+                _helperlandDBContext.SaveChanges();
+                return RedirectToAction("Welcome");
+            }
+            else
+            {
+                var x = from ServiceRequest in _helperlandDBContext.ServiceRequests
+                        where ServiceRequest.ServiceProviderId == model.serviceproid
+                        && ServiceRequest.Status == 1 && ServiceRequest.ServiceRequestId != model.Cancelrequestid
+                        select ServiceRequest;
+                var mstartdate = DateTime.Parse(model.date + " " + model.time);
+                var menddate = mstartdate.AddHours(model.endtime);
+                var j = 0;
+                foreach (var servicedatecheck in x)
+                {
+                    var endtimefromdb = servicedatecheck.ServiceStartDate.AddHours(servicedatecheck.ServiceHours);
+                    if (endtimefromdb >= mstartdate && endtimefromdb < menddate)
+                    {
+                        j = 1;
+                    }
+
+                    else if (menddate >= servicedatecheck.ServiceStartDate && mstartdate < endtimefromdb)
+                    {
+                        j = 1;
+                    }
+                    else if (mstartdate >= servicedatecheck.ServiceStartDate && menddate <= endtimefromdb)
+                    {
+                        j = 1;
+                    }
+                    else if (servicedatecheck.ServiceStartDate >= mstartdate && endtimefromdb <= menddate)
+                    {
+                        j = 1;
+                    }
+                    if (j == 1)
+                    {
+                        TempData["date"] = servicedatecheck.ServiceStartDate.ToShortDateString();
+                        TempData["s"] = servicedatecheck.ServiceStartDate.ToString("HH:mm");
+                        TempData["e"] = servicedatecheck.ServiceStartDate.AddHours(servicedatecheck.ServiceHours).ToString("HH:mm");
+                        break;
+                    }
+                }
+                if (j == 0)
+                {
+                    ServiceRequest serviceRequest = _helperlandDBContext.ServiceRequests.Where(x => x.ServiceRequestId == model.
             Cancelrequestid).FirstOrDefault();
-            serviceRequest.ServiceStartDate = DateTime.Parse(model.date + " " + model.time);
-            _helperlandDBContext.ServiceRequests.Update(serviceRequest);
-            _helperlandDBContext.SaveChanges();
-            return RedirectToAction("Welcome");
+                    serviceRequest.ServiceStartDate = DateTime.Parse(model.date + " " + model.time);
+                    _helperlandDBContext.ServiceRequests.Update(serviceRequest);
+                    _helperlandDBContext.SaveChanges();
+
+                }
+                else if (j == 1)
+                {
+                    TempData["conflict11"] = "conflict";
+
+
+                }
+                return RedirectToAction("Welcome");
+            }
         }
         [HttpPost]
         public IActionResult cancelrequest(CustomerSideModel model)
@@ -320,8 +377,87 @@ namespace helperland.Controllers
         }
         public IActionResult WelcomeForAdmin()
         {
+            AdminSideModel model = new AdminSideModel();
+            model.myuser = from u in _helperlandDBContext.Users
+                           where u.UserTypeId != 3
+                           select u;
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult activateuser(AdminSideModel model)
+        {
+            User u = _helperlandDBContext.Users.Where(x => x.UserId == model.iduser).FirstOrDefault();
+            u.IsApproved = true;
+            u.ModifiedBy = 3;
+            u.ModifiedDate = DateTime.Now;
+            _helperlandDBContext.Users.Update(u);
+            _helperlandDBContext.SaveChanges();
+            return RedirectToAction("WelcomeForAdmin");
+        }
+        [HttpPost]
+        public IActionResult deactivateuser(AdminSideModel model)
+        {
+            User u = _helperlandDBContext.Users.Where(x => x.UserId == model.iduser).FirstOrDefault();
+            u.IsApproved = false;
+            u.ModifiedBy = 3;
+            u.ModifiedDate = DateTime.Now;
+            _helperlandDBContext.Users.Update(u);
+            _helperlandDBContext.SaveChanges();
+            return RedirectToAction("WelcomeForAdmin");
+        }
+        public IActionResult ServiceRequestAdmin(AdminSideModel model)
+        {
+            model.sr = from sr in _helperlandDBContext.ServiceRequests select sr;
+            model.sradd = from add in _helperlandDBContext.ServiceRequestAddresses select add;
+            model.myuser = from user in _helperlandDBContext.Users select user;
+            model.myrate = from rate in _helperlandDBContext.Ratings select rate;
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult editsrbyadmin(AdminSideModel m)
+        {
+            ServiceRequest sr=_helperlandDBContext.ServiceRequests.Where(x => x.ServiceRequestId == m.Srid).FirstOrDefault();
+            sr.ServiceStartDate= DateTime.Parse(m.date1 + " " + m.time1);
+            sr.ModifiedBy = 3;
+            sr.ModifiedDate = DateTime.Now;
+            _helperlandDBContext.ServiceRequests.Update(sr);
+            _helperlandDBContext.SaveChanges();
+            ServiceRequestAddress serviceRequestAddress = _helperlandDBContext.ServiceRequestAddresses.Where(x => x.ServiceRequestId == m.Srid).FirstOrDefault();
+            serviceRequestAddress.AddressLine1 = m.Add2;
+            serviceRequestAddress.AddressLine2 = m.Add1;
+            serviceRequestAddress.City = m.City;
             
-            return View();
+            serviceRequestAddress.PostalCode = m.zipcode;
+            
+            _helperlandDBContext.ServiceRequestAddresses.Update(serviceRequestAddress);
+            _helperlandDBContext.SaveChanges();
+            return RedirectToAction("ServiceRequestAdmin");
+
+
+        }
+        [HttpPost]
+        public IActionResult CancelSRbyCust(AdminSideModel m)
+        {
+            ServiceRequest sr = _helperlandDBContext.ServiceRequests.Where(x => x.ServiceRequestId == m.Srid).FirstOrDefault();
+            sr.Status = 2;
+           
+            sr.ModifiedBy = 3;
+            sr.ModifiedDate = DateTime.Now;
+            _helperlandDBContext.ServiceRequests.Update(sr);
+            _helperlandDBContext.SaveChanges();
+            return RedirectToAction("ServiceRequestAdmin");
+        }
+        public IActionResult CancelSRbySP(AdminSideModel m)
+        {
+            ServiceRequest sr = _helperlandDBContext.ServiceRequests.Where(x => x.ServiceRequestId == m.Srid).FirstOrDefault();
+            sr.Status = 1;
+            sr.ServiceProviderId = null;
+            sr.SpacceptedDate = null;
+            sr.ModifiedBy = 3;
+            sr.ModifiedDate = DateTime.Now;
+            _helperlandDBContext.ServiceRequests.Update(sr);
+            _helperlandDBContext.SaveChanges();
+            return RedirectToAction("ServiceRequestAdmin");
         }
         public IActionResult ServiceHistory()
         {

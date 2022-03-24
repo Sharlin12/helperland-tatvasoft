@@ -23,5 +23,8 @@ namespace helperland.Models
         public IEnumerable<FavoriteAndBlocked> favoriteAndBlockeds1 { get; set; }
         public int spid { get; set; }
         public int userid { get; set; }
+        public int serviceproid { get; set; }
+
+        public float endtime { get; set; }
     }
 }

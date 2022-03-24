@@ -281,3 +281,5 @@ D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcor
 D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\RatingForSp.cshtml.g.cs
 D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\blockcustomer.cshtml.g.cs
 D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\SPsettings.cshtml.g.cs
+D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutForAdmin.cshtml.g.cs
+D:\Study\internship\helperland\helperland\helperland\helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\ServiceRequestAdmin.cshtml.g.cs

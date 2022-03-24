@@ -80,7 +80,9 @@ namespace helperland.Controllers
                         ViewBag.Message = String.Format("Invalid Login");
                         return View("~/Views/Home/Index.cshtml");
                     }
-                    return RedirectToAction("WelcomeForAdmin", "Home");
+                    HttpContext.Session.SetInt32("AdminId", details.FirstOrDefault().UserId);
+                    HttpContext.Session.SetString("Adminfname", details.FirstOrDefault().FirstName);
+                    return RedirectToAction("ServiceRequestAdmin", "Home");
                 }
                 else
                 {

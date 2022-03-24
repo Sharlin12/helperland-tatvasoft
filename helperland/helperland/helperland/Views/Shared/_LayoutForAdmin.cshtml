@@ -1,0 +1,69 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
+<head>
+   <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- rate -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+ <!-- rateyo-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+     <link href="~/css/site.css" rel="stylesheet" type="text/css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+
+    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+   <link rel="icon" type="image/png" sizes="16x16" href="~/assets/favicon-16x16.png">
+   <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css">
+    </head>
+    <body>
+  <!--nav bar-->
+      <div class="my-navbar d-flex align-items-center" >
+        <nav class="navbar navbar-expand-lg  fixed-top align-items-center" id="admin-navbar">
+            <a href="#" title="helperland"  id="helperland">helperland</a>
+          <button class="navbar-toggler" style="border: none;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="text-white fa fa-bars"></i>
+            
+            <!--in mobile layout made threelines icon white-->
+          </button>
+        
+          <div class="collapse navbar-collapse align-items-center" id="navbarSupportedContent">
+            <ul class="navbar-nav align-items-center  ml-auto ">
+               <li class="nav-item " >
+                   <a class="nav-link nav-img" href="#" title="Settings" id="admin-user-img"><img src="~/assets/admin-user.png"></a>
+                </li>
+                <li class="nav-item" id="admin-name">
+                    <a class="nav-link nav-text" href="#" >@HttpContextAccessor.HttpContext.Session.GetString("Adminfname")
+                        </a>
+                </li>
+              
+                 <li class="nav-item" id="logout">
+                    <a class="nav-link nav-img" asp-controller="Home" asp-action="logout" title="Settings"><img src="~/assets/logout.png"></a>
+                </li>
+            </ul>
+             
+          </div>
+        </nav>
+    </div>
+    <main role="main" >
+            @RenderBody()
+    </main>
+    </body>
+   </html>
+   
+
