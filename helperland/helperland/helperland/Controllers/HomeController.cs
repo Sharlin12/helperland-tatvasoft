@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace helperland.Controllers
@@ -152,7 +153,19 @@ namespace helperland.Controllers
                     serviceRequest.ServiceStartDate = DateTime.Parse(model.date + " " + model.time);
                     _helperlandDBContext.ServiceRequests.Update(serviceRequest);
                     _helperlandDBContext.SaveChanges();
-
+                    User u = _helperlandDBContext.Users.Where(x => x.UserId == serviceRequest.ServiceProviderId).FirstOrDefault();
+                    MailMessage mail = new MailMessage();
+                    mail.To.Add(u.Email);
+                    mail.From = new MailAddress("helperland12@gmail.com");
+                    mail.Subject = "Reschedule Service Request by Customer";
+                    mail.Body = "Service Request " + serviceRequest.ServiceId + " has been rescheduled by customer. New date and time are " + DateTime.Parse(model.date + " " + model.time) + ".";
+                    mail.IsBodyHtml = true;
+                    SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                    smtp.EnableSsl = true;
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new System.Net.NetworkCredential("helperland12@gmail.com", "helperlandlogin12");
+                    smtp.Send(mail);
+                    smtp.Dispose();
                 }
                 else if (j == 1)
                 {
@@ -172,7 +185,22 @@ namespace helperland.Controllers
             serviceRequest.Status = 2;
             _helperlandDBContext.ServiceRequests.Update(serviceRequest);
             _helperlandDBContext.SaveChanges();
-
+            if (serviceRequest.ServiceProviderId > 0)
+            {
+                User u = _helperlandDBContext.Users.Where(x => x.UserId == serviceRequest.ServiceProviderId).FirstOrDefault();
+                MailMessage mail = new MailMessage();
+                mail.To.Add(u.Email);
+                mail.From = new MailAddress("helperland12@gmail.com");
+                mail.Subject = "Cancelled Service Request by Customer";
+                mail.Body = "Service Request " + serviceRequest.ServiceId + " has been cancelled by customer.";
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential("helperland12@gmail.com", "helperlandlogin12");
+                smtp.Send(mail);
+                smtp.Dispose();
+            }
             return RedirectToAction("Welcome");
 
         }
@@ -311,6 +339,29 @@ namespace helperland.Controllers
                     serviceRequest.Status = 1;
                     _helperlandDBContext.ServiceRequests.Update(serviceRequest);
                     _helperlandDBContext.SaveChanges();
+                    var spid1 = serviceRequest.ServiceProviderId;
+                    var spinfo = from u in _helperlandDBContext.Users
+                                 where u.UserId != spid1 && u.ZipCode == serviceRequest.ZipCode && u.UserTypeId == 2
+                                 select u;
+                    if (spinfo != null)
+                    {
+                        foreach (var email in spinfo)
+                        {
+                            MailMessage mail = new MailMessage();
+                            mail.To.Add(email.Email);
+                            mail.From = new MailAddress("helperland12@gmail.com");
+                            mail.Subject = "Service request is not available";
+                            mail.Body = "Service Request " + serviceRequest.ServiceId + " is no more available now!";
+                            mail.IsBodyHtml = true;
+                            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                            smtp.EnableSsl = true;
+                            smtp.UseDefaultCredentials = false;
+                            smtp.Credentials = new System.Net.NetworkCredential("helperland12@gmail.com", "helperlandlogin12");
+                            smtp.Send(mail);
+                            smtp.Dispose();
+                        }
+                    }
+                    
                     return RedirectToAction("WelcomeForSp");
                 }
                 else
@@ -429,8 +480,55 @@ namespace helperland.Controllers
             
             serviceRequestAddress.PostalCode = m.zipcode;
             
+           
             _helperlandDBContext.ServiceRequestAddresses.Update(serviceRequestAddress);
             _helperlandDBContext.SaveChanges();
+            User u = _helperlandDBContext.Users.Where(x => x.UserId == sr.UserId).FirstOrDefault();
+            User u1 = _helperlandDBContext.Users.Where(x => x.UserId == sr.ServiceProviderId).FirstOrDefault();
+            if (sr.ServiceProviderId > 0)
+            {
+
+                MailMessage mail = new MailMessage();
+                mail.To.Add(u.Email);
+                mail.From = new MailAddress("helperland12@gmail.com");
+                mail.Subject = "Updated By Admin";
+                mail.Body = "Service Request is " + sr.ServiceId + " is updated by admin.";
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential("helperland12@gmail.com", "helperlandlogin12");
+                smtp.Send(mail);
+                smtp.Dispose();
+                MailMessage mail1 = new MailMessage();
+                mail1.To.Add(u1.Email);
+                mail1.From = new MailAddress("helperland12@gmail.com");
+                mail1.Subject = "Updated By Admin";
+                mail1.Body = "Service Request is " + sr.ServiceId + " is updated by admin.";
+                mail1.IsBodyHtml = true;
+                SmtpClient smtp1 = new SmtpClient("smtp.gmail.com", 587);
+                smtp1.EnableSsl = true;
+                smtp1.UseDefaultCredentials = false;
+                smtp1.Credentials = new System.Net.NetworkCredential("helperland12@gmail.com", "helperlandlogin12");
+                smtp1.Send(mail1);
+                smtp1.Dispose();
+
+            }
+            else
+            {
+                MailMessage mail = new MailMessage();
+                mail.To.Add(u.Email);
+                mail.From = new MailAddress("helperland12@gmail.com");
+                mail.Subject = "Updated By Admin";
+                mail.Body = "Service Request is "+sr.ServiceId+" is updated by admin.";
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential("helperland12@gmail.com", "helperlandlogin12");
+                smtp.Send(mail);
+                smtp.Dispose();
+            }
             return RedirectToAction("ServiceRequestAdmin");
 
 
@@ -445,6 +543,53 @@ namespace helperland.Controllers
             sr.ModifiedDate = DateTime.Now;
             _helperlandDBContext.ServiceRequests.Update(sr);
             _helperlandDBContext.SaveChanges();
+            User u = _helperlandDBContext.Users.Where(x => x.UserId == sr.UserId).FirstOrDefault();
+            User u1 = _helperlandDBContext.Users.Where(x => x.UserId == sr.ServiceProviderId).FirstOrDefault();
+            if (sr.ServiceProviderId > 0)
+            {
+
+                MailMessage mail = new MailMessage();
+                mail.To.Add(u.Email);
+                mail.From = new MailAddress("helperland12@gmail.com");
+                mail.Subject = "Cancelled By Admin";
+                mail.Body = "Service Request is " + sr.ServiceId + " is cancelled by admin from customer.";
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential("helperland12@gmail.com", "helperlandlogin12");
+                smtp.Send(mail);
+                smtp.Dispose();
+                MailMessage mail1 = new MailMessage();
+                mail1.To.Add(u1.Email);
+                mail1.From = new MailAddress("helperland12@gmail.com");
+                mail1.Subject = "Cancelled By Admin";
+                mail1.Body = "Service Request is " + sr.ServiceId + " is cancelled by admin from customer.";
+                mail1.IsBodyHtml = true;
+                SmtpClient smtp1 = new SmtpClient("smtp.gmail.com", 587);
+                smtp1.EnableSsl = true;
+                smtp1.UseDefaultCredentials = false;
+                smtp1.Credentials = new System.Net.NetworkCredential("helperland12@gmail.com", "helperlandlogin12");
+                smtp1.Send(mail1);
+                smtp1.Dispose();
+
+            }
+            else
+            {
+                MailMessage mail = new MailMessage();
+                mail.To.Add(u.Email);
+                mail.From = new MailAddress("helperland12@gmail.com");
+                mail.Subject = "Cancelled By Admin";
+                mail.Body = "Service Request is " + sr.ServiceId + " is cancelled by admin from customer.";
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential("helperland12@gmail.com", "helperlandlogin12");
+                smtp.Send(mail);
+                smtp.Dispose();
+            }
+
             return RedirectToAction("ServiceRequestAdmin");
         }
         public IActionResult CancelSRbySP(AdminSideModel m)
@@ -457,6 +602,52 @@ namespace helperland.Controllers
             sr.ModifiedDate = DateTime.Now;
             _helperlandDBContext.ServiceRequests.Update(sr);
             _helperlandDBContext.SaveChanges();
+            User u = _helperlandDBContext.Users.Where(x => x.UserId == sr.UserId).FirstOrDefault();
+            User u1 = _helperlandDBContext.Users.Where(x => x.UserId == sr.ServiceProviderId).FirstOrDefault();
+            if (sr.ServiceProviderId > 0)
+            {
+
+                MailMessage mail = new MailMessage();
+                mail.To.Add(u.Email);
+                mail.From = new MailAddress("helperland12@gmail.com");
+                mail.Subject = "Cancelled By Admin";
+                mail.Body = "Service Request is " + sr.ServiceId + " is cancelled by admin from service provider.";
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential("helperland12@gmail.com", "helperlandlogin12");
+                smtp.Send(mail);
+                smtp.Dispose();
+                MailMessage mail1 = new MailMessage();
+                mail1.To.Add(u1.Email);
+                mail1.From = new MailAddress("helperland12@gmail.com");
+                mail1.Subject = "Cancelled By Admin";
+                mail1.Body = "Service Request is " + sr.ServiceId + " is cancelled by admin from service provider.";
+                mail1.IsBodyHtml = true;
+                SmtpClient smtp1 = new SmtpClient("smtp.gmail.com", 587);
+                smtp1.EnableSsl = true;
+                smtp1.UseDefaultCredentials = false;
+                smtp1.Credentials = new System.Net.NetworkCredential("helperland12@gmail.com", "helperlandlogin12");
+                smtp1.Send(mail1);
+                smtp1.Dispose();
+
+            }
+            else
+            {
+                MailMessage mail = new MailMessage();
+                mail.To.Add(u.Email);
+                mail.From = new MailAddress("helperland12@gmail.com");
+                mail.Subject = "Cancelled By Admin";
+                mail.Body = "Service Request is " + sr.ServiceId + " is cancelled by admin from service provider.";
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential("helperland12@gmail.com", "helperlandlogin12");
+                smtp.Send(mail);
+                smtp.Dispose();
+            }
             return RedirectToAction("ServiceRequestAdmin");
         }
         public IActionResult ServiceHistory()
@@ -1142,6 +1333,28 @@ namespace helperland.Controllers
                 _helperlandDBContext.SaveChanges();
             }
             ViewBag.serviceid = serviceid;
+            
+            var spinfo = from u in _helperlandDBContext.Users
+                         where u.ZipCode == sr.ZipCode && u.UserTypeId == 2
+                         select u;
+            if (spinfo != null)
+            {
+                foreach (var email in spinfo)
+                {
+                    MailMessage mail = new MailMessage();
+                    mail.To.Add(email.Email);
+                    mail.From = new MailAddress("helperland12@gmail.com");
+                    mail.Subject = "New Service request is available";
+                    mail.Body = "New Service Request " + sr.ServiceId + " is available now!";
+                    mail.IsBodyHtml = true;
+                    SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                    smtp.EnableSsl = true;
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new System.Net.NetworkCredential("helperland12@gmail.com", "helperlandlogin12");
+                    smtp.Send(mail);
+                    smtp.Dispose();
+                }
+            }
             return View("bookservice");
         
             
