@@ -81,6 +81,7 @@ namespace helperland.Controllers
 
                 _helperlandDBContext.Users.Add(myuser);
                 _helperlandDBContext.SaveChanges();
+                HttpContext.Session.SetInt32("CustomerId", myuser.UserId);
                 HttpContext.Session.SetString("Customerfname", myuser.FirstName);
                 return RedirectToAction("Welcome", "Home");
 
@@ -392,16 +393,16 @@ namespace helperland.Controllers
            
             if (HttpContext.Session.GetInt32("SPId") != null)
             {
-
+                User abc = _helperlandDBContext.Users.Where(x => x.UserId == HttpContext.Session.GetInt32("SPId")).FirstOrDefault();
                 var x = from User in _helperlandDBContext.Users
                         where User.UserId == HttpContext.Session.GetInt32("SPId")
-                        select User.ZipCode;
+                        select User;
                 ServiceProviderSideModel sp = new ServiceProviderSideModel();
                 sp.serviceRequests = from serviceRequests in _helperlandDBContext.ServiceRequests
-                                     where serviceRequests.ZipCode == x.FirstOrDefault() && serviceRequests.Status == 1 && serviceRequests.ServiceProviderId == null
+                                     where serviceRequests.ZipCode == abc.ZipCode && serviceRequests.Status == 1 && serviceRequests.ServiceProviderId == null
                                      select serviceRequests;
                 sp.serviceRequestswithoutpets = from serviceRequests in _helperlandDBContext.ServiceRequests
-                                                where serviceRequests.ZipCode == x.FirstOrDefault() && serviceRequests.Status == 1 && serviceRequests.HasPets == false && serviceRequests.ServiceProviderId == null
+                                                where serviceRequests.ZipCode == abc.ZipCode && serviceRequests.Status == 1 && serviceRequests.HasPets == false && serviceRequests.ServiceProviderId == null
                                                 select serviceRequests;
                 sp.serviceRequestAddresses = from serviceRequestAddresses in _helperlandDBContext.ServiceRequestAddresses
                                              select serviceRequestAddresses;

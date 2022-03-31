@@ -450,7 +450,7 @@
                                           
                                           const myArray = a.split(" ");
                                           
-                                          var parts= (myArray[0]).split("/");
+                                          var parts= (myArray[0]).split("-");
                                           var date = new Date(parseInt(parts[2], 10),
                                                     parseInt(parts[1], 10) -1,
                                                     parseInt(parts[0], 10));
@@ -466,10 +466,10 @@
                                       }
                                   );
                                   minDate = new DateTime($('#date-picker5'), {
-                      format: 'DD/MM/YYYY'
+                      format: 'DD-MM-YYYY'
                   });
                   maxDate = new DateTime($('#date-picker6'), {
-                      format: 'DD/MM/YYYY'
+                      format: 'DD-MM-YYYY'
                   });
                      $('#button_export_excel').click(() => {
                     $('.admin-wrapper .main-wrapper .datatable-um').DataTable().buttons(0,0).trigger()
